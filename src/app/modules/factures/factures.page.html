@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Factures</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+
+    <ion-button
+      slot="end"
+      (click)="onNav(whereNav.addEntitie,routesNames.facturesAdd)"
+      fill="outline"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
+  <!--                                 LIST                                  -->
+
+  <h1>Factures</h1>
+  <ion-list lines="inset" *ngIf="factures">
+    <ion-item-sliding class="mt-4" *ngFor="let facture of factures">
+      <!-- *************************************** -->
+      <ion-item
+        (click)="onNav(whereNav.ressourcesEntitie,routesNames.facturesInfo,facture.id)"
+      >
+        <app-cmp-facture
+          [factureCreatedAt]="facture.createdAt"
+          [factureType]="facture.type"
+          [factureMontant]="facture.montant"
+        ></app-cmp-facture>
+      </ion-item>
+      <!-- *************************************** -->
+      <ion-item-options side="end">
+        <button
+          (click)="onDeleteFacture(facture.id)"
+          ion-button
+          color="primary"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+        <button
+          (click)="onNav(whereNav.updEntitie,routesNames.facturesUpd,facture.id)"
+          ion-button
+          color="secondary"
+        >
+          <ion-icon name="brush-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-item>
+      <ion-label
+        >Filtre factures :
+        <span *ngIf="factures">{{factures.length}}</span>
+      </ion-label>
+      <ion-select
+        (ionChange)="onFilter($event)"
+        value="all"
+        [interfaceOptions]="customActionSheetOptions"
+        interface="action-sheet"
+        placeholder="Selectionner le type"
+      >
+        <ion-select-option value="all">Totale</ion-select-option>
+        <ion-select-option [value]="enumTypeFacture.eau"
+          >Eaux</ion-select-option
+        >
+        <ion-select-option [value]="enumTypeFacture.electricite"
+          >Electricité</ion-select-option
+        >
+        <ion-select-option [value]="enumTypeFacture.location"
+          >Location</ion-select-option
+        >
+        <ion-select-option [value]="enumTypeFacture.salaire"
+          >Salaire</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-icon
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

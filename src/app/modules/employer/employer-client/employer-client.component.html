@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clients Employer</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD LINGES EMPLOYER----------------------------------- -->
+  <ion-row *ngIf="employer$ | async as employer">
+    <ion-col>
+      <h1>EMPLOYER : {{ employer.prenom }} {{ employer.nom }}</h1>
+    </ion-col>
+  </ion-row>
+  <div class="container" *ngIf="employer$ | async as employer">
+    <ion-card *ngFor="let client of employer.Clients">
+      <ion-card-content>
+        <ion-card-title>
+          <b>Nom Client :</b> {{ client.prenom }} {{ client.nom }}
+        </ion-card-title>
+        <hr />
+        <p class="card-text"><b>Numéro :</b> {{ client.numero }}</p>
+        <p class="card-text"><b>Adresse :</b> {{ client.adresse }}</p>
+        <p class="card-text">
+          <b>Code Fidélité :</b> {{ client.codeFidelite }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

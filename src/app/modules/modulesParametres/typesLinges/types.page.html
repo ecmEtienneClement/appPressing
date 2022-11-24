@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Type de linge</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LISTE                                  -->
+
+  <h1>Types de linges</h1>
+  <ion-list lines="inset">
+    <ion-item-sliding class="mt-4" *ngIf="typesLinges">
+      <!-- *********************                         ****************** -->
+      <ion-item>
+        <div class="row">
+          <div class="col-12">{{typesLinges[0]?.nom}}</div>
+          <div class="col-12">Enregistrer le :{{typesLinges[0]?.createdAt}}</div>
+        </div>
+      </ion-item>
+    </ion-item-sliding>
+    <ion-item-sliding class="mt-4" *ngIf="typesLinges">
+      <!-- *********************                         ****************** -->
+      <ion-item>
+        <div class="row">
+          <div class="col-12">{{typesLinges[1]?.nom}}</div>
+          <div class="col-12">Enregistrer le :{{typesLinges[1]?.createdAt}}</div>
+        </div>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-row>
+    <div class="alert alert-warning">
+      <strong>Ces données ne sont pas modifiable !</strong>
+    </div>
+  </ion-row>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

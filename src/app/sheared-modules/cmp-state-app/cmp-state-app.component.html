@@ -1,0 +1,32 @@
+<div class="row" [ngSwitch]="dataState">
+  <!-- **************ETAT INITIAL****************** -->
+  <div class="col-12" *ngSwitchCase="dataStateEnum.initiale">
+    <div class="alert alert-info">
+      <strong>Etat Initiale!</strong>
+    </div>
+  </div>
+
+  <!-- **************ETAT EN CHARGEMENT****************** -->
+  <div class="col-12" *ngSwitchCase="dataStateEnum.loading">
+    <div class="alert alert-info">
+      <ion-item>
+        <strong>Veillez patienter </strong>
+        <ion-spinner color="warning" name="dots"></ion-spinner>
+      </ion-item>
+    </div>
+  </div>
+
+  <!-- **************ETAT CHARGER****************** -->
+  <div class="col-12" *ngSwitchCase="dataStateEnum.loaded">
+    <div class="alert alert-success">
+      <strong>{{ notification }}</strong>
+    </div>
+  </div>
+
+  <!-- **************ETAT ERREUR****************** -->
+  <div class="col-12" *ngSwitchCase="dataStateEnum.error">
+    <div class="alert alert-danger">
+      <strong>{{ errorMessage }}</strong>
+    </div>
+  </div>
+</div>

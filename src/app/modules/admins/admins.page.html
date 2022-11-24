@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Admins</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+
+    <ion-button
+      slot="end"
+      (click)="onNav(whereNav.addEntitie,routesNames.adminsAdd)"
+      fill="outline"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-list [dataState]="dataState$|async"></app-cmp-loading-list>
+
+  <!--                                 LIST                                  -->
+
+  <h1>ADMINS</h1>
+  <ion-list lines="inset" *ngIf="admins">
+    <ion-item-sliding class="mt-4" *ngFor="let admin of admins">
+      <!-- *************************************** -->
+      <ion-item
+        (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsInfo,admin.id)"
+      >
+        <ion-avatar item-start>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+        <h4>{{admin.nom}}</h4>
+        <h5>{{admin.prenom}}</h5>
+      </ion-item>
+      <!-- *************************************** -->
+      <ion-item-options side="end">
+        <button (click)="onDeleteAdmin(admin.id)" ion-button color="primary">
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+        <button
+          (click)="onNav(whereNav.updEntitie,routesNames.adminsUpd,admin.id)"
+          ion-button
+          color="secondary"
+        >
+          <ion-icon name="brush-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+      <ion-item-options side="start">
+        <button>
+          <ion-icon
+            (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsEmployers,admin.id)"
+            name="people-outline"
+          ></ion-icon>
+        </button>
+        <button>
+          <ion-icon
+            (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsCmtBloquer,admin.id)"
+            name="lock-closed-outline"
+          ></ion-icon>
+        </button>
+
+        <button>
+          <ion-icon
+            (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsFacDepDmd,admin.id)"
+            name="newspaper-outline"
+          ></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-searchbar
+      placeholder="rechercher par prénom"
+      [debounce]="600"
+      (ionChange)="handleChange($event)"
+    ></ion-searchbar>
+
+    <ion-icon
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

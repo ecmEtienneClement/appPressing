@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Form Compte</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION FORM COMPTE----------------------------------- -->
+
+  <form [formGroup]="formCmpBloque" (ngSubmit)="submitForm()" novalidate>
+    <!--                               INPUT TYPE                                            -->
+    <ion-item class="m-3" fill="solid" counter="true">
+      <ion-select
+        formControlName="email"
+        interface="popover"
+        placeholder="Selectionné email"
+      >
+        <ion-select-option
+          *ngFor="let employe of employes"
+          [value]="employe.email"
+        >
+          {{ employe.email }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <!--                               BTN SAVE                                              -->
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+          fill="outline"
+          [disabled]="formCmpBloque.invalid"
+          type="submit"
+          >Bloquer</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

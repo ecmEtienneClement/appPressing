@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Compte Bloquer</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+
+    <ion-button
+      slot="end"
+      (click)="onNav(whereNav.addEntitie,routesNames.cmpBloquesAdd)"
+      fill="outline"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-list [dataState]="dataState$|async"></app-cmp-loading-list>
+
+  <!--                                 LISTE                                  -->
+
+  <h1>COMPTES</h1>
+  <ion-list lines="inset" *ngIf="cmpBloques">
+    <ion-item-sliding class="mt-4" *ngFor="let cmpBloque of cmpBloques">
+      <!-- *************************************** -->
+      <ion-item
+        (click)="onNav(whereNav.ressourcesEntitie ,routesNames.cmpBloquesInfo,cmpBloque.id)"
+      >
+        <ion-avatar item-start>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+        <h4>{{cmpBloque.Employe?.prenom}} {{cmpBloque.Employe?.nom}}</h4>
+        <br />
+        <p>{{cmpBloque.email}}</p>
+      </ion-item>
+      <!-- *************************************** -->
+      <ion-item-options side="end">
+        <button
+          (click)="onDeleteCmtBloquer(cmpBloque.id)"
+          ion-button
+          color="primary"
+        >
+          <ion-icon name="text"></ion-icon>
+          Debl
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-searchbar
+      placeholder="rechercher par email"
+      [debounce]="600"
+      (ionChange)="handleChange($event)"
+    ></ion-searchbar>
+
+    <ion-icon
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

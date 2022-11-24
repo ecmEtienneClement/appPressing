@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details Admin</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD ADMIN----------------------------------- -->
+
+  <h1>DETAILS ADMIN</h1>
+
+  <ion-card *ngIf="admin$ | async as admin">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-card-title> {{ admin.prenom }} {{ admin.nom }} </ion-card-title>
+      <p class="card-text"><b>Email :</b> {{ admin.email }}</p>
+      <p class="card-text"><b>Numéro :</b> {{ admin.numero }}</p>
+      <p class="card-text"><b>Rôle :</b> {{ admin.role }}</p>
+      <p class="card-text"><b>Enregistrer le :</b> {{ admin.createdAt }}</p>
+      <p class="card-text">
+        <b>Dérnier modifcation :</b> {{ admin.updatedAt }}
+      </p>
+      <hr />
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <ion-button (click)="onNavUpdate(admin.id)" fill="outline"
+          >Modifier
+          <ion-icon slot="end" name="pencil-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+    
+
+  </ion-toolbar>
+</ion-footer>

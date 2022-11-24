@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Infos kilo</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LISTE                                  -->
+
+  <h1>Infos kilo</h1>
+  <ion-list lines="inset">
+    <ion-item-sliding class="mt-4" *ngIf="infoKilos">
+      <!-- *********************                         ****************** -->
+      <ion-item>
+        <div class="row">
+          <div class="col-12">
+            Prix linge /kilo :{{infoKilos[0]?.prixLinge}} Fcfa
+          </div>
+          <div class="col-12">
+            Prix repassage /kilo :{{infoKilos[0]?.prixRepassage}} Fcfa
+          </div>
+          <div class="col-12">Enregistrer le :{{infoKilos[0]?.createdAt}}</div>
+          <div class="col-12">Modifier le :{{infoKilos[0]?.updatedAt}}</div>
+        </div>
+      </ion-item>
+    </ion-item-sliding>
+    <!-- *********************             FORM UPDATE            ****************** -->
+
+    <ion-item-sliding class="mt-4" *ngIf="updated">
+      <ion-item>
+        <div class="row">
+          <div class="col-12">
+            Prix linge /kilo :
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="prixLingeUpd"
+            />
+          </div>
+          <div class="col-12">
+            Prix repassage /kilo :
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="prixRepassageUpd"
+            />
+          </div>
+        </div>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="row">
+    <div class="col-12" *ngIf="!updated">
+      <button type="button" class="btn btn-outline-info" (click)="onUpd()">
+        Modifier
+      </button>
+    </div>
+    <div class="col-12" *ngIf="updated">
+      <button type="button" class="btn btn-outline-info" (click)="onUpd()">
+        Fermer
+      </button>
+    </div>
+    <div class="col-12" *ngIf="updated">
+      <button type="button" class="btn btn-outline-info" (click)="onSave()">
+        Enregistrer
+      </button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

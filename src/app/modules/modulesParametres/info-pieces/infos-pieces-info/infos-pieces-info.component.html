@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details {{ infoPiece?.nom }}</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
+
+  <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
+
+  <h1>DETAILS {{ infoPiece?.nom }}</h1>
+
+  <ion-card *ngIf="infoPiece$ | async as infoPiece">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-card-title> {{ infoPiece.nom }} </ion-card-title>
+      <hr />
+      <p class="card-text">
+        <b> Prix linge :</b> {{ infoPiece.prixLinge }} Fcfa
+      </p>
+      <p class="card-text">
+        <b> Prix repassage :</b> {{ infoPiece.prixRepassage }} Fcfa
+      </p>
+      <p class="card-text">
+        <b>Enregistrer le:</b> {{ infoPiece.createdAt | date: "shortDate" }}
+      </p>
+      <p class="card-text">
+        <b>Modifier le :</b> {{ infoPiece.updatedAt | date: "shortDate" }}
+      </p>
+      <hr />
+      <div class="row" *ngIf="updated">
+        <div class="col-12">
+          Prix linge :
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="prixLingeUpd"
+          />
+        </div>
+        <div class="col-12">
+          Prix repassage :
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="prixRepassageUpd"
+          />
+        </div>
+      </div>
+    </ion-card-content>
+    <div class="row">
+      <div class="col-12" *ngIf="!updated">
+        <button type="button" class="btn btn-outline-info" (click)="onUpd()">
+          Modifier
+        </button>
+      </div>
+      <div class="col-12" *ngIf="updated">
+        <button type="button" class="btn btn-outline-info" (click)="onUpd()">
+          Fermer
+        </button>
+      </div>
+      <div class="col-12" *ngIf="updated">
+        <button type="button" class="btn btn-outline-info" (click)="onSave()">
+          Enregistrer
+        </button>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

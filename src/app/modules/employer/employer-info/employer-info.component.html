@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details employer</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
+
+  <h1>DETAILS EMPLOYER</h1>
+
+  <ion-card *ngIf="employe$ | async as employer">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-card-title>
+        {{ employer.prenom }} {{ employer.nom }}
+      </ion-card-title>
+      <p class="card-text"><b>Adresse :</b> {{ employer.adresse }}</p>
+      <p class="card-text"><b>Email :</b> {{ employer.email }}</p>
+      <p class="card-text"><b>Numéro :</b> {{ employer.numero }}</p>
+      <p class="card-text"><b>Rôle :</b> {{ employer.role }}</p>
+      <p class="card-text"><b>Salaire :</b> {{ employer.salaire }} Fcfa</p>
+      <p class="card-text"><b>Recruté le :</b> {{ employer.createdAt }}</p>
+      <p class="card-text">
+        <b>Dérnier modifcation :</b> {{ employer.updatedAt }}
+      </p>
+      <hr />
+      <ion-row>
+        <ion-col>
+          <p class="card-text">
+            <b>Employé de l'admin: </b>etienne clement mbaye
+          </p>
+          <p class="card-text"><b>Numéro de l'admin : </b> 777777777</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <ion-button
+          (click)="
+            onNav(whereNav.updEntitie, routesNames.employersUpd, employer.id)
+          "
+          fill="outline"
+          >Modifier
+          <ion-icon slot="end" name="pencil-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

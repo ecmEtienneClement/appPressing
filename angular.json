@@ -30,8 +30,13 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": [],
+
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss"
+            ],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
@@ -121,10 +126,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
@@ -146,9 +148,8 @@
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@ionic/angular-toolkit"
-    ]
+    "schematicCollections": ["@ionic/angular-toolkit"],
+    "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

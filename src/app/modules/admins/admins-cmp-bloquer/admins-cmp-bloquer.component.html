@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Factures Admin</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
+
+  <ion-row *ngIf="admin$ | async as admin">
+    <ion-col>
+      <h1>Compte bloquer ADMIN : {{ admin.prenom }} {{ admin.nom }}</h1>
+    </ion-col>
+  </ion-row>
+
+  <div class="container" *ngIf="admin$ | async as admin">
+    <ion-card *ngFor="let cmpBloquer of admin.Compte_bloquers">
+      <ion-card-content>
+        <ion-card-title>
+          {{ cmpBloquer.createdAt }}
+        </ion-card-title>
+        <hr />
+        <p class="card-text"><b>Email :</b> {{ cmpBloquer.email }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

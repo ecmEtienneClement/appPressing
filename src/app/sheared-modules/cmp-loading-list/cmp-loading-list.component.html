@@ -1,0 +1,24 @@
+<!--                                 LOADDING FOR LIST                            -->
+
+<div *ngIf="dataState">
+  <ion-list lines="inset" *ngIf="dataState === dataStateEnum.loading">
+    <ion-item-sliding *ngFor="let listLoading of listsLoading">
+      <!-- *************************************** -->
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-skeleton-text
+            class="skeleton"
+            [animated]="true"
+            style="width: 100%"
+          ></ion-skeleton-text>
+        </ion-avatar>
+
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 80%"
+        ></ion-skeleton-text>
+      </ion-item>
+      <!-- *************************************** -->
+    </ion-item-sliding>
+  </ion-list>
+</div>

@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Linge</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+
+    <ion-button
+      slot="end"
+      (click)="onNav(whereNav.addEntitie,routesNames.lingesAddTypeAndClient)"
+      fill="outline"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
+  <!--                                 LIST                                  -->
+
+  <h1>Linges</h1>
+  <ion-list lines="inset" *ngIf="linges">
+    <ion-item-sliding class="mt-4" *ngFor="let linge of linges">
+      <!-- *************************************** -->
+      <ion-item
+        (click)="onNav(whereNav.ressourcesEntitie,routesNames.lingesInfo,linge.id)"
+      >
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title> {{ linge.createdAt }} </ion-card-title>
+            <hr />
+            <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom}}</p>
+            <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
+            <p class="card-text">
+              <b>Payer :</b> <span *ngIf="linge.payer">Oui</span
+              ><span *ngIf="!linge.payer ">Non</span>
+            </p>
+
+            <p class="card-text">
+              <b>Livre :</b> <span *ngIf="linge.livre ">Oui</span
+              ><span *ngIf="!linge.livre ">Non</span>
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <!-- *************************************** -->
+      <ion-item-options side="end">
+        <button (click)="onDeleteLinge(linge.id)" ion-button color="primary">
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-item>
+      <ion-label
+        >Filtre linges :
+        <span *ngIf="linges">{{linges.length}}</span>
+      </ion-label>
+      <ion-select
+        (ionChange)="onFilter($event)"
+        value="all"
+        [interfaceOptions]="customActionSheetOptions"
+        interface="action-sheet"
+        placeholder="Selectionner des critères"
+      >
+        <ion-select-option value="all">Totale</ion-select-option>
+        <ion-select-option value="kilo">Type kilo</ion-select-option>
+        <ion-select-option value="piece">Type piece</ion-select-option>
+        <ion-select-option value="payer">Payer</ion-select-option>
+        <ion-select-option value="non payer">Non payer</ion-select-option>
+        <ion-select-option value="livre">Livré</ion-select-option>
+        <ion-select-option value="non livre">Non livré</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-icon
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

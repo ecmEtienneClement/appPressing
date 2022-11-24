@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details Compte</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD COMPTE----------------------------------- -->
+
+  <h1>DETAILS COMPTE BLOQUÉ</h1>
+
+  <ion-card *ngIf="cmpBloques$ | async as cmpBloque">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-card-title> Bloquer le : {{ cmpBloque.createdAt }} </ion-card-title>
+
+      <p class="card-text"><b>Email :</b> {{ cmpBloque.email }}</p>
+      <p class="card-text">
+        <b>Par Admin :</b> <span *ngIf="cmpBloque.byAdmin">Oui</span>
+        <span *ngIf="!cmpBloque.byAdmin">Non</span>
+      </p>
+      <hr />
+      <p class="card-text">
+        <b>Employé :</b>{{ cmpBloque.Employe?.prenom }}
+        {{ cmpBloque.Employe?.nom }}
+      </p>
+      <p class="card-text">
+        <b>Numero Employé :</b>{{ cmpBloque.Employe?.numero }}
+      </p>
+      <hr />
+      <p class="card-text">
+        <b>Admin :</b>{{ cmpBloque.Admin?.prenom }} {{ cmpBloque.Admin?.nom }}
+      </p>
+      <p class="card-text">
+        <b>Numero admin :</b>{{ cmpBloque.Admin?.numero }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

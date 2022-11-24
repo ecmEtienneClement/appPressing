@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Employers Admin</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD DMDDEPENSE----------------------------------- -->
+
+  <ion-row *ngIf="admin$ | async as admin">
+    <ion-col>
+      <h4>... ADMIN : {{ admin.prenom }} {{ admin.nom }}</h4>
+    </ion-col>
+  </ion-row>
+
+  <div class="container" *ngIf="admin$ | async as admin"></div>
+</ion-content>
+
+<ion-footer [translucent]="true" *ngIf="admin$ | async as admin">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

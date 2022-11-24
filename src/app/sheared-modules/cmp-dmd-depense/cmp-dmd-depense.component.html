@@ -1,0 +1,16 @@
+<ion-card>
+  <ion-card-content>
+    <ion-card-title> <b>Date :</b> {{ dmdDepense.createdAt }} </ion-card-title>
+    <hr />
+    <p class="card-text"><b>Montant :</b> {{ dmdDepense.montant }} Fcfa</p>
+    <p class="card-text">
+      <b>Valider :</b> <span *ngIf="dmdDepense.valider">Oui</span>
+      <span *ngIf="!dmdDepense.valider">Non</span>
+    </p>
+    <p class="card-text">
+      <b>Rejeter :</b> <span *ngIf="dmdDepense.rejeter">Oui</span>
+      <span *ngIf="!dmdDepense.rejeter">Non</span>
+    </p>
+    <p class="card-text"><b>Description :</b> {{ dmdDepense.description }}</p>
+  </ion-card-content>
+</ion-card>

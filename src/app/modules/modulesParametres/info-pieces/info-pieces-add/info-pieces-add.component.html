@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Form Piece</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- -------------------------------- SECTION STATE APP ----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION FORM DEMANDE----------------------------------- -->
+
+  <form [formGroup]="formInfoPiece" (ngSubmit)="submitForm()" novalidate>
+    <!--                               INPUT NOM                                            -->
+
+    <ion-item class="m-3" fill="solid" counter="true">
+      <ion-label position="floating">Nom piece</ion-label>
+      <ion-input maxlength="25" type="text" formControlName="nom"></ion-input>
+      <ion-note slot="helper">Entrez le nom du piece</ion-note>
+      <ion-note slot="error">nom du piece invalid</ion-note>
+    </ion-item>
+    <!--                               INPUT PRIX LINGE                                            -->
+
+    <ion-item class="m-3" fill="solid" counter="true">
+      <ion-label position="floating">Prix linge</ion-label>
+      <ion-input
+        maxlength="4"
+        type="text"
+        formControlName="prixLinge"
+      ></ion-input>
+      <ion-note slot="helper">Entrez le prix du linge</ion-note>
+      <ion-note slot="error">prix du linge invalid</ion-note>
+    </ion-item>
+    <!--                               INPUT PRIX REPASSAGE                                            -->
+    <ion-item class="m-3" fill="solid" counter="true">
+      <ion-label position="floating">Prix repassage</ion-label>
+      <ion-input
+        maxlength="4"
+        type="text"
+        formControlName="prixRepassage"
+      ></ion-input>
+      <ion-note slot="helper">Entrez le prix repassage</ion-note>
+      <ion-note slot="error">prix repassage invalid</ion-note>
+    </ion-item>
+
+    <!--                                     BTN SAVE                                        -->
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+          fill="outline"
+          [disabled]="formInfoPiece.invalid"
+          type="submit"
+          >Enregistrer</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

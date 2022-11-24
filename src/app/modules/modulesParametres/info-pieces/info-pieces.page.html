@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Infos pieces</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+    <ion-button
+      slot="end"
+      (click)="onNav(whereNav.addEntitie,routesNames.infosPiecesAdd)"
+      fill="outline"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING FOR LIST                            -->
+
+  <div *ngIf="dataState$|async as dataState">
+    <ion-list lines="inset" *ngIf="dataState === dataStateEnum.loading">
+      <ion-item-sliding *ngFor="let listLoading of listsLoading">
+        <!-- *************************************** -->
+        <ion-item>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 100%"
+          ></ion-skeleton-text>
+        </ion-item>
+        <!-- *************************************** -->
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <!--                                 LISTE                                  -->
+
+  <h1>Infos pieces</h1>
+  <ion-list lines="inset" *ngIf="infoPieces">
+    <ion-item-sliding
+      class="mt-4"
+      *ngFor="let infoPiece of infoPieces"
+    >
+      <!-- *********************                         ****************** -->
+      <ion-item 
+      (click)="onNav(whereNav.ressourcesEntitie ,routesNames.infosPiecesInfoAndUpd,infoPiece.id)"
+      >
+        <div class="row">
+          <div class="col-12">{{infoPiece.nom}}</div>
+        </div>
+      </ion-item>
+      <ion-item-options side="end">
+        <button
+          (click)="onDeleteInfosPiece(infoPiece.id)"
+          ion-button
+          color="primary"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-searchbar
+      placeholder="rechercher par prénom"
+      [debounce]="600"
+      (ionChange)="handleChange($event)"
+    ></ion-searchbar>
+
+    <ion-icon
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

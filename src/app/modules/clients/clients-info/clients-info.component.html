@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details Client</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
+
+  <h1>DETAILS CLIENT</h1>
+
+  <ion-card *ngIf="client$ | async as client">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-card-title> {{ client.prenom }} {{ client.nom }} </ion-card-title>
+      <p class="card-text"><b>Adresse :</b> {{ client.adresse }}</p>
+      <p class="card-text"><b>Numéro :</b> {{ client.numero }}</p>
+      <p class="card-text"><b>Nombre de linge :</b> {{ client.nbrLinge }}</p>
+      <p class="card-text"><b>Code fidélité :</b> {{ client.codeFidelite }}</p>
+      <p class="card-text"><b>Créer le :</b> {{ client.createdAt }}</p>
+      <p class="card-text">
+        <b>Dérnier modifcation :</b> {{ client.updatedAt }}
+      </p>
+      <hr />
+      <ion-row>
+        <ion-col>
+          <p class="card-text">
+            <b>Client de l'employé: </b> {{ client.Employe.prenom }}
+            {{ client.Employe.nom }}
+          </p>
+          <p class="card-text">
+            <b>Numéro de l'employé : </b> {{ client.Employe.numero }}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <ion-button (click)="onNavUpdate(client.id)" fill="outline"
+          >Modifier
+          <ion-icon slot="end" name="pencil-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

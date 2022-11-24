@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details Facture</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
+
+  <h1>DETAILS FACTURE</h1>
+
+  <ion-card *ngIf="facture$ | async as facture">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-card-title>
+        {{ facture.createdAt }}
+      </ion-card-title>
+      <hr />
+      <p class="card-text"><b>Type :</b> {{ facture.type }}</p>
+      <p class="card-text"><b>Montant :</b> {{ facture.montant }} Fcfa</p>
+      <hr />
+      <p class="card-text">
+        <b>Admin :</b>{{ facture.Admin?.prenom }} {{ facture.Admin?.nom }}
+      </p>
+      <p class="card-text"><b>Numero admin :</b>{{ facture.Admin?.numero }}</p>
+      <hr />
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <ion-button (click)="onNavUpdate(facture.id)" fill="outline"
+          >Modifier
+          <ion-icon slot="end" name="pencil-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

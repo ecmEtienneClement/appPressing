@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>parametres</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 LISTE                                  -->
+
+  <h1>CLIENTS</h1>
+  <ion-list lines="inset">
+    <ion-item-sliding class="mt-4">
+      <!-- *********************                         ****************** -->
+      <ion-item (click)="onNav(routesNames.typesLinges)">
+        <ion-avatar item-start>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+        <h4>Types de linges</h4>
+      </ion-item>
+    </ion-item-sliding>
+    <ion-item-sliding class="mt-4">
+      <!-- *********************                         ****************** -->
+      <ion-item (click)="onNav(routesNames.infosKilo)">
+        <ion-avatar item-start>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+        <h4>Infos kilo</h4>
+      </ion-item>
+    </ion-item-sliding>
+    <ion-item-sliding class="mt-4">
+      <!-- *********************                         ****************** -->
+      <ion-item (click)="onNav(routesNames.infosPieces)">
+        <ion-avatar item-start>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+        <h4>Infos Pieces</h4>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>
