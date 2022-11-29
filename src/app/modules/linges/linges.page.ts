@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { EnumTypeLinge, Linge } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { EntitiesDb } from '../servicesModules/modules.db';
 import { WhereNavEntities } from '../servicesModules/modules.service';
 import { LingesActions } from './ngrx/linges.actions';
 import { LingesSelectors } from './ngrx/linges.selectors';
@@ -35,10 +36,12 @@ export class LingesPage implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private lingesActions: LingesActions,
     private lingesSelectors: LingesSelectors,
-    private lingesService: LingesService
+    private lingesService: LingesService,
+    private db: EntitiesDb
   ) {}
 
   ngOnInit() {
+    this.db.createTables();
     this.store.dispatch(this.lingesActions.getAllEntities()());
     this.subLinges();
     this.dataState$ = this.store.select(this.lingesSelectors.getDataState());

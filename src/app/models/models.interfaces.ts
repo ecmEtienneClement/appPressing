@@ -11,6 +11,7 @@ export interface IG {
 }
 //TODO Model  CLIENT
 export interface Client extends IG {
+  EmployeId: string;
   nom: string;
   prenom: string;
   numero: string;
@@ -101,21 +102,18 @@ export interface Linge extends IG {
   TypeLingeId: string;
   ClientId: string;
   EmployeId: string;
-  DetailTypeKiloId: string | null;
-  DetailTypePieceId: string | null;
-  prixLinge: number;
+  prixLinge?: number;
   payer: boolean;
   montantAvance: number;
   livre: boolean;
-  dateDepot: string;
-  coordX: string;
-  coordY: string;
-  dataRetrait: string;
+  coordX: number;
+  coordY: number;
+  dataRetrait?: string;
   Type_linge?: TypeLinge;
   Client?: Client;
   Employe?: Employe;
-  Detail_type_kilo?: InfoKilo;
-  Detail_type_piece?: InfoPiece;
+  Detail_type_kilo?: DetailTypeKilo;
+  Detail_type_pieces?: DetailTypePiece[];
 }
 //
 //TODO Model TYPELINGE
@@ -130,23 +128,21 @@ export enum EnumTypeLinge {
 //TODO Model DETAILSTYPEKILO
 export interface DetailTypeKilo extends IG {
   nbrKilo: number;
-  prixKilo: number;
+  prixLinge: number;
   aRepasser: boolean;
   prixRepassage: number;
+  LingeId: string;
 }
+
 //
 //TODO Model DETAILSTYPEPIECE
 export interface DetailTypePiece extends IG {
-  Detail_pieces: [DetailPiece];
-}
-//
-//TODO Model DETAILSPIECE
-export interface DetailPiece extends IG {
+  nom: string;
   nbrPiece: number;
   prixLinge: number;
   prixRepassage: number;
   aRepasser: boolean;
-  DetailTypePieceId: string;
+  LingeId: string;
 }
 //
 //TODO Model INFOPIECE
@@ -188,7 +184,7 @@ export interface ErrorRequestAPI {
 
 //TODO Model STATE
 export interface IStateApp<T> {
-  entities: T[] | null;
+  entities: T[];
   entitie: T | null;
   notification: string | null;
   messageError: string | null;

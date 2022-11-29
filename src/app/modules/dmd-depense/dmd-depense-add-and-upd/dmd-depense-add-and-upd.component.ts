@@ -103,7 +103,10 @@ export class DmdDepenseAddAndUpdComponent implements OnInit {
           EmployeId: '0dc16262-e0c0-4b35-8d96-60d77319d0cd',
         };
         this.store.dispatch(
-          this.dmdDepensesActions.addEntitie()({ entitie: newDemandeDepense })
+          this.dmdDepensesActions.addEntitie()({
+            entitie: newDemandeDepense,
+            onNavAfterAdd: true,
+          })
         );
         break;
       //UPD

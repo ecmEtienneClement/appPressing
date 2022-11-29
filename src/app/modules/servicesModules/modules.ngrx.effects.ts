@@ -20,7 +20,9 @@ export class EntitiesEffects<T extends IG> {
         this.entitiesDataService.createEntitie(action.entitie).pipe(
           map((dataEntitie: T) => {
             if (dataEntitie) {
-              this.onNavEntities();
+              if (action.onNavAfterAdd) {
+                this.onNavEntities();
+              }
               return this.entitiesActionsService.addEntitieSuccess()({
                 entitie: dataEntitie,
               });

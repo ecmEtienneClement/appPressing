@@ -2,10 +2,12 @@
 import { createReducer, on } from '@ngrx/store';
 import { AppStateEnum, initStateApp } from 'src/app/appState/app.state';
 import { IStateApp, IG } from 'src/app/models/models.interfaces';
+import { EntitiesEmit } from './modules.emit';
 import { EntitiesActions } from './modules.ngrx.actions';
 
 export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
   private nameNotifactionEntitie = 'null';
+
   constructor(
     private entitiesActionsService: EntitiesActions<T>,
     nameNotifactionEntitie: string
@@ -26,7 +28,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
   public entitiesFeactureReducer() {
     return createReducer(
       initStateApp,
-      //TODO ADD CLIENT
+      //TODO ADD ENTITIE
       on(this.entitiesActionsService.addEntitie(), (state: I) => ({
         ...state,
         dataState: AppStateEnum.loading,
@@ -34,8 +36,17 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
       on(
         this.entitiesActionsService.addEntitieSuccess(),
         (state: I, action) => {
-          const newTbEntities: T[] | null = [...state.entities];
+          const newTbEntities: T[] = [...state.entities];
           newTbEntities.push(action.entitie);
+          //Emission si demander
+          EntitiesEmit.onEmitSub(
+            {
+              entitie: action.entitie,
+              nameNotification: this.getNameEntitie(),
+            },
+            this.getNameEntitie()
+          );
+          //
           return {
             ...state,
             entities: newTbEntities ? newTbEntities : state.entities,
@@ -46,7 +57,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
         }
       ),
 
-      //TODO GET CLIENTS
+      //TODO GET ENTITIES
       on(this.entitiesActionsService.getAllEntities(), (state: I) => ({
         ...state,
         dataState: AppStateEnum.loading,
@@ -62,7 +73,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
         })
       ),
 
-      //TODO GET CLIENT
+      //TODO GET ENTITIE
       on(this.entitiesActionsService.getEntitie(), (state: I) => ({
         ...state,
         dataState: AppStateEnum.loading,
@@ -78,7 +89,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
         })
       ),
 
-      //TODO UPD CLIENT
+      //TODO UPD ENTITIE
       on(this.entitiesActionsService.updEntitie(), (state: I) => ({
         ...state,
         dataState: AppStateEnum.loading,
@@ -99,7 +110,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
         }
       ),
 
-      //TODO DELETE CLIENT
+      //TODO DELETE ENTITIE
       on(this.entitiesActionsService.deleteEntitie(), (state: I) => ({
         ...state,
         dataState: AppStateEnum.loading,
@@ -120,7 +131,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
         }
       ),
 
-      //TODO DELETE ALL CLIENTS
+      //TODO DELETE ALL ENTITIES
       on(this.entitiesActionsService.deleteAllEntities(), (state: I) => ({
         ...state,
         dataState: AppStateEnum.loading,
@@ -138,7 +149,7 @@ export class EntitiesReducer<T extends IG, I extends IStateApp<T>> {
         })
       ),
 
-      //TODO ERROR CLIENTS
+      //TODO ERROR ENTITIES
       on(this.entitiesActionsService.errorEntities(), (state: I, action) => ({
         ...state,
         notification: null,

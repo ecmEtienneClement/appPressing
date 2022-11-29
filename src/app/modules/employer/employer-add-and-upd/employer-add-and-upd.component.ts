@@ -117,7 +117,10 @@ export class EmployerAddAndUpdComponent implements OnInit {
           mdp: 'Motdepasse01',
         };
         this.store.dispatch(
-          this.employersActions.addEntitie()({ entitie: newEmployer })
+          this.employersActions.addEntitie()({
+            entitie: newEmployer,
+            onNavAfterAdd: true,
+          })
         );
         break;
       //UPD

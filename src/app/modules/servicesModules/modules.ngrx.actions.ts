@@ -10,7 +10,7 @@ export class EntitiesActions<T> {
   public addEntitie() {
     return createAction(
       this.entitiesNameAPI + ' addEntitie',
-      props<{ entitie: T }>()
+      props<{ entitie: T; onNavAfterAdd: boolean }>()
     );
   }
   public addEntitieSuccess() {

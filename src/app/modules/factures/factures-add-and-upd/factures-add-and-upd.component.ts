@@ -96,7 +96,10 @@ export class FacturesAddAndUpdComponent implements OnInit {
           AdminId: '1d1fa24c-226e-44ef-9d89-47d68e49a030',
         };
         this.store.dispatch(
-          this.facturesActions.addEntitie()({ entitie: newFacture })
+          this.facturesActions.addEntitie()({
+            entitie: newFacture,
+            onNavAfterAdd: true,
+          })
         );
         break;
       //UPD

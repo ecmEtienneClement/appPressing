@@ -1,3 +1,156 @@
-<p>
-  linges-add-final works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details Linge</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
+
+  <h1>DETAILS LINGE</h1>
+
+  <ion-card *ngIf="linge">
+    <ion-card-content>
+      <ion-card-title>
+        {{ linge.createdAt | date: "shortDate" }}
+      </ion-card-title>
+      <hr />
+      <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom }}</p>
+      <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
+      <p class="card-text">
+        <b>Avance:</b>
+        <ion-toggle
+          (ionChange)="onAvance($event)"
+          [enableOnOffLabels]="avance"
+        ></ion-toggle>
+      </p>
+      <div *ngIf="avance" class="row">
+        <div class="col-12">
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="montantAvance"
+          />
+        </div>
+      </div>
+
+      <p class="card-text">
+        <b>Payer :</b>
+        <ion-toggle
+          (ionChange)="onPayer($event)"
+          [enableOnOffLabels]="linge.payer"
+        ></ion-toggle>
+      </p>
+
+      <p class="card-text">
+        <b>Livre :</b>
+        <ion-toggle
+          (ionChange)="onLivrer($event)"
+          [enableOnOffLabels]="linge.livre"
+        ></ion-toggle>
+      </p>
+      <!--                      DETAILS DU LINGE                         -->
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <h4>Détails du type de linge</h4>
+        </div>
+      </div>
+      <!--                      DETAILS TYPE KILO                         -->
+
+      <div
+        class="container"
+        *ngIf="linge.Type_linge?.nom === enumTypeLinge.kilo"
+      >
+        <p class="card-text">
+          <b>Prix linge :</b> {{ linge.Detail_type_kilo?.prixLinge }}
+        </p>
+        <p class="card-text">
+          <b>Prix repassage :</b> {{ linge.Detail_type_kilo?.prixRepassage }}
+        </p>
+      </div>
+      <!--                      DETAILS TYPE PIECE                         -->
+
+      <div class="container" *ngIf="linge.Detail_type_pieces">
+        <div
+          class="container"
+          *ngFor="let detailsPiece of linge.Detail_type_pieces"
+        >
+          <p class="card-text">
+            <b>Nombre de piece :</b> {{ detailsPiece.nbrPiece }}
+          </p>
+          <p class="card-text">
+            <b>Prix :</b> {{ detailsPiece.prixLinge }} Fcfa
+          </p>
+          <p class="card-text">
+            <b>Prix repassage:</b> {{ detailsPiece.prixRepassage }} Fcfa
+          </p>
+
+          <p class="card-text">
+            <b>A repasser :</b> <span *ngIf="detailsPiece.aRepasser">Oui</span
+            ><span *ngIf="!detailsPiece.aRepasser">Non</span>
+          </p>
+        </div>
+      </div>
+
+      <!--                      DETAILS DU CLIENT                         -->
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <h4>Détails client</h4>
+        </div>
+        <div class="col-12">
+          <p class="card-text"><b>Nom :</b> {{ linge.Client.nom }}</p>
+          <p class="card-text"><b>Numero :</b> {{ linge.Client.numero }}</p>
+          <p class="card-text"><b>Address :</b> {{ linge.Client.adresse }}</p>
+        </div>
+      </div>
+      <!--                      DETAILS DU EMPLOYER                         -->
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <h4>Détails Employer</h4>
+        </div>
+        <div class="col-12">
+          <p class="card-text"><b>Nom :</b> {{ linge.Employe.nom }}</p>
+          <p class="card-text"><b>Numero :</b> {{ linge.Employe.numero }}</p>
+          <p class="card-text"><b>Address :</b> {{ linge.Employe.adresse }}</p>
+          <p class="card-text"><b>email :</b> {{ linge.Employe.email }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onTerminer()"
+          >
+            Terminer
+          </button>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

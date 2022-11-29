@@ -4,7 +4,7 @@ import { Client } from 'src/app/models/models.interfaces';
 import { EntitiesSelectors } from '../../servicesModules/modules.ngrx.selectors';
 import { IClientsState } from './clients.state';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ClientsSelectors extends EntitiesSelectors<Client, IClientsState> {
   constructor() {
     super(NameStateEntities.client);

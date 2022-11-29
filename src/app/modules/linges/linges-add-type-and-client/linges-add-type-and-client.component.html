@@ -20,7 +20,7 @@
   <ion-list>
     <ion-item>
       <ion-select
-        (ionChange)="onClient(event$)"
+        (ionChange)="onClient($event)"
         cancel-text="Annuler"
         ok-text="Suivant"
         placeholder="Client"
@@ -30,10 +30,35 @@
       </ion-select>
     </ion-item>
   </ion-list>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-list
+    *ngIf="selectClient"
+    [dataState]="dataState$ | async"
+  ></app-cmp-loading-list>
 
+  <!--                                 LISTE                                  -->
+
+  <ion-list lines="inset" *ngIf="clients && selectClient">
+    <h1>Séléctionné un client</h1>
+    <ion-item-sliding class="mt-4" *ngFor="let client of clients">
+      <!-- *************************************** -->
+      <ion-item (click)="onSelectClient(client.id)">
+        <ion-avatar item-start>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+        <h4>{{ client.prenom }} {{ client.nom }}</h4>
+        <h6>{{ client.numero }}</h6>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
   <!-- --------------------------------SECTION FORM CLIENT----------------------------------- -->
 
-  <form [formGroup]="formClient" (ngSubmit)="submitForm()" novalidate>
+  <form
+    *ngIf="newClient"
+    [formGroup]="formClient"
+    (ngSubmit)="submitForm()"
+    novalidate
+  >
     <!--                               INPUT NOM                                            -->
     <ion-item class="m-3" fill="solid" counter="true">
       <ion-label position="floating">Nom</ion-label>
@@ -88,5 +113,11 @@
       slot="start"
       [defaultHref]="routesNames.home"
     ></ion-back-button>
+    <ion-searchbar
+      *ngIf="!newClient"
+      placeholder="rechercher par prénom"
+      [debounce]="600"
+      (ionChange)="handleChange($event)"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-footer>

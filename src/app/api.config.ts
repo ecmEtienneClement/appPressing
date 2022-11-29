@@ -13,7 +13,6 @@ export enum NameUrlEntitiesAPI {
   infosPieces = 'infosPieces/',
   detailsTypePiece = 'detailTypePieces/',
   detailTypeKilo = 'detailTypeKilo/',
-  detailPieces = 'detailPieces/',
 }
 // TODO MODEL ENTITIES NAME API
 export enum EntitiesNameAPI {
@@ -30,5 +29,4 @@ export enum EntitiesNameAPI {
   infosPieces = '[infosPieces / API]',
   detailsTypePiece = '[detailsTypePieces / API]',
   detailsTypeKilo = '[detailsTypeKilo / API]',
-  detailsPiece = '[detailsPieces / API]',
 }

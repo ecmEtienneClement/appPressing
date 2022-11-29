@@ -64,17 +64,10 @@
       </div>
       <!--                      DETAILS TYPE PIECE                         -->
 
-      <div
-        class="container"
-        *ngIf="
-          linge.Type_linge?.nom === enumTypeLinge.piece &&
-            isDetailsTypePiece &&
-            detailsTypePiece$ | async as detailsTypePieces
-        "
-      >
+      <div class="container" *ngIf="linge.Detail_type_pieces">
         <div
           class="container"
-          *ngFor="let detailsPiece of detailsTypePieces.Detail_pieces"
+          *ngFor="let detailsPiece of linge.Detail_type_pieces"
         >
           <p class="card-text">
             <b>Nombre de piece :</b> {{ detailsPiece.nbrPiece }}

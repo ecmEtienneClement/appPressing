@@ -33,11 +33,6 @@ import { GetClientsReducer } from './ngrx/clients.reducer';
     AddAndUpdClientComponent,
     ClientLingesComponent,
   ],
-  providers: [
-    ClientsActions,
-    ClientsSelectors,
-    ClientsDataService,
-    ClientService,
-  ],
+  providers: [ClientsDataService, ClientService],
 })
 export class ClientsPageModule {}

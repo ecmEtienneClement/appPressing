@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -28,6 +29,7 @@ export class AddAndUpdClientComponent implements OnInit {
     prenom: '',
     adresse: '',
     numero: '',
+    EmployeId: '',
     nbrLinge: 1,
     codeFidelite: 1,
   };
@@ -110,9 +112,13 @@ export class AddAndUpdClientComponent implements OnInit {
           numero: formAddValues.numero,
           nbrLinge: 1,
           codeFidelite: 1,
+          EmployeId: '',
         };
         this.store.dispatch(
-          this.clientsActionsService.addEntitie()({ entitie: newClient })
+          this.clientsActionsService.addEntitie()({
+            entitie: newClient,
+            onNavAfterAdd: true,
+          })
         );
         break;
       //UPD
@@ -128,9 +134,8 @@ export class AddAndUpdClientComponent implements OnInit {
           codeFidelite: this.clientUpd.codeFidelite,
           createdAt: this.clientUpd.createdAt,
           updatedAt: this.clientUpd.updatedAt,
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           Employe: this.clientUpd.Employe,
-          // eslint-disable-next-line @typescript-eslint/naming-convention
+          EmployeId: this.clientUpd.EmployeId,
           Linges: this.clientUpd.Linges,
         };
         this.store.dispatch(

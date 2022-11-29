@@ -1,5 +1,9 @@
 {
   "name": "FirstIonic",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "3d1c5b11"
 }

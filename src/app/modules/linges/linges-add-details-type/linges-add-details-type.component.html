@@ -1,3 +1,257 @@
-<p>
-  linges-add-details-type works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>details..</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div
+    *ngIf="typeKilo && dataState$ | async as dataState"
+    class="container-fluid"
+  >
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <div
+    *ngIf="typePiece && dataState$ | async as dataState"
+    class="container-fluid"
+  >
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!-- --------------------------------SECTION TYPE LINGE----------------------------------- -->
+
+  <ion-item>
+    <ion-select
+      (ionChange)="onTypeLinge($event)"
+      cancel-text="Annuler"
+      ok-text="Suivant"
+      placeholder="Type de linge"
+    >
+      <ion-select-option value="kilo">Kilo</ion-select-option>
+      <ion-select-option value="piece">Piece</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- *********************             FORM KILO            ****************** -->
+
+  <div class="container" *ngIf="typeKilo">
+    <ion-card>
+      <ion-card-title>Details</ion-card-title>
+      <ion-card-header>
+        <div class="row">
+          <div class="col-12">Nombre de kilo</div>
+          <div class="col-12">
+            <input type="number" class="form-control" [(ngModel)]="nbrKilo" />
+          </div>
+
+          <div class="col-12">
+            <ion-label>Repasser</ion-label>
+            <ion-toggle
+              (ionChange)="onRepassage($event)"
+              [enableOnOffLabels]="aRepasser"
+            ></ion-toggle>
+          </div>
+        </div>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row">
+          <div class="col-12">Nombre de kilo: {{ nbrKilo }} kg</div>
+          <div class="col-12">
+            Prix linge par kilo: {{ infosKilo.prixLinge }} Fcfa
+          </div>
+          <div class="col-12">
+            A repasser: <span *ngIf="aRepasser">Oui</span>
+            <span *ngIf="!aRepasser">Non</span>
+          </div>
+          <div class="col-12">
+            Prix repassage par kilo: {{ infosKilo.prixRepassage }} Fcfa
+          </div>
+          <hr />
+          <div class="col-12">
+            Prix linge total : {{ infosKilo.prixLinge * nbrKilo }} Fcfa
+          </div>
+          <div class="col-12">
+            Prix repassage total :
+            <span *ngIf="aRepasser"
+              >{{ infosKilo.prixRepassage * nbrKilo }} Fcfa</span
+            >
+            <span *ngIf="!aRepasser">0 Fcfa</span>
+          </div>
+          <hr />
+          <div class="col-12">
+            <p *ngIf="aRepasser">
+              Prix linge global :
+              {{
+                infosKilo.prixLinge * nbrKilo +
+                  infosKilo.prixRepassage * nbrKilo
+              }}
+              Fcfa
+            </p>
+            <p *ngIf="!aRepasser">
+              Prix linge global :
+              {{ infosKilo.prixLinge * nbrKilo }}
+              Fcfa
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <!--                                 LISTE PIECES                                 -->
+
+  <ion-list
+    lines="inset"
+    *ngIf="infoPieces && typePiece && !onNextSelectedPiece"
+  >
+    <h1>Selectionner pieces</h1>
+    <ion-item class="mt-2" *ngFor="let infoPiece of infoPieces">
+      <div class="row">
+        <div class="col-2" *ngIf="!onNextSelectedPiece">
+          <ion-toggle
+            (ionChange)="onSelectPiece($event, infoPiece)"
+            [enableOnOffLabels]="false"
+          ></ion-toggle>
+        </div>
+        <div class="col-10">{{ infoPiece.nom }}</div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!--                                 LISTE PIECES SELECTED                              -->
+
+  <ion-list lines="inset" *ngIf="onNextSelectedPiece && infoPiecesSelected">
+    <h1>Pieces selectionnées</h1>
+    <ion-item class="mt-2" *ngFor="let detailsPiece of infoPiecesSelected">
+      <ion-item> </ion-item>
+      <ion-card>
+        <ion-card-title>{{ detailsPiece.nom }}</ion-card-title>
+        <ion-card-content>
+          <ion-card-header>
+            <div class="row">
+              <div class="col-12">Nombre de piece</div>
+              <div class="col-12">
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="detailsPiece.nbrPiece"
+                />
+              </div>
+              <div class="col-12">
+                <ion-label>Repasser</ion-label>
+
+                <ion-toggle
+                  (ionChange)="onRepassagePiece($event, detailsPiece)"
+                  [enableOnOffLabels]="detailsPiece.aRepasser"
+                ></ion-toggle>
+              </div>
+            </div>
+          </ion-card-header>
+          <div class="row">
+            <div class="col-12">
+              Nombre de piece: {{ detailsPiece.nbrPiece }}
+            </div>
+            <div class="col-12">
+              Prix linge par piece: {{ detailsPiece.prixLinge }} Fcfa
+            </div>
+            <div class="col-12">
+              A repasser: <span *ngIf="detailsPiece.aRepasser">Oui</span>
+              <span *ngIf="!detailsPiece.aRepasser">Non</span>
+            </div>
+            <div class="col-12">
+              Prix repassage par piece: {{ detailsPiece.prixRepassage }} Fcfa
+            </div>
+            <hr />
+            <div class="col-12">
+              Prix linge total :
+              {{ detailsPiece.prixLinge * detailsPiece.nbrPiece }} Fcfa
+            </div>
+            <div class="col-12">
+              Prix repassage total :
+              <span *ngIf="detailsPiece.aRepasser"
+                >{{
+                  detailsPiece.prixRepassage * detailsPiece.nbrPiece
+                }}
+                Fcfa</span
+              >
+              <span *ngIf="!detailsPiece.aRepasser">0 Fcfa</span>
+            </div>
+            <hr />
+            <div class="col-12">
+              <p *ngIf="detailsPiece.aRepasser">
+                Prix linge global :
+                {{
+                  detailsPiece.prixLinge * detailsPiece.nbrPiece +
+                    detailsPiece.prixRepassage * detailsPiece.nbrPiece
+                }}
+                Fcfa
+              </p>
+              <p *ngIf="!detailsPiece.aRepasser">
+                Prix linge global :
+                {{ detailsPiece.prixLinge * detailsPiece.nbrPiece }}
+                Fcfa
+              </p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <div class="row">
+    <div class="col-12">
+      <button
+        *ngIf="typePiece && !onNextSelectedPiece"
+        type="button"
+        class="btn btn-outline-success"
+        (click)="onNextSelectedPiece()"
+      >
+        Suivant
+      </button>
+    </div>
+    <div class="col-12">
+      <button
+        *ngIf="typeKilo || onNextSelectedPiece"
+        type="button"
+        class="btn btn-outline-success"
+        (click)="onLasteSuivant()"
+      >
+        Suivant
+      </button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-searchbar
+      *ngIf="infoPieces && typePiece && !onNextSelectedPiece"
+      placeholder="rechercher par nom"
+      [debounce]="600"
+      (ionChange)="handleChange($event)"
+    ></ion-searchbar>
+
+    <ion-icon
+      *ngIf="infoPieces && typePiece && !onNextSelectedPiece"
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

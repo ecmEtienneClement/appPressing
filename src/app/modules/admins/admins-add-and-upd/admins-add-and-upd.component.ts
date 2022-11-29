@@ -103,7 +103,10 @@ export class AdminsAddAndUpdComponent implements OnInit {
           mdp: formAddValues.mdp,
         };
         this.store.dispatch(
-          this.adminsActions.addEntitie()({ entitie: newAdmin })
+          this.adminsActions.addEntitie()({
+            entitie: newAdmin,
+            onNavAfterAdd: true,
+          })
         );
         break;
       //UPD

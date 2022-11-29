@@ -16,6 +16,9 @@ import { EntitiesActions } from './modules/servicesModules/modules.ngrx.actions'
 import { EntitiesEffects } from './modules/servicesModules/modules.ngrx.effects';
 import { EntitiesDataState } from './modules/servicesModules/modules.entitiesDataState';
 import { EntitiesSelectors } from './modules/servicesModules/modules.ngrx.selectors';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +41,9 @@ import { EntitiesSelectors } from './modules/servicesModules/modules.ngrx.select
     EntitiesEffects,
     EntitiesDataState,
     EntitiesSelectors,
+    Geolocation,
+    SQLite,
+    NativeStorage,
   ],
   bootstrap: [AppComponent],
 })

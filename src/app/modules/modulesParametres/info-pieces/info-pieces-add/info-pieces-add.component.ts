@@ -66,7 +66,10 @@ export class InfoPiecesAddComponent implements OnInit {
       prixRepassage: formAddValues.prixRepassage,
     };
     this.store.dispatch(
-      this.infoPiecesActions.addEntitie()({ entitie: newInfoPiece })
+      this.infoPiecesActions.addEntitie()({
+        entitie: newInfoPiece,
+        onNavAfterAdd: true,
+      })
     );
   }
 }

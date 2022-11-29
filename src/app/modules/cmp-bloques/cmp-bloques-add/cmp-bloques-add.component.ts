@@ -95,7 +95,10 @@ export class CmpBloquesAddComponent implements OnInit, OnDestroy {
         EmployeId: employer.id,
       };
       this.store.dispatch(
-        this.cmpBloquesActions.addEntitie()({ entitie: newCmpBloque })
+        this.cmpBloquesActions.addEntitie()({
+          entitie: newCmpBloque,
+          onNavAfterAdd: true,
+        })
       );
     }
   }
