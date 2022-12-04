@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import {
-  DetailTypeKilo,
-  DetailTypePiece,
-  EnumTypeLinge,
-  Linge,
-} from 'src/app/models/models.interfaces';
+import { EnumTypeLinge, Linge } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
 import { LingesSelectors } from '../ngrx/linges.selectors';
 

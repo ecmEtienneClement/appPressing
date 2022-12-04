@@ -4,34 +4,63 @@
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
-    <ion-button slot="end">teste</ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding"> </ion-content>
-<!-- </div>
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Test </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="screen">
+    <div class="screen__content">
+      <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+      <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+        <app-cmp-state-app
+          [dataState]="dataState"
+          [notification]="notification$ | async"
+          [errorMessage]="errorMessage$ | async"
+        ></app-cmp-state-app>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank de teste</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>
-      Start with Ionic
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components"
-        >UI Components</a
+      <!-- --------------------------------SECTION FORM LOGIN----------------------------------- -->
+      <form
+        class="login"
+        [formGroup]="formLogin"
+        (ngSubmit)="submitForm()"
+        novalidate
       >
-    </p>
+        <!--                               INPUT Email                                            -->
+        <ion-item class="m-3" fill="solid" counter="true">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input
+            maxlength="50"
+            type="text"
+            formControlName="email"
+          ></ion-input>
+          <ion-note slot="helper">Email valide</ion-note>
+          <ion-note slot="error">Email invalide</ion-note>
+        </ion-item>
+
+        <!--                               INPUT MDP                                            -->
+        <ion-item class="m-3" fill="solid" counter="true">
+          <ion-label position="floating">Mot de passe</ion-label>
+          <ion-input
+            minlength="6"
+            maxlength="15"
+            type="text"
+            formControlName="mdp"
+          ></ion-input>
+          <ion-note slot="helper">Mot de passe valide</ion-note>
+          <ion-note slot="error">Mot de passe invalide</ion-note>
+        </ion-item>
+
+        <button
+          *ngIf="!formLogin.invalid"
+          class="button login__submit"
+          type="submit"
+        >
+          <span class="button__text">Se Connecter</span>
+        </button>
+      </form>
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape"></span>
+    </div>
   </div>
-</ion-content> -->
+</ion-content>

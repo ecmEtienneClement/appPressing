@@ -7,7 +7,7 @@ import { Employe } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
 import { EmployersActions } from './ngrx/employer.action';
 import { EmployersSelectors } from './ngrx/employers.selectors';
-import { EmployerService } from './services.ts/employer.service';
+import { EmployerService } from './services.ts/employers.service';
 import { WhereNavEntities } from '../servicesModules/modules.service';
 
 @Component({

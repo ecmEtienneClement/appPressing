@@ -11,7 +11,7 @@ generique.
 La class I est le model state des entites et etend de la class IStateApp
 voir dans les class comme (clients.state.ts) exp==> IClientsState
 
-T extends IG permet a la class generique T d'avoir la propriter
+T extends IG permet a la class generique T d'avoir la propriete Id
 */
 @Injectable()
 export class EntitiesSelectors<T extends IG, I extends IStateApp<T>> {

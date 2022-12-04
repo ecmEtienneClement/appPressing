@@ -11,6 +11,7 @@ import { GetInfosPiecesReducer } from './ngrx/InfoPieces.reducer';
 import { ShearedModulesModule } from 'src/app/sheared-modules/sheared-modules.module';
 import { InfosPiecesInfoComponent } from './infos-pieces-info/infos-pieces-info.component';
 import { InfoPiecesAddComponent } from './info-pieces-add/info-pieces-add.component';
+import { InfosPiecesResolver } from './services/infoPieces.resolver';
 
 @NgModule({
   imports: [
@@ -27,6 +28,6 @@ import { InfoPiecesAddComponent } from './info-pieces-add/info-pieces-add.compon
     InfosPiecesInfoComponent,
     InfoPiecesAddComponent,
   ],
-  providers: [InfosPiecesDataService, InfosPiecesService],
+  providers: [InfosPiecesDataService, InfosPiecesService, InfosPiecesResolver],
 })
 export class InfoPiecesPageModule {}

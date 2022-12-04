@@ -110,27 +110,27 @@
   </div>
   <!--                                 LISTE PIECES                                 -->
 
-  <ion-list
-    lines="inset"
-    *ngIf="infoPieces && typePiece && !onNextSelectedPiece"
-  >
+  <ion-list lines="inset" *ngIf="infoPieces && typePiece && !nextSelectedPiece">
     <h1>Selectionner pieces</h1>
     <ion-item class="mt-2" *ngFor="let infoPiece of infoPieces">
       <div class="row">
-        <div class="col-2" *ngIf="!onNextSelectedPiece">
+        <div class="col-12">{{ infoPiece.nom }}</div>
+      </div>
+      <div class="row">
+        <div class="col-12">
           <ion-toggle
             (ionChange)="onSelectPiece($event, infoPiece)"
             [enableOnOffLabels]="false"
           ></ion-toggle>
         </div>
-        <div class="col-10">{{ infoPiece.nom }}</div>
       </div>
+     
     </ion-item>
   </ion-list>
 
   <!--                                 LISTE PIECES SELECTED                              -->
 
-  <ion-list lines="inset" *ngIf="onNextSelectedPiece && infoPiecesSelected">
+  <ion-list lines="inset" *ngIf="nextSelectedPiece && infoPiecesSelected">
     <h1>Pieces selectionnées</h1>
     <ion-item class="mt-2" *ngFor="let detailsPiece of infoPiecesSelected">
       <ion-item> </ion-item>
@@ -211,7 +211,7 @@
   <div class="row">
     <div class="col-12">
       <button
-        *ngIf="typePiece && !onNextSelectedPiece"
+        *ngIf="typePiece && !nextSelectedPiece"
         type="button"
         class="btn btn-outline-success"
         (click)="onNextSelectedPiece()"
@@ -221,7 +221,7 @@
     </div>
     <div class="col-12">
       <button
-        *ngIf="typeKilo || onNextSelectedPiece"
+        *ngIf="typeKilo || nextSelectedPiece"
         type="button"
         class="btn btn-outline-success"
         (click)="onLasteSuivant()"
@@ -240,14 +240,14 @@
     ></ion-back-button>
 
     <ion-searchbar
-      *ngIf="infoPieces && typePiece && !onNextSelectedPiece"
+      *ngIf="infoPieces && typePiece && !nextSelectedPiece"
       placeholder="rechercher par nom"
       [debounce]="600"
       (ionChange)="handleChange($event)"
     ></ion-searchbar>
 
     <ion-icon
-      *ngIf="infoPieces && typePiece && !onNextSelectedPiece"
+      *ngIf="infoPieces && typePiece && !nextSelectedPiece"
       class="scroll"
       slot="end"
       name="arrow-up-outline"

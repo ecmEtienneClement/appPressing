@@ -25,7 +25,8 @@
   </ion-row>
   <div class="container" *ngIf="employer$ | async as employer">
     <app-cmp-dmd-depense
-      [demandeDepenses]="employer.Demande_depenses"
+      *ngFor="let dmdDepense of employer.Demande_depenses"
+      [dmdDepense]="dmdDepense"
     ></app-cmp-dmd-depense>
   </div>
 </ion-content>

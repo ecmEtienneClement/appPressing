@@ -61,75 +61,7 @@
           [enableOnOffLabels]="linge.livre"
         ></ion-toggle>
       </p>
-      <!--                      DETAILS DU LINGE                         -->
       <hr />
-      <div class="row">
-        <div class="col-12">
-          <h4>Détails du type de linge</h4>
-        </div>
-      </div>
-      <!--                      DETAILS TYPE KILO                         -->
-
-      <div
-        class="container"
-        *ngIf="linge.Type_linge?.nom === enumTypeLinge.kilo"
-      >
-        <p class="card-text">
-          <b>Prix linge :</b> {{ linge.Detail_type_kilo?.prixLinge }}
-        </p>
-        <p class="card-text">
-          <b>Prix repassage :</b> {{ linge.Detail_type_kilo?.prixRepassage }}
-        </p>
-      </div>
-      <!--                      DETAILS TYPE PIECE                         -->
-
-      <div class="container" *ngIf="linge.Detail_type_pieces">
-        <div
-          class="container"
-          *ngFor="let detailsPiece of linge.Detail_type_pieces"
-        >
-          <p class="card-text">
-            <b>Nombre de piece :</b> {{ detailsPiece.nbrPiece }}
-          </p>
-          <p class="card-text">
-            <b>Prix :</b> {{ detailsPiece.prixLinge }} Fcfa
-          </p>
-          <p class="card-text">
-            <b>Prix repassage:</b> {{ detailsPiece.prixRepassage }} Fcfa
-          </p>
-
-          <p class="card-text">
-            <b>A repasser :</b> <span *ngIf="detailsPiece.aRepasser">Oui</span
-            ><span *ngIf="!detailsPiece.aRepasser">Non</span>
-          </p>
-        </div>
-      </div>
-
-      <!--                      DETAILS DU CLIENT                         -->
-      <hr />
-      <div class="row">
-        <div class="col-12">
-          <h4>Détails client</h4>
-        </div>
-        <div class="col-12">
-          <p class="card-text"><b>Nom :</b> {{ linge.Client.nom }}</p>
-          <p class="card-text"><b>Numero :</b> {{ linge.Client.numero }}</p>
-          <p class="card-text"><b>Address :</b> {{ linge.Client.adresse }}</p>
-        </div>
-      </div>
-      <!--                      DETAILS DU EMPLOYER                         -->
-      <hr />
-      <div class="row">
-        <div class="col-12">
-          <h4>Détails Employer</h4>
-        </div>
-        <div class="col-12">
-          <p class="card-text"><b>Nom :</b> {{ linge.Employe.nom }}</p>
-          <p class="card-text"><b>Numero :</b> {{ linge.Employe.numero }}</p>
-          <p class="card-text"><b>Address :</b> {{ linge.Employe.adresse }}</p>
-          <p class="card-text"><b>email :</b> {{ linge.Employe.email }}</p>
-        </div>
-      </div>
 
       <div class="row">
         <div class="col-12">

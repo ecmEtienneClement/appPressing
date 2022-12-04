@@ -5,6 +5,7 @@ import { CmpBloquesAddComponent } from './cmp-bloques-add/cmp-bloques-add.compon
 import { CmpBloquesInfoComponent } from './cmp-bloques-info/cmp-bloques-info.component';
 
 import { CmpBloquesPage } from './cmp-bloques.page';
+import { CmpBloquesResolver } from './services/cmpBloques.resolver';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.cmpBloquesInfo}/:id`,
+    resolve: { cmpBloqueResolver: CmpBloquesResolver },
     component: CmpBloquesInfoComponent,
   },
   {

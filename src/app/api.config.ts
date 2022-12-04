@@ -1,5 +1,6 @@
 // TODO MODEL NAME URL
 export enum NameUrlEntitiesAPI {
+  login = 'sign/',
   admins = 'admins/',
   employers = 'employers/',
   clients = 'clients/',
@@ -29,4 +30,5 @@ export enum EntitiesNameAPI {
   infosPieces = '[infosPieces / API]',
   detailsTypePiece = '[detailsTypePieces / API]',
   detailsTypeKilo = '[detailsTypeKilo / API]',
+  login = '[login / API]',
 }

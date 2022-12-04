@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- --------------------------------SECTION FORBIDEN----------------------------------- -->
+
+  <div class="alert alert-warning">
+    <strong>Vous n'éte pas authorisé a accéder a cette ressource !</strong>
+  </div>
+</ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

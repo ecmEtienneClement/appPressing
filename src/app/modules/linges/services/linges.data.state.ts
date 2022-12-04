@@ -5,6 +5,7 @@ import { Linge } from 'src/app/models/models.interfaces';
 export class LingeDataState {
   private idClientLinge = '';
   private newLinge: Linge;
+  private montantLinge: number;
 
   //TODO
   //GET FOR ID CLIENT
@@ -24,5 +25,15 @@ export class LingeDataState {
   //SET FOR LINGE
   public setNewLinge(newLinge: Linge) {
     this.newLinge = newLinge;
+  }
+
+  //TODO
+  //GET  FOR MONTANT LINGE
+  public getMontantLinge() {
+    return this.montantLinge;
+  }
+  //SET FOR MONTANT LINGE
+  public setMontantLinge(montantLinge: number) {
+    this.montantLinge = montantLinge;
   }
 }

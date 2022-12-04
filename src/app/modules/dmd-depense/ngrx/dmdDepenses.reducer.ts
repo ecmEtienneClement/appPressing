@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 import { DemandeDepense } from 'src/app/models/models.interfaces';
 import { EntitiesReducer } from '../../servicesModules/modules.ngrx.reducer';
-import { DmdDepensesActions } from './factures.actions';
-import { IDmdDepenseState } from './factures.state';
+import { DmdDepensesActions } from './dmdDepenses.actions';
+import { IDmdDepenseState } from './dmdDepenses.state';
 
 class DmdDepensesReducer extends EntitiesReducer<
   DemandeDepense,

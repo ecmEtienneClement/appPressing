@@ -12,6 +12,7 @@ import { FacturesEffects } from './ngrx/factures.effects';
 import { GetFacturesReducer } from './ngrx/factures.reducer';
 import { FacturesSelectors } from './ngrx/factures.selectors';
 import { FacturesDataService } from './services/factures.data.service';
+import { FacturesResolver } from './services/factures.resolver';
 import { FacturesService } from './services/factures.service';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { FacturesService } from './services/factures.service';
     FacturesService,
     FacturesActions,
     FacturesSelectors,
+    FacturesResolver,
   ],
 })
 export class FacturesPageModule {}

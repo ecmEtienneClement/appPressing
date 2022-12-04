@@ -6,8 +6,8 @@ import { EmployerClientComponent } from './employer-client/employer-client.compo
 import { EmployerDemandeDepenseComponent } from './employer-demande-depense/employer-demande-depense.component';
 import { EmployerInfoComponent } from './employer-info/employer-info.component';
 import { EmployerLingeComponent } from './employer-linge/employer-linge.component';
-
 import { EmployerPage } from './employer.page';
+import { EmployersResolver } from './services.ts/employers.resolver';
 
 const routes: Routes = [
   {
@@ -16,26 +16,32 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.employersInfo}/:id`,
+    resolve: { employersResolver: EmployersResolver },
     component: EmployerInfoComponent,
   },
   {
     path: `${RoutesNames.employersAdd}`,
+    resolve: { employersResolver: EmployersResolver },
     component: EmployerAddAndUpdComponent,
   },
   {
     path: `${RoutesNames.employersUpd}/:id`,
+    resolve: { employersResolver: EmployersResolver },
     component: EmployerAddAndUpdComponent,
   },
   {
     path: `${RoutesNames.employersLinges}/:id`,
+    resolve: { employersResolver: EmployersResolver },
     component: EmployerLingeComponent,
   },
   {
     path: `${RoutesNames.employersClients}/:id`,
+    resolve: { employersResolver: EmployersResolver },
     component: EmployerClientComponent,
   },
   {
     path: `${RoutesNames.employersDmdDepense}/:id`,
+    resolve: { employersResolver: EmployersResolver },
     component: EmployerDemandeDepenseComponent,
   },
 ];

@@ -1,5 +1,6 @@
 export enum RoutesNames {
   home = 'home',
+  forbiden = 'forbiden',
   //TODO CLIENTS
   admins = 'admins',
   adminsInfo = 'admins_info',
@@ -19,6 +20,7 @@ export enum RoutesNames {
   //TODO LINGES
   linges = 'linges',
   lingesInfo = 'clients_info',
+  lingesUpd = 'clients_upd',
   lingesAddTypeAndClient = 'clients_add_type_and_client',
   lingesAddDetailsType = 'clients_add_details_type',
   lingesAddFinale = 'clients_add_finale',

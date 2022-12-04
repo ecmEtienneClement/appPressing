@@ -10,8 +10,8 @@ import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
 } from '../../servicesModules/modules.entitiesDataState';
-import { DmdDepensesActions } from '../ngrx/factures.actions';
-import { DmdDepensesSelectors } from '../ngrx/factures.selectors';
+import { DmdDepensesActions } from '../ngrx/dmdDepenses.actions';
+import { DmdDepensesSelectors } from '../ngrx/dmdDepenses.selectors';
 
 @Component({
   selector: 'app-dmd-depense-add-and-upd',

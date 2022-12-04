@@ -7,12 +7,13 @@ import { DmdDepenseAddAndUpdComponent } from './dmd-depense-add-and-upd/dmd-depe
 import { DmdDepenseInfoComponent } from './dmd-depense-info/dmd-depense-info.component';
 import { DmdDepensePageRoutingModule } from './dmd-depense-routing.module';
 import { DmdDepensePage } from './dmd-depense.page';
-import { DmdDepensesActions } from './ngrx/factures.actions';
-import { DmdDepensesEffects } from './ngrx/factures.effects';
-import { GetDmdDepensesReducer } from './ngrx/factures.reducer';
-import { DmdDepensesSelectors } from './ngrx/factures.selectors';
-import { DmdDepensesDataService } from './services/factures.data.service';
-import { DmdDepensesService } from './services/factures.service';
+import { DmdDepensesActions } from './ngrx/dmdDepenses.actions';
+import { DmdDepensesEffects } from './ngrx/dmdDepenses.effects';
+import { GetDmdDepensesReducer } from './ngrx/dmdDepenses.reducer';
+import { DmdDepensesSelectors } from './ngrx/dmdDepenses.selectors';
+import { DmdDepensesDataService } from './services/dmdDepenses.data.service';
+import { DmdDepensesResolver } from './services/dmdDepenses.resolver';
+import { DmdDepensesService } from './services/dmdDepenses.service';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { DmdDepensesService } from './services/factures.service';
     DmdDepensesService,
     DmdDepensesActions,
     DmdDepensesSelectors,
+    DmdDepensesResolver,
   ],
 })
 export class DmdDepensePageModule {}

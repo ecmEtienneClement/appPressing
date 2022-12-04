@@ -9,6 +9,6 @@ import { EntitiesDataService } from '../../servicesModules/modules.data.service'
 @Injectable()
 export class AdminsDataService extends EntitiesDataService<Admin> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, NameUrlEntitiesAPI.admins);
+       super(httpClient, NameUrlEntitiesAPI.admins);
   }
 }

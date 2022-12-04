@@ -16,6 +16,7 @@ import { AdminsEmpoyerComponent } from './admins-empoyer/admins-empoyer.componen
 import { AdminsCmpBloquerComponent } from './admins-cmp-bloquer/admins-cmp-bloquer.component';
 import { AdminsAddAndUpdComponent } from './admins-add-and-upd/admins-add-and-upd.component';
 import { AdminsFacDmdDepComponent } from './admins-fac-dmd-dep/admins-fac-dmd-dep.component';
+import { AdminsResolver } from './services/admins.resolver';
 
 @NgModule({
   imports: [
@@ -35,6 +36,12 @@ import { AdminsFacDmdDepComponent } from './admins-fac-dmd-dep/admins-fac-dmd-de
     AdminsCmpBloquerComponent,
     AdminsFacDmdDepComponent,
   ],
-  providers: [AdminsDataService, AdminsService, AdminsActions, AdminsSelectors],
+  providers: [
+    AdminsSelectors,
+    AdminsDataService,
+    AdminsService,
+    AdminsActions,
+    AdminsResolver,
+  ],
 })
 export class AdminsPageModule {}

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details Linge</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
+
+  <h1>DETAILS LINGE</h1>
+
+  <ion-card *ngIf="linge">
+    <ion-card-header *ngIf="payer && livre">
+      <div class="alert alert-success mt-4">
+        <strong>Ce linge est payé et livré !</strong>
+      </div>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="!payer || !livre">
+      <ion-card-title>
+        {{ linge.createdAt | date: "shortDate" }}
+      </ion-card-title>
+      <hr />
+      <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom }}</p>
+      <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
+      <div *ngIf="!payer" class="row">
+        <p class="card-text">
+          <b>Montant avance:</b> {{ linge.montantAvance }} Fcfa
+        </p>
+
+        <div class="col-12">
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="montantAvance"
+          />
+        </div>
+      </div>
+
+      <p class="card-text" *ngIf="!payer">
+        <b>Payer :</b>
+        <ion-toggle
+          (ionChange)="onPayer($event)"
+          [enableOnOffLabels]="linge.payer"
+        ></ion-toggle>
+      </p>
+
+      <p class="card-text" *ngIf="!livre">
+        <b>Livre :</b>
+        <ion-toggle
+          (ionChange)="onLivrer($event)"
+          [enableOnOffLabels]="linge.livre"
+        ></ion-toggle>
+      </p>
+      <hr />
+
+      <div class="row">
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onTerminer()"
+          >
+            Enregistrer
+          </button>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

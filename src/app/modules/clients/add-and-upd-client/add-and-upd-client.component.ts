@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Client } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
@@ -40,7 +41,8 @@ export class AddAndUpdClientComponent implements OnInit {
     private store: Store<AppState>,
     private formBuilder: FormBuilder,
     private clientDataState: EntitiesDataState,
-    private clientsSelectorsService: ClientsSelectors
+    private clientsSelectorsService: ClientsSelectors,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -55,7 +57,6 @@ export class AddAndUpdClientComponent implements OnInit {
     );
     this.initForm();
     //
-    console.log('action==>' + this.clientDataState.getAddOrUpdFormEntitie());
     this.switchNameRoute(this.clientDataState.getAddOrUpdFormEntitie());
   }
   //TODO INIT FORM
@@ -112,7 +113,7 @@ export class AddAndUpdClientComponent implements OnInit {
           numero: formAddValues.numero,
           nbrLinge: 1,
           codeFidelite: 1,
-          EmployeId: '',
+          EmployeId: this.userService.getIdUser(),
         };
         this.store.dispatch(
           this.clientsActionsService.addEntitie()({

@@ -15,7 +15,7 @@
           </ion-item>
         </ion-menu-toggle>
         <!-- **********MENU ADMINS********** -->
-        <ion-menu-toggle>
+        <ion-menu-toggle *ngIf="isAdmin">
           <ion-item routerLink="{{ routesNames.admins }}">
             <ion-icon slot="start" name="people-outline"></ion-icon>
             <ion-label>Admins</ion-label>
@@ -45,7 +45,7 @@
         >
 
         <!-- **********MENU FACTURES********** -->
-        <ion-menu-toggle>
+        <ion-menu-toggle *ngIf="isAdmin">
           <ion-item routerLink="{{ routesNames.factures }}">
             <ion-icon slot="start" name="people-outline"></ion-icon>
             <ion-label>Factures</ion-label>
@@ -59,17 +59,25 @@
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU COMPTE BLOQUE********** -->
-        <ion-menu-toggle>
+        <ion-menu-toggle *ngIf="isAdmin">
           <ion-item routerLink="{{ routesNames.cmpBloques }}">
             <ion-icon slot="start" name="people-outline"></ion-icon>
             <ion-label>Comptes Bloqués</ion-label>
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU PARAMETRE********** -->
-        <ion-menu-toggle>
+        <ion-menu-toggle *ngIf="isAdmin">
           <ion-item routerLink="{{ routesNames.parametres }}">
             <ion-icon slot="start" name="people-outline"></ion-icon>
-            <ion-label>Parametres</ion-label>
+            <ion-label>Configurations</ion-label>
+          </ion-item></ion-menu-toggle
+        >
+
+        <!-- **********MENU PARAMETRE********** -->
+        <ion-menu-toggle>
+          <ion-item (click)="logOut()">
+            <ion-icon slot="start" name="people-outline"></ion-icon>
+            <ion-label>Déconnecter</ion-label>
           </ion-item></ion-menu-toggle
         >
       </ion-list>

@@ -13,6 +13,7 @@ import { NameStateEntities } from 'src/app/appState/app.state';
 import { GetCmpBloquesReducer } from './ngrx/cmpBloques.reducer';
 import { CmpBloquesInfoComponent } from './cmp-bloques-info/cmp-bloques-info.component';
 import { CmpBloquesAddComponent } from './cmp-bloques-add/cmp-bloques-add.component';
+import { CmpBloquesResolver } from './services/cmpBloques.resolver';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { CmpBloquesAddComponent } from './cmp-bloques-add/cmp-bloques-add.compon
     CmpBloquesService,
     CmpBloquesActions,
     CmpBloquesSelectors,
+    CmpBloquesResolver,
   ],
 })
 export class CmpBloquesPageModule {}

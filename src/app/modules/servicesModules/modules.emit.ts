@@ -11,6 +11,7 @@ export class EntitiesEmit {
   //TODO SUB
   public static onEmitSub(dataEmit: DataEmit, nameNotification: string) {
     if (
+      nameNotification === 'user' ||
       nameNotification === 'client' ||
       nameNotification === 'linge' ||
       nameNotification === 'details type kilo' ||

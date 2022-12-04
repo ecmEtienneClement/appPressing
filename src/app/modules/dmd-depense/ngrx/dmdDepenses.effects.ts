@@ -3,9 +3,9 @@ import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { DemandeDepense } from 'src/app/models/models.interfaces';
 import { EntitiesEffects } from '../../servicesModules/modules.ngrx.effects';
-import { DmdDepensesDataService } from '../services/factures.data.service';
-import { DmdDepensesService } from '../services/factures.service';
-import { DmdDepensesActions } from './factures.actions';
+import { DmdDepensesDataService } from '../services/dmdDepenses.data.service';
+import { DmdDepensesService } from '../services/dmdDepenses.service';
+import { DmdDepensesActions } from './dmdDepenses.actions';
 
 @Injectable()
 export class DmdDepensesEffects extends EntitiesEffects<DemandeDepense> {

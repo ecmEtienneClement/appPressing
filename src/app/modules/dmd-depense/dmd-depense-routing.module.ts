@@ -5,6 +5,7 @@ import { DmdDepenseAddAndUpdComponent } from './dmd-depense-add-and-upd/dmd-depe
 import { DmdDepenseInfoComponent } from './dmd-depense-info/dmd-depense-info.component';
 
 import { DmdDepensePage } from './dmd-depense.page';
+import { DmdDepensesResolver } from './services/dmdDepenses.resolver';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.dmdDepensesInfo}/:id`,
+    resolve: { dmdDepensesResolver: DmdDepensesResolver },
     component: DmdDepenseInfoComponent,
   },
   {
@@ -21,6 +23,7 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.dmdDepensesUpd}/:id`,
+    resolve: { dmdDepensesResolver: DmdDepensesResolver },
     component: DmdDepenseAddAndUpdComponent,
   },
 ];

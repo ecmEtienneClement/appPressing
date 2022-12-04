@@ -32,7 +32,9 @@
       <p class="card-text">
         <b>Montant Avance:</b> {{ linge.montantAvance }} Fcfa
       </p>
-
+      <p class="card-text" *ngIf="linge.montantAvance > 0 && !linge.payer">
+        <b>Montant restant:</b> {{ linge.prixLinge - linge.montantAvance }} Fcfa
+      </p>
       <p class="card-text">
         <b>Payer :</b> <span *ngIf="linge.payer">Oui</span
         ><span *ngIf="!linge.payer">Non</span>
@@ -60,6 +62,9 @@
         </p>
         <p class="card-text">
           <b>Prix repassage :</b> {{ linge.Detail_type_kilo?.prixRepassage }}
+        </p>
+        <p class="card-text">
+          <b>Nombre de kilo :</b> {{ linge.Detail_type_kilo?.nbrKilo }}
         </p>
       </div>
       <!--                      DETAILS TYPE PIECE                         -->

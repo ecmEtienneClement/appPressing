@@ -9,6 +9,26 @@ export interface IG {
   createdAt?: string;
   updatedAt?: string;
 }
+
+//TODO Model USER IG ICI N'EST QU'UNE CONTRAINTE ...
+export interface User extends IG {
+  userIdAuth?: string;
+  userEmailAuth?: string;
+  userNomAuth?: string;
+  userPrenomAuth?: string;
+  userRoleAuth?: string;
+  userIpAuth?: string;
+  userUserAgentAuth?: string;
+  email: string;
+  mdp: string;
+  token?: string;
+}
+//TODO
+export enum EnumUserState {
+  logIn = 'login',
+  logOut = 'logOut',
+}
+
 //TODO Model  CLIENT
 export interface Client extends IG {
   EmployeId: string;
@@ -31,7 +51,8 @@ export interface Employe extends IG {
   salaire: number;
   email: string;
   mdp: string;
-  role?: RoleEnum;
+  AdminId: string;
+  role?: EnumUserRole;
   Linges?: Linge[];
   Clients?: Client[];
   Demande_depenses?: DemandeDepense[];
@@ -44,16 +65,16 @@ export interface Admin extends IG {
   numero?: string;
   email: string;
   mdp: string;
-  role?: RoleEnum;
+  role?: EnumUserRole;
   Demande_depenses?: DemandeDepense[];
   Factures?: Facture[];
   Compte_bloquers?: Compte_bloquer[];
 }
 //
 
-enum RoleEnum {
-  admin,
-  user,
+export enum EnumUserRole {
+  admin = 'admin',
+  employer = 'employer',
 }
 //
 //TODO Model FACTURE
@@ -102,7 +123,7 @@ export interface Linge extends IG {
   TypeLingeId: string;
   ClientId: string;
   EmployeId: string;
-  prixLinge?: number;
+  prixLinge: number;
   payer: boolean;
   montantAvance: number;
   livre: boolean;

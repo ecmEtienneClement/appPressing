@@ -5,9 +5,9 @@ import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { DemandeDepense } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
 import { WhereNavEntities } from '../../servicesModules/modules.service';
-import { DmdDepensesActions } from '../ngrx/factures.actions';
-import { DmdDepensesSelectors } from '../ngrx/factures.selectors';
-import { DmdDepensesService } from '../services/factures.service';
+import { DmdDepensesActions } from '../ngrx/dmdDepenses.actions';
+import { DmdDepensesSelectors } from '../ngrx/dmdDepenses.selectors';
+import { DmdDepensesService } from '../services/dmdDepenses.service';
 
 @Component({
   selector: 'app-dmd-depense-info',

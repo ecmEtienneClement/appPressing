@@ -179,7 +179,7 @@
     --ion-color-step-900: #e6e6e6;
     --ion-color-step-950: #f2f2f2;
 
-    --ion-item-background: #000000;
+    --ion-item-background: #ffffff;
 
     --ion-card-background: #1c1c1d;
   }
@@ -233,7 +233,11 @@
     --ion-card-background: #ffffff;
   }
 }
-
+ion-searchbar {
+  --border-radius: 20px;
+  --color: #000000;
+  height: 5px;
+}
 ion-skeleton-text {
   --border-radius: 9999px;
   --background: #2e2b2b;
@@ -249,4 +253,12 @@ ion-segment-button.md {
   --color: #000;
   --color-checked: #08a391;
   --indicator-height: 4px;
+}
+ion-item {
+  --background: $color-light;
+  --background-focused: $color-light;
+  --color: $color-dark;
+}
+ion-note {
+  --color: #000;
 }

@@ -4,6 +4,7 @@ import { RoutesNames } from 'src/app/routes.config';
 import { FacturesAddAndUpdComponent } from './factures-add-and-upd/factures-add-and-upd.component';
 import { FacturesInfoComponent } from './factures-info/factures-info.component';
 import { FacturesPage } from './factures.page';
+import { FacturesResolver } from './services/factures.resolver';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.facturesInfo}/:id`,
+    resolve: { facturesResolver: FacturesResolver },
     component: FacturesInfoComponent,
   },
   {
@@ -20,6 +22,7 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.facturesUpd}/:id`,
+    resolve: { facturesResolver: FacturesResolver },
     component: FacturesAddAndUpdComponent,
   },
 ];

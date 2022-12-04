@@ -19,19 +19,19 @@ import { LingesService } from './services/linges.service';
 export class LingesPage implements OnInit, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
 
-  lingesInit: Linge[];
-  linges: Linge[];
+  lingesInit: Linge[] = [];
+  linges: Linge[] = [];
   notification$: Observable<string> = new Observable();
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
-
   customActionSheetOptions = {
     header: 'Linges',
     subHeader: 'Sélectionnés critères de linges',
   };
+
   constructor(
     private store: Store<AppState>,
     private lingesActions: LingesActions,
@@ -39,7 +39,7 @@ export class LingesPage implements OnInit, OnDestroy {
     private lingesService: LingesService,
     private db: EntitiesDb
   ) {}
-
+  //AIzaSyDuMAmilxAQTBuFKztDzshg1xVfFL9twdg
   ngOnInit() {
     this.db.createTables();
     this.store.dispatch(this.lingesActions.getAllEntities()());
@@ -58,12 +58,15 @@ export class LingesPage implements OnInit, OnDestroy {
     this.sub.add(
       this.store.select(this.lingesSelectors.getEntities()).subscribe({
         next: (linges) => {
-          this.lingesInit = linges;
-          this.linges = linges;
+          if (linges) {
+            this.lingesInit = linges;
+            this.linges = linges;
+          }
         },
       })
     );
   }
+
   //TODO SCROLL
   scrollToTop() {
     this.content.scrollToTop(500);

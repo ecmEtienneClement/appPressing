@@ -5,6 +5,7 @@ import { InfoPiecesAddComponent } from './info-pieces-add/info-pieces-add.compon
 
 import { InfoPiecesPage } from './info-pieces.page';
 import { InfosPiecesInfoComponent } from './infos-pieces-info/infos-pieces-info.component';
+import { InfosPiecesResolver } from './services/infoPieces.resolver';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.infosPiecesInfoAndUpd}/:id`,
+    resolve: { infosPiecesResolver: InfosPiecesResolver },
     component: InfosPiecesInfoComponent,
   },
 ];

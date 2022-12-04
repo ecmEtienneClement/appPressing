@@ -11,10 +11,9 @@ import { AddAndUpdClientComponent } from './add-and-upd-client/add-and-upd-clien
 import { ShearedModulesModule } from 'src/app/sheared-modules/sheared-modules.module';
 import { ClientLingesComponent } from './client-linges/client-linges.component';
 import { ClientService } from './services/clients.service';
-import { ClientsActions } from './ngrx/clients.actions';
 import { NameStateEntities } from 'src/app/appState/app.state';
-import { ClientsSelectors } from './ngrx/clients.selectors';
 import { GetClientsReducer } from './ngrx/clients.reducer';
+import { ClientsResolver } from './services/clients.resolver';
 
 @NgModule({
   imports: [
@@ -33,6 +32,6 @@ import { GetClientsReducer } from './ngrx/clients.reducer';
     AddAndUpdClientComponent,
     ClientLingesComponent,
   ],
-  providers: [ClientsDataService, ClientService],
+  providers: [ClientsDataService, ClientService, ClientsResolver],
 })
 export class ClientsPageModule {}

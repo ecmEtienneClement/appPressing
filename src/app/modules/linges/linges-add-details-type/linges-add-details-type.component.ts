@@ -15,6 +15,7 @@ import {
   TypeLinge,
 } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { InfosKiloActions } from '../../modulesParametres/info-kilo/ngrx/infosKilo.actions';
 import { InfosKiloSelectors } from '../../modulesParametres/info-kilo/ngrx/infosKilo.selectors';
 import { InfosPiecesActions } from '../../modulesParametres/info-pieces/ngrx/infosPieces.actions';
@@ -60,6 +61,7 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
   infoPiecesSelected: DetailTypePiece[] = [];
   detailsTypeKilo: DetailTypeKilo;
   nbrKilo = 0;
+  montantLinge = 0;
   infosKilo: InfoKilo;
   tbPieceCrated: DetailTypePiece[] = [];
   readonly routesNames = RoutesNames;
@@ -80,14 +82,15 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
     private lingesDataState: LingeDataState,
     private infoPiecesActions: InfosPiecesActions,
     private infoPiecesSelectors: InfosPiecesSelectors,
-    private lingesService: LingesService
+    private lingesService: LingesService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.store.dispatch(this.typesLingesActions.getAllEntities()());
     this.store.dispatch(this.infoPiecesActions.getAllEntities()());
     this.store.dispatch(this.infosKiloActions.getAllEntities()());
-    /*
+
     this.dataState$ = this.store.select(
       this.detailsTypesKiloSelectors.getDataState()
     );
@@ -97,7 +100,7 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.select(
       this.detailsTypesKiloSelectors.getMessageError()
     );
-    */
+
     this.dataState$ = this.store.select(
       this.detailsTypesPieceSelectors.getDataState()
     );
@@ -107,6 +110,7 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.select(
       this.detailsTypesPieceSelectors.getMessageError()
     );
+
     this.onSubTypeLinge();
     this.onSubInfosKilo();
     this.subInfoPieces();
@@ -231,7 +235,7 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
   onLasteSuivant() {
     const newLinge: Linge = {
       ClientId: this.lingesDataState.getIdClientLinge(),
-      EmployeId: '8c4dsc57dc7d7dv',
+      EmployeId: this.userService.getIdUser(),
       TypeLingeId: this.idTypeLinges,
       coordX: 11178,
       coordY: 44444,
@@ -264,10 +268,6 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
               }
               break;
             case 'details type kilo':
-              const typeKilo = <DetailTypeKilo>dataEmit.entitie;
-              const lingeAddKilo: Linge = this.lingesDataState.getNewLinge();
-              lingeAddKilo.Detail_type_kilo = typeKilo;
-              this.lingesDataState.setNewLinge(lingeAddKilo);
               this.onNav(
                 this.whereNav.addEntitie,
                 this.routesNames.lingesAddFinale
@@ -279,9 +279,6 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
               if (
                 this.tbPieceCrated.length === this.infoPiecesSelected.length
               ) {
-                const lingeAddPiece: Linge = this.lingesDataState.getNewLinge();
-                lingeAddPiece.Detail_type_pieces = this.tbPieceCrated;
-                this.lingesDataState.setNewLinge(lingeAddPiece);
                 this.onNav(
                   this.whereNav.addEntitie,
                   this.routesNames.lingesAddFinale
@@ -302,7 +299,16 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
       prixRepassage: this.infosKilo.prixRepassage,
       LingeId: this.lingesDataState.getNewLinge().id,
     };
-
+    //Calcule montant du linge
+    if (this.aRepasser) {
+      const prixLinge = this.nbrKilo * this.infosKilo.prixLinge;
+      const prixRepassage = this.nbrKilo * this.infosKilo.prixRepassage;
+      const montantLingeAvcRps = prixLinge + prixRepassage;
+      this.lingesDataState.setMontantLinge(montantLingeAvcRps);
+    } else {
+      const montantLingeSnsRps = this.nbrKilo * this.infosKilo.prixLinge;
+      this.lingesDataState.setMontantLinge(montantLingeSnsRps);
+    }
     this.store.dispatch(
       this.detailsTypesKiloActions.addEntitie()({
         entitie: this.detailsTypeKilo,
@@ -312,6 +318,20 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
   }
   //TODO
   onCreateTypePiece() {
+    //Calcule montant linge
+    this.infoPiecesSelected.forEach((piece) => {
+      if (piece.aRepasser) {
+        const prixPieceLinge = piece.nbrPiece * piece.prixLinge;
+        const prixPieceRep = piece.nbrPiece * piece.prixRepassage;
+        const somme = prixPieceLinge + prixPieceRep;
+        this.montantLinge += somme;
+      } else {
+        const prixPieceLinge = piece.nbrPiece * piece.prixLinge;
+        this.montantLinge += prixPieceLinge;
+      }
+    });
+    this.lingesDataState.setMontantLinge(this.montantLinge);
+
     this.infoPiecesSelected.forEach((piece) => {
       piece.LingeId = this.lingesDataState.getNewLinge().id;
 

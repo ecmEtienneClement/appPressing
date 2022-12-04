@@ -12,11 +12,12 @@ import { EmployerAddAndUpdComponent } from './employer-add-and-upd/employer-add-
 import { EmployerLingeComponent } from './employer-linge/employer-linge.component';
 import { EmployerClientComponent } from './employer-client/employer-client.component';
 import { EmployerDemandeDepenseComponent } from './employer-demande-depense/employer-demande-depense.component';
-import { EmployerService } from './services.ts/employer.service';
+import { EmployerService } from './services.ts/employers.service';
 import { NameStateEntities } from 'src/app/appState/app.state';
 import { EmployersActions } from './ngrx/employer.action';
 import { EmployersSelectors } from './ngrx/employers.selectors';
 import { GetEmployersReducer } from './ngrx/employers.reducer';
+import { EmployersResolver } from './services.ts/employers.resolver';
 
 @NgModule({
   imports: [
@@ -37,6 +38,6 @@ import { GetEmployersReducer } from './ngrx/employers.reducer';
     EmployerDemandeDepenseComponent,
     EmployerClientComponent,
   ],
-  providers: [EmployesDataService, EmployerService],
+  providers: [EmployesDataService, EmployerService, EmployersResolver],
 })
 export class EmployerPageModule {}

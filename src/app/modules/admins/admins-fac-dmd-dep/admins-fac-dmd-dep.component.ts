@@ -7,7 +7,6 @@ import { RoutesNames } from 'src/app/routes.config';
 import { WhereNavEntities } from '../../servicesModules/modules.service';
 import { AdminsSelectors } from '../ngrx/admins.selectors';
 
-
 @Component({
   selector: 'app-admins-fac-dmd-dep',
   templateUrl: './admins-fac-dmd-dep.component.html',
@@ -46,7 +45,7 @@ export class AdminsFacDmdDepComponent implements OnInit {
   }
 
   //TODO
-  onNav(whereContainer: string) {
+  onSegement(whereContainer: string) {
     switch (whereContainer) {
       case 'dmd':
         this.demande = true;
@@ -54,20 +53,20 @@ export class AdminsFacDmdDepComponent implements OnInit {
         this.facture = false;
         break;
       case 'dep':
-        this.demande = false;
         this.depense = true;
+        this.demande = false;
         this.facture = false;
         break;
       case 'fac':
+        this.facture = true;
         this.demande = false;
         this.depense = false;
-        this.facture = true;
         break;
 
       default:
-          this.demande = true;
-          this.depense = false;
-          this.facture = false;
+        this.demande = true;
+        this.depense = false;
+        this.facture = false;
         break;
     }
   }

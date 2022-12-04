@@ -31,7 +31,9 @@ export class EntitiesEffects<T extends IG> {
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error.message,
+                error: error.error
+                  ? error.error.message
+                  : error.message,
               })
             )
           )
@@ -54,7 +56,9 @@ export class EntitiesEffects<T extends IG> {
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error.message,
+                error: error.error
+                  ? error.error.message
+                  : error.message,
               })
             )
           )
@@ -77,7 +81,9 @@ export class EntitiesEffects<T extends IG> {
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error.message,
+                error: error.error
+                  ? error.error.message
+                  : error.message,
               })
             )
           )
@@ -95,13 +101,15 @@ export class EntitiesEffects<T extends IG> {
           map((dataEntitie: T) => {
             this.onNavInfo(action.entitie.id);
             return this.entitiesActionsService.updEntitieSuccess()({
-              entitie: action.entitie,
+              entitie: dataEntitie,
             });
           }),
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error.message,
+                error: error.error
+                  ? error.error.message
+                  : error.message,
               })
             )
           )
@@ -125,7 +133,9 @@ export class EntitiesEffects<T extends IG> {
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error.message,
+                error: error.error
+                  ? error.error.message
+                  : error.message,
               })
             )
           )
@@ -148,7 +158,9 @@ export class EntitiesEffects<T extends IG> {
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error.message,
+                error: error.error
+                  ? error.error.message
+                  : error.message,
               })
             )
           )

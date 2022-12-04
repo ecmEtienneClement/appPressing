@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { LoginDataService } from './services/login.data.service';
+import { LoginEffects } from './ngrx/login.effects';
+import { GetLoginReducer } from './ngrx/login.reducer';
+import { NameStateEntities } from '../appState/app.state';
+import { ShearedModulesModule } from '../sheared-modules/sheared-modules.module';
+import { Toast } from '@awesome-cordova-plugins/toast/ngx';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule
+    ShearedModulesModule,
+    HomePageRoutingModule,
+    StoreModule.forFeature(NameStateEntities.login, GetLoginReducer.getReducer),
+    EffectsModule.forFeature([LoginEffects]),
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [LoginDataService, Toast],
 })
 export class HomePageModule {}

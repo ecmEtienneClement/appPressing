@@ -13,6 +13,8 @@ import { LingesInfosComponent } from './linges-infos/linges-infos.component';
 import { LingesAddTypeAndClientComponent } from './linges-add-type-and-client/linges-add-type-and-client.component';
 import { LingesAddDetailsTypeComponent } from './linges-add-details-type/linges-add-details-type.component';
 import { LingesAddFinalComponent } from './linges-add-final/linges-add-final.component';
+import { LingesUpdComponent } from './linges-upd/linges-upd.component';
+import { LingesResolver } from './services/linges.resolver';
 
 @NgModule({
   imports: [
@@ -27,10 +29,11 @@ import { LingesAddFinalComponent } from './linges-add-final/linges-add-final.com
   declarations: [
     LingesPage,
     LingesInfosComponent,
+    LingesUpdComponent,
     LingesAddTypeAndClientComponent,
     LingesAddDetailsTypeComponent,
     LingesAddFinalComponent,
   ],
-  providers: [LingesService, LingesDataService],
+  providers: [LingesService, LingesDataService, LingesResolver],
 })
 export class LingesPageModule {}

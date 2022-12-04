@@ -27,25 +27,30 @@
 
   <div class="container" *ngIf="admin$ | async as admin">
     <!--                          DMD DEPENSES                          -->
-    <app-cmp-dmd-depense
-      *ngIf="demande"
-      [demandeDepenses]="admin.Demande_depenses"
-    ></app-cmp-dmd-depense>
+    <div class="container" *ngIf="demande">
+      <app-cmp-dmd-depense
+        *ngFor="let dmdDepense of admin.Demande_depenses"
+        [dmdDepense]="dmdDepense"
+      ></app-cmp-dmd-depense>
+    </div>
     <!--                           DEPENSES                           -->
 
-    <app-cmp-dmd-depense
-      *ngIf="demande"
-      [demandeDepenses]="admin.Demande_depenses"
-    ></app-cmp-dmd-depense>
+    <div class="container" *ngIf="depense">
+      <app-cmp-dmd-depense
+        *ngFor="let dmdDepense of admin.Demande_depenses"
+        [dmdDepense]="dmdDepense"
+      ></app-cmp-dmd-depense>
+    </div>
 
     <!--                          FACTURES                           -->
-
-    <app-cmp-facture
-      *ngFor="let facture of admin.Factures"
-      [factureCreatedAt]="facture.createdAt"
-      [factureType]="facture.type"
-      [factureMontant]="facture.montant"
-    ></app-cmp-facture>
+    <div class="container" *ngIf="facture">
+      <app-cmp-facture
+        *ngFor="let facture of admin.Factures"
+        [factureCreatedAt]="facture.createdAt"
+        [factureType]="facture.type"
+        [factureMontant]="facture.montant"
+      ></app-cmp-facture>
+    </div>
   </div>
 </ion-content>
 
@@ -56,13 +61,13 @@
       [defaultHref]="routesNames.home"
     ></ion-back-button>
     <ion-segment value="factures">
-      <ion-segment-button (click)="onNav('fac')" value="factures">
+      <ion-segment-button (click)="onSegement('fac')" value="factures">
         <ion-label>Factures</ion-label>
       </ion-segment-button>
-      <ion-segment-button (click)="onNav('dmd')" value="demande">
+      <ion-segment-button (click)="onSegement('dmd')" value="demande">
         <ion-label>Demandes</ion-label>
       </ion-segment-button>
-      <ion-segment-button (click)="onNav('dep')" value="depense">
+      <ion-segment-button (click)="onSegement('dep')" value="depense">
         <ion-label>Depenses</ion-label>
       </ion-segment-button>
     </ion-segment>

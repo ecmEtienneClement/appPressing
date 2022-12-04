@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Employe } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
@@ -32,6 +33,7 @@ export class EmployerAddAndUpdComponent implements OnInit {
     email: '',
     mdp: '',
     salaire: 0,
+    AdminId: '',
   };
   //
   formEmployer: FormGroup;
@@ -40,7 +42,8 @@ export class EmployerAddAndUpdComponent implements OnInit {
     private employersActions: EmployersActions,
     private employersSelectores: EmployersSelectors,
     private entitiesDataState: EntitiesDataState,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -108,6 +111,7 @@ export class EmployerAddAndUpdComponent implements OnInit {
       case EnumAddOrUpdFormEntitie.addEntitie:
         const formAddValues = this.formEmployer.value;
         const newEmployer: Employe = {
+          AdminId: this.userService.getIdUser(),
           nom: formAddValues.nom,
           prenom: formAddValues.prenom,
           adresse: formAddValues.adresse,
@@ -127,6 +131,7 @@ export class EmployerAddAndUpdComponent implements OnInit {
       case EnumAddOrUpdFormEntitie.updEntitie:
         const formUpdValues = this.formEmployer.value;
         const updClient: Employe = {
+          AdminId: this.employeUpd.AdminId,
           id: this.employeUpd.id,
           nom: formUpdValues.nom,
           prenom: formUpdValues.prenom,

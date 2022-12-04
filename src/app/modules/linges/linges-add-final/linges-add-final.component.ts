@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -14,15 +15,24 @@ import { LingeDataState } from '../services/linges.data.state';
   styleUrls: ['./linges-add-final.component.scss'],
 })
 export class LingesAddFinalComponent implements OnInit {
-  notification$: Observable<string> = new Observable();
-  errorMessage$: Observable<string> = new Observable();
-  linge: Linge;
+  notification$: Observable<string | null> = new Observable();
+  errorMessage$: Observable<string | null> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   avance = false;
   montantAvance = 0;
   readonly routesNames = RoutesNames;
   readonly enumTypeLinge = EnumTypeLinge;
-
+  linge: Linge = {
+    ClientId: '',
+    EmployeId: '',
+    TypeLingeId: '',
+    coordX: 0,
+    coordY: 0,
+    livre: false,
+    payer: false,
+    montantAvance: 0,
+    prixLinge: 0,
+  };
   constructor(
     private store: Store<AppState>,
     private lingesSelectorsService: LingesSelectors,
@@ -41,6 +51,19 @@ export class LingesAddFinalComponent implements OnInit {
       this.lingesSelectorsService.getMessageError()
     );
     this.linge = this.lingesDataState.getNewLinge();
+    /**
+     * TODO JSON.parse(JSON.stringify(this.linge))
+     * C'est mise en place pour enlever la lecture seule des propriétes du linge.
+     * Vous pouvez vérifier si vous le commenté les méthodes onPayer() et onLivrer()
+     * ne fonctionneront plus car les propriétes manipulées passeront en lecture seule
+     */
+    this.linge = JSON.parse(JSON.stringify(this.linge));
+    this.onMontant();
+  }
+
+  //TODO
+  onMontant() {
+    this.linge.prixLinge = this.lingesDataState.getMontantLinge();
   }
 
   //TODO

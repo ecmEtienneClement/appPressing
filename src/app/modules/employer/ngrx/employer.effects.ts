@@ -3,7 +3,7 @@ import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Employe } from 'src/app/models/models.interfaces';
 import { EntitiesEffects } from '../../servicesModules/modules.ngrx.effects';
-import { EmployerService } from '../services.ts/employer.service';
+import { EmployerService } from '../services.ts/employers.service';
 import { EmployesDataService } from '../services.ts/employers.data.service';
 import { EmployersActions } from './employer.action';
 

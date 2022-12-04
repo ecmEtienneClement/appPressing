@@ -59,6 +59,13 @@
         <button (click)="onDeleteLinge(linge.id)" ion-button color="primary">
           <ion-icon name="trash-outline"></ion-icon>
         </button>
+        <button
+          (click)="onNav(whereNav.updEntitie,routesNames.lingesUpd,linge.id)"
+          ion-button
+          color="primary"
+        >
+          upd
+        </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
