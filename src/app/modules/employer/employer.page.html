@@ -30,61 +30,65 @@
 
   <!--                                 LIST                                  -->
 
-  <h1>EMPLOYERS</h1>
   <ion-list lines="inset" *ngIf="employes">
-    <ion-item-sliding class="mt-4" *ngFor="let employer of employes">
+    <ion-item-sliding *ngFor="let employer of employes">
       <!-- *************************************** -->
       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.employersInfo,employer.id)"
       >
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h2>{{employer.prenom}} {{employer.nom}}</h2>
+        <main class="user">
+          <article class="user__profile">
+                                    <ion-icon  class="user__picture" name="person-outline"></ion-icon>
+
+            <span class="user__name"
+              >{{employer.prenom}} {{employer.nom}}
+            </span>
+          </article>
+        </main>
       </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
         <button
+          class="item_btn"
           (click)="onDeleteEmploye(employer.id)"
           ion-button
           color="primary"
         >
-          <ion-icon name="text"></ion-icon>
-          Del
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.updEntitie,routesNames.employersUpd,employer.id)"
           ion-button
           color="secondary"
         >
-          <ion-icon name="call"></ion-icon>
-          Upd
+          <ion-icon class="item_icon" name="pencil-outline"></ion-icon>
         </button>
       </ion-item-options>
       <ion-item-options side="start">
         <button
+          class="item_btn"
           (click)="onNav(whereNav.ressourcesEntitie,routesNames.employersClients,employer.id)"
           ion-button
           color="primary"
         >
-          <ion-icon name="mail"></ion-icon>
-          Clients
+          <ion-icon class="item_icon" name="person-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.ressourcesEntitie,routesNames.employersLinges,employer.id)"
           ion-button
           color="primary"
         >
-          <ion-icon name="mail"></ion-icon>
-          Linges
+          <ion-icon class="item_icon" name="shirt-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.ressourcesEntitie,routesNames.employersDmdDepense,employer.id)"
           ion-button
           color="primary"
         >
-          <ion-icon name="mail"></ion-icon>
-          Demandes
+          <ion-icon class="item_icon" name="reader-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

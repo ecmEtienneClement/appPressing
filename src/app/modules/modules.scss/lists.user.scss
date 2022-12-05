@@ -1,0 +1,65 @@
+@import "../modules.scss/variables.scss";
+
+.user {
+  width: 100%;
+  background-color: $color-light;
+  border-radius: 0 0 12px 12px;
+  padding: 10px 5px 10px;
+  display: grid;
+  height: 75px;
+  max-height: 75px;
+
+  &__profile {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: center;
+    padding: 10px 30px 10px 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px 5px rgba(51, 51, 51, 0.23);
+    background-color: $color-light;
+  }
+
+  &__picture {
+    color: $color-dark;
+    font-size: 25px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #f3f4f6, 0 0 0 22px $color-light-black;
+  }
+
+  &__name {
+    color: $color-dark;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.54px;
+    margin-left: 40px;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    color: $color-light-black;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: right;
+  }
+}
+
+.item_btn {
+  background-color: $color-light;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  margin-left: 2px;
+  margin-right: 5px;
+  border-left: 2px solid $color-light-black;
+  border-radius: 15px;
+  background: linear-gradient(145deg, $color-light, $color-light);
+  box-shadow: 10px 0 20px -10px rgba(0, 0, 0, 0.8);
+  height: 50%;
+}
+.item_icon {
+  font-size: 25px;
+  color: $color-dark;
+  margin-left: 10px;
+  margin-right: 10px;
+}

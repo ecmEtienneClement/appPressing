@@ -30,51 +30,51 @@
 
   <!--                                 LIST                                  -->
 
-  <h1>ADMINS</h1>
   <ion-list lines="inset" *ngIf="admins">
-    <ion-item-sliding class="mt-4" *ngFor="let admin of admins">
+    <ion-item-sliding *ngFor="let admin of admins">
       <!-- *************************************** -->
       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsInfo,admin.id)"
       >
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h4>{{admin.nom}}</h4>
-        <h5>{{admin.prenom}}</h5>
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon class="user__picture" name="person-outline"></ion-icon>
+
+            <span class="user__name">{{admin.prenom}} {{admin.nom}} </span>
+          </article>
+        </main>
       </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
-        <button (click)="onDeleteAdmin(admin.id)" ion-button color="primary">
-          <ion-icon name="trash-outline"></ion-icon>
+        <button class="item_btn" (click)="onDeleteAdmin(admin.id)">
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.updEntitie,routesNames.adminsUpd,admin.id)"
-          ion-button
-          color="secondary"
         >
-          <ion-icon name="brush-outline"></ion-icon>
+          <ion-icon class="item_icon" name="brush-outline"></ion-icon>
         </button>
       </ion-item-options>
       <ion-item-options side="start">
-        <button>
-          <ion-icon
-            (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsEmployers,admin.id)"
-            name="people-outline"
-          ></ion-icon>
+        <button
+          class="item_btn"
+          (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsEmployers,admin.id)"
+        >
+          <ion-icon class="item_icon" name="people-outline"></ion-icon>
         </button>
-        <button>
-          <ion-icon
-            (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsCmtBloquer,admin.id)"
-            name="lock-closed-outline"
-          ></ion-icon>
+        <button
+          class="item_btn"
+          (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsCmtBloquer,admin.id)"
+        >
+          <ion-icon class="item_icon" name="lock-closed-outline"></ion-icon>
         </button>
 
-        <button>
-          <ion-icon
-            (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsFacDepDmd,admin.id)"
-            name="newspaper-outline"
-          ></ion-icon>
+        <button
+          class="item_btn"
+          (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsFacDepDmd,admin.id)"
+        >
+          <ion-icon class="item_icon" name="newspaper-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

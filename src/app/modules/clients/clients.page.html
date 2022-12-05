@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>clients</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+
+    <ion-button
+      slot="end"
+      (click)="onNav(whereNavClient.addEntitie,routesNames.clientsAdd)"
+      fill="outline"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--                                 STATE                                  -->
+
+  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+  <!--                                 LOADDING                                  -->
+  <app-cmp-loading-list [dataState]="dataState$|async"></app-cmp-loading-list>
+
+  <!--                                 LISTE                                  -->
+
+  <ion-list lines="inset" *ngIf="clients">
+    <ion-item-sliding *ngFor="let client of clients">
+      <!-- *************************************** -->
+      <ion-item
+        (click)="onNav(whereNavClient.ressourcesEntitie ,routesNames.clientsInfo,client.id)"
+      >
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon class="user__picture" name="person-outline"></ion-icon>
+
+            <span class="user__name">{{client.prenom}} {{client.nom}} </span>
+            <span class="user__value"> {{client.nbrLinge}}</span>
+          </article>
+        </main>
+      </ion-item>
+      <!-- *************************************** -->
+      <ion-item-options side="end">
+        <button
+          class="item_btn"
+          (click)="onDeleteClient(client.id)"
+          ion-button
+          color="primary"
+        >
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
+        </button>
+        <button
+          class="item_btn"
+          (click)="onNav(whereNavClient.updEntitie ,routesNames.clientsUpd,client.id)"
+          ion-button
+          color="secondary"
+        >
+          <ion-icon class="item_icon" name="pencil-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+      <ion-item-options side="start">
+        <button
+          class="item_btn"
+          (click)="onNav(whereNavClient.ressourcesEntitie,routesNames.clientsLinges,client.id)"
+          ion-button
+          color="primary"
+        >
+          <ion-icon class="item_icon" name="shirt-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+
+    <ion-searchbar
+      placeholder="rechercher par prénom"
+      [debounce]="600"
+      (ionChange)="handleChange($event)"
+    ></ion-searchbar>
+
+    <ion-icon
+      class="scroll"
+      slot="end"
+      name="arrow-up-outline"
+      (click)="scrollToTop()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-footer>

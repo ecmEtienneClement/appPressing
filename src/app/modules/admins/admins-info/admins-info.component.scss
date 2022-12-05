@@ -1,4 +1,34 @@
-ion-tabs {
-  --color-selected: var(--ion-color-primary);
-  --background-focused-opacity: var(--ion-color-primary);
+@import "../../modules.scss/variables.scss";
+
+.container-fluid {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    326deg,
+    rgba(147, 13, 224, 1) 0%,
+    rgba(0, 159, 231, 1) 15%,
+    rgba(0, 222, 223, 1) 50%,
+    rgba(156, 0, 224, 1) 100%
+  );
+
+  ion-card {
+    @include card-bg-mixing;
+    ion-card-header {
+      @include flex-mixing;
+      ion-avatar {
+        ion-icon {
+          font-size: 90px;
+        }
+      }
+      ion-card-title {
+        margin-top: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+    }
+    ion-card-content {
+      @include flex-mixing;
+      justify-content: left;
+    }
+  }
 }

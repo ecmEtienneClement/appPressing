@@ -1,6 +1,5 @@
-ion-button {
-  --border-radius: 40%;
-}
+@import "../modules.scss/lists.user.scss";
+
 ion-searchbar {
   --border-radius: 20px;
   --color: #000000;
@@ -9,12 +8,4 @@ ion-searchbar {
 .scroll {
   font-size: 25px;
   padding-right: 8px;
-}
-button {
-  width: 50px;
-  ion-icon {
-    font-size: 20px;
-    color: white;
-    font-weight: bold;
-  }
 }

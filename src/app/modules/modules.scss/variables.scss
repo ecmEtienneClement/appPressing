@@ -1,0 +1,22 @@
+//MES VARIABLES
+$color-primary: #3880ff;
+$color-light: #ffffff;
+$color-dark: #000000;
+$color-light-black: #acacac;
+//MES MIXIN S
+@mixin flex-mixing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@mixin card-bg-mixing {
+  color: white;
+  background: rgba(252, 252, 252, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  -webkit-box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
+}
