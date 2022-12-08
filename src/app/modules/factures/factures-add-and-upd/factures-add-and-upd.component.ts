@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Facture, EnumTypeFacture } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
@@ -37,7 +38,8 @@ export class FacturesAddAndUpdComponent implements OnInit {
     private facturesActions: FacturesActions,
     private facturesSelectores: FacturesSelectors,
     private entitiesDataState: EntitiesDataState,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -93,7 +95,7 @@ export class FacturesAddAndUpdComponent implements OnInit {
         const newFacture: Facture = {
           type: formAddValues.type,
           montant: formAddValues.montant,
-          AdminId: '1d1fa24c-226e-44ef-9d89-47d68e49a030',
+          AdminId: this.userService.getIdUser(),
         };
         this.store.dispatch(
           this.facturesActions.addEntitie()({

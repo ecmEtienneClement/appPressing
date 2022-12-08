@@ -19,6 +19,7 @@ export class AdminsInfoComponent implements OnInit {
   admin$: Observable<Admin> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
+    readonly whereNav = WhereNavEntities;
   constructor(
     private store: Store<AppState>,
     private adminService: AdminsService,
@@ -47,5 +48,13 @@ export class AdminsInfoComponent implements OnInit {
       RoutesNames.adminsUpd,
       idAdmin
     );
+  }
+   //TODO NAV
+  onNav(
+    whereNav: WhereNavEntities,
+    routeParam?: RoutesNames,
+    idEmploye?: string
+  ) {
+    this.adminService.onNav(whereNav, routeParam, idEmploye);
   }
 }

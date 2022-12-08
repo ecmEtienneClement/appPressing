@@ -1,0 +1,52 @@
+@import "../modules.scss/variables.scss";
+
+.container-fluid {
+  //position: relative;
+  height: 100%;
+  width: 100%;
+  ion-card {
+    @include card-bg-mixin;
+    ion-card-header {
+      .container {
+        @include flex-mixin;
+        ion-avatar {
+          ion-icon {
+            font-size: 90px;
+          }
+        }
+        ion-card-title {
+          margin-top: 40px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+        ion-button {
+          @include btn-mixin;
+        }
+      }
+      .container-res {
+        @include card-bg-mixin;
+        .row {
+          .col-res {
+            margin-top: 8px;
+            ion-button {
+              @include btn-mixin;
+            }
+          }
+        }
+      }
+    }
+    ion-card-content {
+      .row {
+        margin-top: 15px;
+        .col-12 {
+          text-transform: capitalize;
+          text-align: left;
+          justify-content: left;
+          b {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

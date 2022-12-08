@@ -22,34 +22,136 @@
 
     <ion-card *ngIf="admin$ | async as admin">
       <ion-card-header>
-        <ion-avatar>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <ion-card-title> {{ admin.prenom }} {{ admin.nom }} </ion-card-title>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title> {{ admin.prenom }} {{ admin.nom }} </ion-card-title>
+          <ion-button
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="
+              onNav(whereNav.updEntitie, routesNames.adminsUpd, admin.id)
+            "
+            ><p>Modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
+        </div>
+
+        <!--  -->
+        <div class="container-res">
+          <div class="row">
+            <div class="col-res col-12">
+              <ion-button
+                fill="clear"
+                size="small"
+                (click)="
+                  onNav(
+                    whereNav.ressourcesEntitie,
+                    routesNames.adminsEmployers,
+                    admin.id
+                  )
+                "
+              >
+                <ion-icon class="item_icon" name="people-outline"></ion-icon>
+                <p>Employé(s)</p>
+              </ion-button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-res col-12">
+              <ion-button
+                fill="clear"
+                size="small"
+                (click)="
+                  onNav(
+                    whereNav.ressourcesEntitie,
+                    routesNames.adminsFacDepDmd,
+                    admin.id
+                  )
+                "
+              >
+                <ion-icon class="item_icon" name="newspaper-outline"></ion-icon>
+                <p>Demande(s) dépense(s) & Facture(s)</p>
+              </ion-button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-res col-12">
+              <ion-button
+                fill="clear"
+                size="small"
+                (click)="
+                  onNav(
+                    whereNav.ressourcesEntitie,
+                    routesNames.adminsCmtBloquer,
+                    admin.id
+                  )
+                "
+              >
+                <ion-icon
+                  class="item_icon"
+                  name="lock-closed-outline"
+                ></ion-icon>
+
+                <p>Compte(s) bloqué(s)</p>
+              </ion-button>
+            </div>
+          </div>
+        </div>
       </ion-card-header>
 
       <ion-card-content>
-        <p class="card-text"><b>Email :</b> {{ admin.email }}</p>
-        <p class="card-text"><b>Numéro :</b> {{ admin.numero }}</p>
-        <p class="card-text"><b>Rôle :</b> {{ admin.role }}</p>
-        <p class="card-text">
-          <b>Enregistrer le :</b> {{ admin.createdAt | date : "shortDate" }}
-        </p>
-        <p class="card-text">
-          <b>Dérnier modifcation :</b>
-          {{ admin.updatedAt | date : "shortDate" }}
-        </p>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Email :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ admin.email }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Numéro :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ admin.numero }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Rôle :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ admin.role }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Enregistré le :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ admin.createdAt | date : "shortDate" }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Dérniere modification :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ admin.updatedAt | date : "shortDate" }}</p>
+          </div>
+        </div>
+
         <hr />
       </ion-card-content>
-
-      <ion-row no-padding>
-        <ion-col>
-          <ion-button (click)="onNavUpdate(admin.id)" fill="outline"
-            >Modifier
-            <ion-icon slot="end" name="pencil-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
     </ion-card>
   </div>
 </ion-content>

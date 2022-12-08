@@ -24,7 +24,10 @@ export class EmployerAddAndUpdComponent implements OnInit {
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
-
+  nomEmployer = '...';
+  prenomEmployer = '';
+  updatePwd = false;
+  isUpdate = false;
   employeUpd: Employe = {
     nom: '',
     prenom: '',
@@ -72,7 +75,13 @@ export class EmployerAddAndUpdComponent implements OnInit {
       numero: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       salaire: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       email: [null, [Validators.required, Validators.email]],
-      //   mdp: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
+      mdp: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern('(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])^[a-zA-Z0-9]*$'),
+        ],
+      ],
     });
   }
 
@@ -92,6 +101,9 @@ export class EmployerAddAndUpdComponent implements OnInit {
                 salaire: dataEmploye.salaire,
                 email: dataEmploye.email,
               });
+              this.nomEmployer = dataEmploye.nom;
+              this.prenomEmployer = dataEmploye.prenom;
+              this.isUpdate = true;
             }
           },
           error: (error) => {
@@ -102,6 +114,11 @@ export class EmployerAddAndUpdComponent implements OnInit {
         });
         break;
     }
+  }
+  //TODO
+  onUpdatePwd() {
+    this.updatePwd = true;
+    this.isUpdate = false;
   }
 
   //TODO SUBMIT
@@ -118,7 +135,7 @@ export class EmployerAddAndUpdComponent implements OnInit {
           numero: formAddValues.numero,
           salaire: formAddValues.salaire,
           email: formAddValues.email,
-          mdp: 'Motdepasse01',
+          mdp: formAddValues.mdp,
         };
         this.store.dispatch(
           this.employersActions.addEntitie()({
@@ -138,7 +155,6 @@ export class EmployerAddAndUpdComponent implements OnInit {
           adresse: formUpdValues.adresse,
           numero: formUpdValues.numero,
           email: formUpdValues.email,
-          //  mdp: formAddValues.mdp,
           mdp: this.employeUpd.mdp,
           salaire: formUpdValues.salaire,
           role: this.employeUpd.role,

@@ -8,47 +8,60 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION FORM COMPTE----------------------------------- -->
+
+    <ion-card>
+      <form [formGroup]="formCmpBloque" (ngSubmit)="submitForm()" novalidate>
+        <ion-card-header>
+          <div class="container">
+            <ion-card-title> Facture </ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formCmpBloque.invalid"
+              type="submit"
+              ><p>Bloquer</p>
+              <ion-icon slot="end" name="pencil-outline"></ion-icon
+            ></ion-button>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <hr />
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT TYPE                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-select
+                  formControlName="email"
+                  interface="popover"
+                  placeholder="Selectionné email"
+                >
+                  <ion-select-option
+                    *ngFor="let employe of employes"
+                    [value]="employe.email"
+                  >
+                    {{ employe.email }}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION FORM COMPTE----------------------------------- -->
-
-  <form [formGroup]="formCmpBloque" (ngSubmit)="submitForm()" novalidate>
-    <!--                               INPUT TYPE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-select
-        formControlName="email"
-        interface="popover"
-        placeholder="Selectionné email"
-      >
-        <ion-select-option
-          *ngFor="let employe of employes"
-          [value]="employe.email"
-        >
-          {{ employe.email }}</ion-select-option
-        >
-      </ion-select>
-    </ion-item>
-
-    <!--                               BTN SAVE                                              -->
-
-    <ion-row>
-      <ion-col>
-        <ion-button
-          fill="outline"
-          [disabled]="formCmpBloque.invalid"
-          type="submit"
-          >Bloquer</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </form>
 </ion-content>
 
 <ion-footer [translucent]="true">

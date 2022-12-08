@@ -8,56 +8,77 @@
 </ion-header>
 
 <ion-content>
-  <!-- -------------------------------- SECTION STATE APP ----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
-  </div>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION FORM DEMANDE----------------------------------- -->
 
-  <!-- --------------------------------SECTION FORM DEMANDE----------------------------------- -->
-
-  <form [formGroup]="formDemandeDepense" (ngSubmit)="submitForm()" novalidate>
-    <!--                               INPUT DESCRIPTION                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-textarea
-        maxlength="500"
-        formControlName="description"
-        placeholder="Votre description ici ..."
-        [autoGrow]="true"
+    <ion-card>
+      <form
+        [formGroup]="formDemandeDepense"
+        (ngSubmit)="submitForm()"
+        novalidate
       >
-      </ion-textarea>
-      <ion-note slot="helper">Entrez la description</ion-note>
-      <ion-note slot="error">description invalid</ion-note>
-    </ion-item>
+        <ion-card-header>
+          <div class="container">
+            <ion-card-title> Facture </ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formDemandeDepense.invalid"
+              type="submit"
+              ><p>Enregistrer</p>
+              <ion-icon slot="end" name="pencil-outline"></ion-icon
+            ></ion-button>
+          </div>
+        </ion-card-header>
 
-    <!--                               INPUT MONTANT                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Montant</ion-label>
-      <ion-input
-        maxlength="9"
-        type="text"
-        formControlName="montant"
-      ></ion-input>
-      <ion-note slot="helper">Entrez le montant</ion-note>
-      <ion-note slot="error">montant invalid</ion-note>
-    </ion-item>
+        <ion-card-content>
+          <hr />
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT DESCRIPTION                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-textarea
+                  maxlength="500"
+                  formControlName="description"
+                  placeholder="Votre description ici ..."
+                  [autoGrow]="true"
+                >
+                </ion-textarea>
+                <ion-note slot="helper">Entrez la description</ion-note>
+                <ion-note slot="error">description invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
 
-    <!--                                     BTN SAVE                                        -->
-
-    <ion-row>
-      <ion-col>
-        <ion-button
-          fill="outline"
-          [disabled]="formDemandeDepense.invalid"
-          type="submit"
-          >Enregistrer</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </form>
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT MONTANT                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Montant</ion-label>
+                <ion-input
+                  maxlength="9"
+                  type="text"
+                  formControlName="montant"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le montant</ion-note>
+                <ion-note slot="error">montant invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer [translucent]="true">

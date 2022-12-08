@@ -23,7 +23,10 @@ export class AdminsAddAndUpdComponent implements OnInit {
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
-
+  updatePwd = false;
+  isUpdate = false;
+  nomAdmin = '...';
+  prenomAdmin = '';
   AdminUpd: Admin = {
     nom: '',
     prenom: '',
@@ -60,7 +63,13 @@ export class AdminsAddAndUpdComponent implements OnInit {
       prenom: [null, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       numero: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       email: [null, [Validators.required, Validators.email]],
-      mdp: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
+      mdp: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern('(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])^[a-zA-Z0-9]*$'),
+        ],
+      ],
     });
   }
 
@@ -79,7 +88,11 @@ export class AdminsAddAndUpdComponent implements OnInit {
                 email: dataEmploye.email,
                 mdp: dataEmploye.mdp,
               });
+              this.nomAdmin = dataEmploye.nom;
+            this.prenomAdmin = dataEmploye.prenom;
+            this.isUpdate = true;
             }
+            
           },
           error: (error) => {
             this.store.dispatch(this.adminsActions.errorEntities()({ error }));
@@ -87,6 +100,11 @@ export class AdminsAddAndUpdComponent implements OnInit {
         });
         break;
     }
+  }
+  //TODO
+  onUpdatePwd() {
+    this.updatePwd = true;
+    this.isUpdate = false;
   }
 
   //TODO SUBMIT

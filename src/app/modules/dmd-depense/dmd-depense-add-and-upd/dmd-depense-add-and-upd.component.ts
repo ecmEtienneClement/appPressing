@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { DemandeDepense } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
@@ -38,7 +39,8 @@ export class DmdDepenseAddAndUpdComponent implements OnInit {
     private dmdDepensesActions: DmdDepensesActions,
     private dmdDepensesSelectores: DmdDepensesSelectors,
     private entitiesDataState: EntitiesDataState,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -100,7 +102,7 @@ export class DmdDepenseAddAndUpdComponent implements OnInit {
           montant: formAddValues.montant,
           rejeter: false,
           valider: false,
-          EmployeId: '0dc16262-e0c0-4b35-8d96-60d77319d0cd',
+          EmployeId: this.userService.getIdUser(),
         };
         this.store.dispatch(
           this.dmdDepensesActions.addEntitie()({

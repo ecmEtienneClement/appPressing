@@ -1,3 +1,10 @@
+@import "../../modules.scss/card.user.scss";
+@import "../../modules.scss/lists.user.scss";
+
+.blc-select-client {
+  @include card-bg-mixin;
+ 
+}
 ion-checkbox {
   --size: 32px;
   --background-checked: #6815ec;

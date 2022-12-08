@@ -8,63 +8,82 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION FORM FACTURE----------------------------------- -->
+
+    <ion-card>
+      <form [formGroup]="formFacture" (ngSubmit)="submitForm()" novalidate>
+        <ion-card-header>
+          <div class="container">
+            <ion-card-title> Facture </ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formFacture.invalid"
+              type="submit"
+              ><p>Enregistrer</p>
+              <ion-icon slot="end" name="pencil-outline"></ion-icon
+            ></ion-button>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <hr />
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT TYPE                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-select
+                  formControlName="type"
+                  interface="popover"
+                  placeholder="Selectionné type"
+                >
+                  <ion-select-option [value]="enumTypeFacture.eau"
+                    >Eau</ion-select-option
+                  >
+                  <ion-select-option [value]="enumTypeFacture.electricite"
+                    >Electricité</ion-select-option
+                  >
+                  <ion-select-option [value]="enumTypeFacture.location"
+                    >Location</ion-select-option
+                  >
+                  <ion-select-option [value]="enumTypeFacture.salaire"
+                    >Salaire</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT MONTANT                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Montant</ion-label>
+                <ion-input
+                  maxlength="9"
+                  type="text"
+                  formControlName="montant"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le montant</ion-note>
+                <ion-note slot="error">montant invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION FORM FACTURE----------------------------------- -->
-
-  <form [formGroup]="formFacture" (ngSubmit)="submitForm()" novalidate>
-    <!--                               INPUT TYPE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-select
-        formControlName="type"
-        interface="popover"
-        placeholder="Selectionné type"
-      >
-        <ion-select-option [value]="enumTypeFacture.eau">Eau</ion-select-option>
-        <ion-select-option [value]="enumTypeFacture.electricite"
-          >Electricité</ion-select-option
-        >
-        <ion-select-option [value]="enumTypeFacture.location"
-          >Location</ion-select-option
-        >
-        <ion-select-option [value]="enumTypeFacture.salaire"
-          >Salaire</ion-select-option
-        >
-      </ion-select>
-    </ion-item>
-
-    <!--                               INPUT MONTANT                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Montant</ion-label>
-      <ion-input
-        maxlength="9"
-        type="text"
-        formControlName="montant"
-      ></ion-input>
-      <ion-note slot="helper">Entrez le montant</ion-note>
-      <ion-note slot="error">montant invalid</ion-note>
-    </ion-item>
-
-    <!--                               BTN SAVE                                              -->
-
-    <ion-row>
-      <ion-col>
-        <ion-button
-          fill="outline"
-          [disabled]="formFacture.invalid"
-          type="submit"
-          >Enregistrer</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </form>
 </ion-content>
 
 <ion-footer [translucent]="true">

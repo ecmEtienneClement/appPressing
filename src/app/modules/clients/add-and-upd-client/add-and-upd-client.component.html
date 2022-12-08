@@ -8,64 +8,110 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION FORM CLIENT----------------------------------- -->
+
+    <ion-card>
+      <form [formGroup]="formClient" (ngSubmit)="submitForm()" novalidate>
+        <ion-card-header>
+          <div class="container">
+            <ion-avatar>
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </ion-avatar>
+            <ion-card-title>
+              {{ prenomClient }} {{ nomClient }}
+            </ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formClient.invalid"
+              type="submit"
+              ><p>Enregistrer</p>
+              <ion-icon slot="end" name="pencil-outline"></ion-icon
+            ></ion-button>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <hr />
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NOM                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Nom</ion-label>
+                <ion-input
+                  maxlength="20"
+                  type="text"
+                  formControlName="nom"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le nom</ion-note>
+                <ion-note slot="error">Nom invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT PRENOM                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Prénom</ion-label>
+                <ion-input
+                  maxlength="35"
+                  type="text"
+                  formControlName="prenom"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le prénom</ion-note>
+                <ion-note slot="error">Prénon invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT ADRESSE                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Adresse</ion-label>
+                <ion-input
+                  maxlength="35"
+                  type="text"
+                  formControlName="adresse"
+                ></ion-input>
+                <ion-note slot="helper">Entrez l'adresse</ion-note>
+                <ion-note slot="error">Adresse invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NUMERO                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Numéro</ion-label>
+                <ion-input
+                  maxlength="9"
+                  type="text"
+                  formControlName="numero"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le numéro</ion-note>
+                <ion-note slot="error">Numéro invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION FORM CLIENT----------------------------------- -->
-
-  <form [formGroup]="formClient" (ngSubmit)="submitForm()" novalidate>
-    <!--                               INPUT NOM                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input maxlength="20" type="text" formControlName="nom"></ion-input>
-      <ion-note slot="helper">Entrez votre nom</ion-note>
-      <ion-note slot="error">Nom invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT PRENOM                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Prénom</ion-label>
-      <ion-input
-        maxlength="35"
-        type="text"
-        formControlName="prenom"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre prenom</ion-note>
-      <ion-note slot="error">Prénon invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT ADRESSE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Adresse</ion-label>
-      <ion-input
-        maxlength="35"
-        type="text"
-        formControlName="adresse"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre adresse</ion-note>
-      <ion-note slot="error">Adresse invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT NUMERO                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Numéro</ion-label>
-      <ion-input maxlength="9" type="text" formControlName="numero"></ion-input>
-      <ion-note slot="helper">Entrez votre numéro</ion-note>
-      <ion-note slot="error">Numéro invalid</ion-note>
-    </ion-item>
-    <ion-row>
-      <!--                               BTN SAVE                                              -->
-
-      <ion-col>
-        <ion-button fill="outline" [disabled]="formClient.invalid" type="submit"
-          >Enregistrer</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </form>
 </ion-content>
 
 <ion-footer [translucent]="true">

@@ -19,6 +19,7 @@ export class ClientsInfoComponent implements OnInit {
   client$: Observable<Client> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
+  readonly whereNav = WhereNavEntities;
   constructor(
     private store: Store<AppState>,
     private clientService: ClientService,
@@ -40,12 +41,12 @@ export class ClientsInfoComponent implements OnInit {
     );
   }
 
-  //TODO NAVIGATION CLIENT
-  onNavUpdate(idClient: string) {
-    this.clientService.onNav(
-      WhereNavEntities.updEntitie,
-      RoutesNames.clientsUpd,
-      idClient
-    );
+  //TODO NAV
+  onNav(
+    whereNav: WhereNavEntities,
+    routeParam?: RoutesNames,
+    idEmploye?: string
+  ) {
+    this.clientService.onNav(whereNav, routeParam, idEmploye);
   }
 }

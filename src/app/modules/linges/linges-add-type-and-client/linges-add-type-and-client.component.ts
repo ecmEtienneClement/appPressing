@@ -8,6 +8,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Client } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { ClientsActions } from '../../clients/ngrx/clients.actions';
 import { ClientsSelectors } from '../../clients/ngrx/clients.selectors';
 import {
@@ -56,7 +57,8 @@ export class LingesAddTypeAndClientComponent implements OnInit, OnDestroy {
     private clientsSelectorsService: ClientsSelectors,
     private lingesService: LingesService,
     private lingesDataState: LingeDataState,
-    private entititeNativeStorage: EntititeNativeStorage
+    private entititeNativeStorage: EntititeNativeStorage,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -140,7 +142,7 @@ export class LingesAddTypeAndClientComponent implements OnInit, OnDestroy {
       numero: formAddValues.numero,
       nbrLinge: 1,
       codeFidelite: 0,
-      EmployeId: '0dc16262-e0c0-4b35-8d96-60d77319d0cd',
+      EmployeId: this.userService.getIdUser(),
     };
     //10458090-8d5a-4730-9c4a-4805dcb5b934
     this.store.dispatch(

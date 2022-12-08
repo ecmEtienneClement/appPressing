@@ -24,7 +24,8 @@ export class AddAndUpdClientComponent implements OnInit {
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
-
+  nomClient = '...';
+  prenomClient = '';
   clientUpd: Client = {
     nom: '',
     prenom: '',
@@ -88,6 +89,8 @@ export class AddAndUpdClientComponent implements OnInit {
                   adresse: dataClient.adresse,
                   numero: dataClient.numero,
                 });
+                this.nomClient = dataClient.nom;
+                this.prenomClient = dataClient.prenom;
               }
             },
             error: (error) => {

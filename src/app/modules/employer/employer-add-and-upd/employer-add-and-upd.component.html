@@ -8,86 +8,165 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION FORM EMPLOYER----------------------------------- -->
+
+    <ion-card>
+      <form [formGroup]="formEmployer" (ngSubmit)="submitForm()" novalidate>
+        <ion-card-header>
+          <div class="container">
+            <ion-avatar>
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </ion-avatar>
+            <ion-card-title>
+              {{ prenomEmployer }} {{ nomEmployer }}
+            </ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formEmployer.invalid"
+              type="submit"
+              ><p>Enregistrer</p>
+              <ion-icon slot="end" name="pencil-outline"></ion-icon
+            ></ion-button>
+          </div>
+          <!--  -->
+          <div class="container-res">
+            <div class="row">
+              <div class="col-res col-12">
+                <ion-button (click)="onUpdatePwd()" fill="clear" size="small">
+                  <ion-icon slot="end" name="pencil-outline"></ion-icon>
+                  <p>Modifier mot de passe</p>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <hr />
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NOM                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Nom</ion-label>
+                <ion-input
+                  maxlength="20"
+                  type="text"
+                  formControlName="nom"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le nom</ion-note>
+                <ion-note slot="error">Nom invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT PRENOM                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Prénom</ion-label>
+                <ion-input
+                  maxlength="35"
+                  type="text"
+                  formControlName="prenom"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le prénom</ion-note>
+                <ion-note slot="error">Prénon invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT ADRESSE                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Adresse</ion-label>
+                <ion-input
+                  maxlength="35"
+                  type="text"
+                  formControlName="adresse"
+                ></ion-input>
+                <ion-note slot="helper">Entrez l'adresse</ion-note>
+                <ion-note slot="error">Adresse invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+
+          <!--                               INPUT Email                                            -->
+          <ion-item fill="solid" counter="true">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input
+              maxlength="50"
+              type="text"
+              formControlName="email"
+            ></ion-input>
+            <ion-note slot="helper">Entrez email</ion-note>
+            <ion-note slot="error">Email invalid</ion-note>
+          </ion-item>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NUMERO                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Numéro</ion-label>
+                <ion-input
+                  maxlength="9"
+                  type="text"
+                  formControlName="numero"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le numéro</ion-note>
+                <ion-note slot="error">Numéro invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT SALAIRE                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Salaire</ion-label>
+                <ion-input
+                  maxlength="7"
+                  type="text"
+                  formControlName="salaire"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le salaire</ion-note>
+                <ion-note slot="error">Salaire invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row" *ngIf="updatePwd && !isUpdate">
+            <div class="col-12">
+              <!--                               INPUT MDP                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Mot de passe</ion-label>
+                <ion-input
+                  maxlength="25"
+                  type="text"
+                  formControlName="mdp"
+                ></ion-input>
+                <ion-note slot="helper">Entrez votre mot de passe</ion-note>
+                <ion-note slot="error">Mot de passe invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION FORM EMPLOYER----------------------------------- -->
-
-  <form [formGroup]="formEmployer" (ngSubmit)="submitForm()" novalidate>
-    <!--                               INPUT NOM                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input maxlength="20" type="text" formControlName="nom"></ion-input>
-      <ion-note slot="helper">Entrez votre nom</ion-note>
-      <ion-note slot="error">Nom invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT PRENOM                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Prénom</ion-label>
-      <ion-input
-        maxlength="35"
-        type="text"
-        formControlName="prenom"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre prenom</ion-note>
-      <ion-note slot="error">Prénon invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT ADRESSE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Adresse</ion-label>
-      <ion-input
-        maxlength="35"
-        type="text"
-        formControlName="adresse"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre adresse</ion-note>
-      <ion-note slot="error">Adresse invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT Email                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input maxlength="50" type="text" formControlName="email"></ion-input>
-      <ion-note slot="helper">Entrez votre email</ion-note>
-      <ion-note slot="error">Email invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT SALAIRE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Salaire</ion-label>
-      <ion-input
-        maxlength="7"
-        type="text"
-        formControlName="salaire"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre salaire</ion-note>
-      <ion-note slot="error">Salaire invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT NUMERO                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Numéro</ion-label>
-      <ion-input maxlength="9" type="text" formControlName="numero"></ion-input>
-      <ion-note slot="helper">Entrez votre numéro</ion-note>
-      <ion-note slot="error">Numéro invalid</ion-note>
-    </ion-item>
-
-    <!--                               BTN SAVE                                              -->
-
-    <ion-row>
-      <ion-col>
-        <ion-button
-          fill="outline"
-          [disabled]="formEmployer.invalid"
-          type="submit"
-          >Enregistrer</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </form>
 </ion-content>
 
 <ion-footer [translucent]="true">

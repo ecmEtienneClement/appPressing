@@ -1,22 +1,24 @@
 @import "../modules.scss/variables.scss";
-
+ion-item {
+  --border-style: none;
+}
 .user {
   width: 100%;
   background-color: $color-light;
   border-radius: 0 0 12px 12px;
-  padding: 10px 5px 10px;
+  padding: 2px 5px 10px;
   display: grid;
-  height: 75px;
-  max-height: 75px;
+  height: 70px;
+  max-height: 70px;
 
   &__profile {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     align-items: center;
-    padding: 10px 30px 10px 10px;
+    padding: 5px 30px 10px 10px;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 10px 10px 5px rgba(51, 51, 51, 0.23);
+    box-shadow: 0 2px 2px 2px rgba(51, 51, 51, 0.23);
     background-color: $color-light;
   }
 

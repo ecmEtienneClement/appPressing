@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Details Client</ion-title>
+    <ion-title>Détails Client</ion-title>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -8,57 +8,141 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
+
+    <ion-card *ngIf="client$ | async as client">
+      <ion-card-header>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title>
+            {{ client.prenom }} {{ client.nom }}
+          </ion-card-title>
+          <ion-button
+            fill="clear"
+            size="small"
+            (click)="
+              onNav(whereNav.updEntitie, routesNames.clientsUpd, client.id)
+            "
+            ><p>modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
+        </div>
+        <div class="container-res">
+          <div class="row">
+            <div class="col-res col-12">
+              <ion-button
+                fill="clear"
+                size="small"
+                (click)="
+                  onNav(
+                    whereNav.ressourcesEntitie,
+                    routesNames.clientsLinges,
+                    client.id
+                  )
+                "
+              >
+                <ion-icon class="item_icon" name="shirt-outline"></ion-icon>
+                <p>linge(s)</p>
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Adresse :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.adresse }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Numéro :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.numero }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Nombre de linge :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.nbrLinge }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Code fidélité :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.codeFidelite }}</p>
+          </div>
+        </div>
+
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Enregistré le :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.createdAt | date : "shortDate" }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Dérniere modification :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.updatedAt | date : "shortDate" }}</p>
+          </div>
+        </div>
+
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Client de l'employé :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">
+              {{ client.Employe.prenom }} {{ client.Employe.nom }}
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-12">
+            <b>Numéro de l'employé :</b>
+          </div>
+          <div class="col-12">
+            <p class="card-text">{{ client.Employe.numero }}</p>
+          </div>
+        </div>
+        <hr />
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
-
-  <h1>DETAILS CLIENT</h1>
-
-  <ion-card *ngIf="client$ | async as client">
-    <ion-avatar>
-      <ion-icon name="person-circle-outline"></ion-icon>
-    </ion-avatar>
-
-    <ion-card-content>
-      <ion-card-title> {{ client.prenom }} {{ client.nom }} </ion-card-title>
-      <p class="card-text"><b>Adresse :</b> {{ client.adresse }}</p>
-      <p class="card-text"><b>Numéro :</b> {{ client.numero }}</p>
-      <p class="card-text"><b>Nombre de linge :</b> {{ client.nbrLinge }}</p>
-      <p class="card-text"><b>Code fidélité :</b> {{ client.codeFidelite }}</p>
-      <p class="card-text"><b>Créer le :</b> {{ client.createdAt }}</p>
-      <p class="card-text">
-        <b>Dérnier modifcation :</b> {{ client.updatedAt }}
-      </p>
-      <hr />
-      <ion-row>
-        <ion-col>
-          <p class="card-text">
-            <b>Client de l'employé: </b> {{ client.Employe.prenom }}
-            {{ client.Employe.nom }}
-          </p>
-          <p class="card-text">
-            <b>Numéro de l'employé : </b> {{ client.Employe.numero }}
-          </p>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <ion-button (click)="onNavUpdate(client.id)" fill="outline"
-          >Modifier
-          <ion-icon slot="end" name="pencil-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
 </ion-content>
 
 <ion-footer [translucent]="true">

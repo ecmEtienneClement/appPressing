@@ -52,6 +52,7 @@ export interface Employe extends IG {
   email: string;
   mdp: string;
   AdminId: string;
+  Admin?: Admin;
   role?: EnumUserRole;
   Linges?: Linge[];
   Clients?: Client[];

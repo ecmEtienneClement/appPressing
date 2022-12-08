@@ -30,22 +30,22 @@
     ></app-cmp-state-app>
   </div>
   <!-- --------------------------------SECTION TYPE LINGE----------------------------------- -->
-
-  <ion-item>
-    <ion-select
-      (ionChange)="onTypeLinge($event)"
-      cancel-text="Annuler"
-      ok-text="Suivant"
-      placeholder="Type de linge"
-    >
-      <ion-select-option value="kilo">Kilo</ion-select-option>
-      <ion-select-option value="piece">Piece</ion-select-option>
-    </ion-select>
-  </ion-item>
-
+  <div class="blc-select-type mt-3">
+    <ion-item>
+      <ion-select
+        (ionChange)="onTypeLinge($event)"
+        cancel-text="Annuler"
+        ok-text="Suivant"
+        placeholder="Type de linge"
+      >
+        <ion-select-option value="kilo">Kilo</ion-select-option>
+        <ion-select-option value="piece">Piece</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
   <!-- *********************             FORM KILO            ****************** -->
 
-  <div class="container" *ngIf="typeKilo">
+  <div class="container mt-3" *ngIf="typeKilo">
     <ion-card>
       <ion-card-title>Details</ion-card-title>
       <ion-card-header>
@@ -55,8 +55,10 @@
             <input type="number" class="form-control" [(ngModel)]="nbrKilo" />
           </div>
 
-          <div class="col-12">
+          <div class="col-12 mt-2">
             <ion-label>Repasser</ion-label>
+          </div>
+          <div class="col-12">
             <ion-toggle
               (ionChange)="onRepassage($event)"
               [enableOnOffLabels]="aRepasser"
@@ -66,22 +68,22 @@
       </ion-card-header>
       <ion-card-content>
         <div class="row">
-          <div class="col-12">Nombre de kilo: {{ nbrKilo }} kg</div>
-          <div class="col-12">
+          <div class="col-12 mt-2">Nombre de kilo: {{ nbrKilo }} kg</div>
+          <div class="col-12 mt-2">
             Prix linge par kilo: {{ infosKilo.prixLinge }} Fcfa
           </div>
-          <div class="col-12">
+          <div class="col-12 mt-2">
             A repasser: <span *ngIf="aRepasser">Oui</span>
             <span *ngIf="!aRepasser">Non</span>
           </div>
-          <div class="col-12">
+          <div class="col-12 mt-2">
             Prix repassage par kilo: {{ infosKilo.prixRepassage }} Fcfa
           </div>
           <hr />
           <div class="col-12">
             Prix linge total : {{ infosKilo.prixLinge * nbrKilo }} Fcfa
           </div>
-          <div class="col-12">
+          <div class="col-12 mt-2">
             Prix repassage total :
             <span *ngIf="aRepasser"
               >{{ infosKilo.prixRepassage * nbrKilo }} Fcfa</span
@@ -111,29 +113,28 @@
   <!--                                 LISTE PIECES                                 -->
 
   <ion-list lines="inset" *ngIf="infoPieces && typePiece && !nextSelectedPiece">
-    <h1>Selectionner pieces</h1>
-    <ion-item class="mt-2" *ngFor="let infoPiece of infoPieces">
-      <div class="row">
-        <div class="col-12">{{ infoPiece.nom }}</div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <ion-toggle
-            (ionChange)="onSelectPiece($event, infoPiece)"
-            [enableOnOffLabels]="false"
-          ></ion-toggle>
+    <h5>Selectionner pieces</h5>
+    <div class="list-select-piece">
+      <ion-item class="mt-2" *ngFor="let infoPiece of infoPieces">
+        <div class="row">
+          <div class="col-12">
+            <ion-toggle
+              class="tog-select-piece"
+              (ionChange)="onSelectPiece($event, infoPiece)"
+              [enableOnOffLabels]="false"
+            ></ion-toggle>
+            {{ infoPiece.nom }}
+          </div>
         </div>
-      </div>
-     
-    </ion-item>
+      </ion-item>
+    </div>
   </ion-list>
 
   <!--                                 LISTE PIECES SELECTED                              -->
 
   <ion-list lines="inset" *ngIf="nextSelectedPiece && infoPiecesSelected">
-    <h1>Pieces selectionnées</h1>
+    <h5>Pieces selectionnées</h5>
     <ion-item class="mt-2" *ngFor="let detailsPiece of infoPiecesSelected">
-      <ion-item> </ion-item>
       <ion-card>
         <ion-card-title>{{ detailsPiece.nom }}</ion-card-title>
         <ion-card-content>
@@ -147,9 +148,8 @@
                   [(ngModel)]="detailsPiece.nbrPiece"
                 />
               </div>
-              <div class="col-12">
+              <div class="col-12 mt-2">
                 <ion-label>Repasser</ion-label>
-
                 <ion-toggle
                   (ionChange)="onRepassagePiece($event, detailsPiece)"
                   [enableOnOffLabels]="detailsPiece.aRepasser"
@@ -158,17 +158,17 @@
             </div>
           </ion-card-header>
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 mt-1">
               Nombre de piece: {{ detailsPiece.nbrPiece }}
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-1">
               Prix linge par piece: {{ detailsPiece.prixLinge }} Fcfa
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-1">
               A repasser: <span *ngIf="detailsPiece.aRepasser">Oui</span>
               <span *ngIf="!detailsPiece.aRepasser">Non</span>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-1">
               Prix repassage par piece: {{ detailsPiece.prixRepassage }} Fcfa
             </div>
             <hr />
@@ -176,7 +176,7 @@
               Prix linge total :
               {{ detailsPiece.prixLinge * detailsPiece.nbrPiece }} Fcfa
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-1">
               Prix repassage total :
               <span *ngIf="detailsPiece.aRepasser"
                 >{{
@@ -209,25 +209,27 @@
   </ion-list>
 
   <div class="row">
-    <div class="col-12">
-      <button
+    <div class="col-btn-next col-12">
+      <ion-button
         *ngIf="typePiece && !nextSelectedPiece"
-        type="button"
-        class="btn btn-outline-success"
+        fill="clear"
+        class="mt-2"
+        size="small"
         (click)="onNextSelectedPiece()"
       >
         Suivant
-      </button>
+      </ion-button>
     </div>
-    <div class="col-12">
-      <button
+    <div class="col-btn-next col-12">
+      <ion-button
         *ngIf="typeKilo || nextSelectedPiece"
-        type="button"
-        class="btn btn-outline-success"
+        fill="clear"
+        class="mt-2"
+        size="small"
         (click)="onLasteSuivant()"
       >
         Suivant
-      </button>
+      </ion-button>
     </div>
   </div>
 </ion-content>

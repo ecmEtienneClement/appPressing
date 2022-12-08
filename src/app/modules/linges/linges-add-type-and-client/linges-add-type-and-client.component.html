@@ -8,103 +8,145 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
-  </div>
-  <!-- --------------------------------SECTION TYPE LINGE----------------------------------- -->
-  <ion-list>
-    <ion-item>
-      <ion-select
-        (ionChange)="onClient($event)"
-        cancel-text="Annuler"
-        ok-text="Suivant"
-        placeholder="Client"
-      >
-        <ion-select-option value="select">Séléctionné</ion-select-option>
-        <ion-select-option value="new">Nouveau</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <!--                                 LOADDING                                  -->
-  <app-cmp-loading-list
-    *ngIf="selectClient"
-    [dataState]="dataState$ | async"
-  ></app-cmp-loading-list>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
 
-  <!--                                 LISTE                                  -->
+    <!-- --------------------------------SECTION TYPE LINGE----------------------------------- -->
 
-  <ion-list lines="inset" *ngIf="clients && selectClient">
-    <h1>Séléctionné un client</h1>
-    <ion-item-sliding class="mt-4" *ngFor="let client of clients">
-      <!-- *************************************** -->
-      <ion-item (click)="onSelectClient(client.id)">
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h4>{{ client.prenom }} {{ client.nom }}</h4>
-        <h6>{{ client.numero }}</h6>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
-  <!-- --------------------------------SECTION FORM CLIENT----------------------------------- -->
-
-  <form
-    *ngIf="newClient"
-    [formGroup]="formClient"
-    (ngSubmit)="submitForm()"
-    novalidate
-  >
-    <!--                               INPUT NOM                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input maxlength="20" type="text" formControlName="nom"></ion-input>
-      <ion-note slot="helper">Entrez votre nom</ion-note>
-      <ion-note slot="error">Nom invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT PRENOM                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Prénom</ion-label>
-      <ion-input
-        maxlength="35"
-        type="text"
-        formControlName="prenom"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre prenom</ion-note>
-      <ion-note slot="error">Prénon invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT ADRESSE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Adresse</ion-label>
-      <ion-input
-        maxlength="35"
-        type="text"
-        formControlName="adresse"
-      ></ion-input>
-      <ion-note slot="helper">Entrez votre adresse</ion-note>
-      <ion-note slot="error">Adresse invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT NUMERO                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Numéro</ion-label>
-      <ion-input maxlength="9" type="text" formControlName="numero"></ion-input>
-      <ion-note slot="helper">Entrez votre numéro</ion-note>
-      <ion-note slot="error">Numéro invalid</ion-note>
-    </ion-item>
-    <ion-row>
-      <!--                               BTN SAVE                                              -->
-
-      <ion-col>
-        <ion-button fill="outline" [disabled]="formClient.invalid" type="submit"
-          >Enregistrer</ion-button
+    <div class="blc-select-client">
+      <ion-item>
+        <ion-select
+          (ionChange)="onClient($event)"
+          cancel-text="Annuler"
+          ok-text="Suivant"
+          placeholder="Client"
         >
-      </ion-col>
-    </ion-row>
-  </form>
+          <ion-select-option value="select">Séléctionné</ion-select-option>
+          <ion-select-option value="new">Nouveau</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!--                                 LOADDING                                  -->
+    <app-cmp-loading-list
+      *ngIf="selectClient"
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-list>
+    <!--                                 LISTE                                  -->
+
+    <ion-list lines="inset" *ngIf="clients && selectClient">
+      <h5 class="mt-2">Séléctionné un client</h5>
+      <ion-item-sliding  *ngFor="let client of clients">
+        <ion-item (click)="onSelectClient(client.id)">
+          <main class="user">
+            <article class="user__profile">
+              <ion-icon class="user__picture" name="person-outline"></ion-icon>
+              <span class="user__name"
+                >{{ client.prenom }} {{ client.nom }}
+              </span>
+            </article>
+          </main>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <!-- --------------------------------SECTION FORM NEW CLIENT----------------------------------- -->
+
+    <ion-card>
+      <form
+        *ngIf="newClient"
+        [formGroup]="formClient"
+        (ngSubmit)="submitForm()"
+        novalidate
+      >
+        <ion-card-header>
+          <div class="container">
+            <ion-card-title> Nouveau client </ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formClient.invalid"
+              type="submit"
+              ><p>Enregistrer</p>
+              <ion-icon slot="end" name="pencil-outline"></ion-icon
+            ></ion-button>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <hr />
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NOM                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Nom</ion-label>
+                <ion-input
+                  maxlength="20"
+                  type="text"
+                  formControlName="nom"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le nom</ion-note>
+                <ion-note slot="error">Nom invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT PRENOM                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Prénom</ion-label>
+                <ion-input
+                  maxlength="35"
+                  type="text"
+                  formControlName="prenom"
+                ></ion-input>
+                <ion-note slot="helper">Entrez le prenom</ion-note>
+                <ion-note slot="error">Prénon invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT ADRESSE                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Adresse</ion-label>
+                <ion-input
+                  maxlength="35"
+                  type="text"
+                  formControlName="adresse"
+                ></ion-input>
+                <ion-note slot="helper">Entrez votre adresse</ion-note>
+                <ion-note slot="error">Adresse invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NUMERO                                            -->
+              <ion-item fill="solid" counter="true">
+                <ion-label position="floating">Numéro</ion-label>
+                <ion-input
+                  maxlength="9"
+                  type="text"
+                  formControlName="numero"
+                ></ion-input>
+                <ion-note slot="helper">Entrez votre numéro</ion-note>
+                <ion-note slot="error">Numéro invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer [translucent]="true">

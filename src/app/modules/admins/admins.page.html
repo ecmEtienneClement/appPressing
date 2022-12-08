@@ -33,7 +33,7 @@
   <ion-list lines="inset" *ngIf="admins">
     <ion-item-sliding *ngFor="let admin of admins">
       <!-- *************************************** -->
-      <ion-item
+       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsInfo,admin.id)"
       >
         <main class="user">
@@ -43,7 +43,7 @@
             <span class="user__name">{{admin.prenom}} {{admin.nom}} </span>
           </article>
         </main>
-      </ion-item>
+      </ion-item> 
       <!-- *************************************** -->
       <ion-item-options side="end">
         <button class="item_btn" (click)="onDeleteAdmin(admin.id)">
