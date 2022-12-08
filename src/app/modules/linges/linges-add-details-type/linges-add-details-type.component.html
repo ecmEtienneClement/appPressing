@@ -30,7 +30,7 @@
     ></app-cmp-state-app>
   </div>
   <!-- --------------------------------SECTION TYPE LINGE----------------------------------- -->
-  <div class="blc-select-type mt-3">
+  <div class="blc-select-type mt-3" *ngIf="!nextSelectedPiece">
     <ion-item>
       <ion-select
         (ionChange)="onTypeLinge($event)"
@@ -113,7 +113,20 @@
   <!--                                 LISTE PIECES                                 -->
 
   <ion-list lines="inset" *ngIf="infoPieces && typePiece && !nextSelectedPiece">
-    <h5>Selectionner pieces</h5>
+    <h5>
+      Selectionner pieces
+
+      <ion-button
+        *ngIf="typePiece && !nextSelectedPiece"
+        fill="clear"
+        class="end"
+        size="small"
+        slot="end"
+        (click)="onNextSelectedPiece()"
+      >
+        Suivant
+      </ion-button>
+    </h5>
     <div class="list-select-piece">
       <ion-item class="mt-2" *ngFor="let infoPiece of infoPieces">
         <div class="row">
@@ -134,9 +147,28 @@
 
   <ion-list lines="inset" *ngIf="nextSelectedPiece && infoPiecesSelected">
     <h5>Pieces selectionnées</h5>
+    <div class="row">
+      <div class="col-12">
+        <ion-button
+          *ngIf="typeKilo || nextSelectedPiece"
+          fill="clear"
+          class="end"
+          size="small"
+          (click)="onLasteSuivant()"
+        >
+          Suivant
+        </ion-button>
+      </div>
+    </div>
     <ion-item class="mt-2" *ngFor="let detailsPiece of infoPiecesSelected">
       <ion-card>
-        <ion-card-title>{{ detailsPiece.nom }}</ion-card-title>
+        <ion-card-title>
+          <div class="row">
+            <div style="margin-left: 40%" class="col-12">
+            {{ detailsPiece.nom }}
+            </div>
+          </div>
+        </ion-card-title>
         <ion-card-content>
           <ion-card-header>
             <div class="row">

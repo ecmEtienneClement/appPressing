@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import { Admin } from 'src/app/models/models.interfaces';
+import { Admin, DemandeDepense } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
 import { WhereNavEntities } from '../../servicesModules/modules.service';
 import { AdminsSelectors } from '../ngrx/admins.selectors';
@@ -21,6 +21,7 @@ export class AdminsFacDmdDepComponent implements OnInit {
   errorMessage$: Observable<string> = new Observable();
   admin$: Observable<Admin> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
+  depenses: DemandeDepense[];
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
 
@@ -42,8 +43,21 @@ export class AdminsFacDmdDepComponent implements OnInit {
     this.admin$ = this.store.select(
       this.adminsSelectorsService.getEntitieById()
     );
+    this.onSubAdminDmd();
   }
 
+  //TODO SUB DMD
+  onSubAdminDmd() {
+    this.store.select(this.adminsSelectorsService.getEntitieById()).subscribe({
+      next: (dataAdmin) => {
+       if(dataAdmin){
+          this.depenses = dataAdmin.Demande_depenses.filter(
+            (dmd) => dmd.valider === true
+          );
+       }
+      },
+    });
+  }
   //TODO
   onSegement(whereContainer: string) {
     switch (whereContainer) {

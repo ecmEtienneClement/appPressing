@@ -64,67 +64,67 @@
         <hr />
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Adresse :</b>
+          <div class="atribut col-6">
+            <b>Adresse </b>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <p class="card-text">{{ client.adresse }}</p>
           </div>
         </div>
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Numéro :</b>
+          <div class="atribut col-6">
+            <b>Numéro </b>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <p class="card-text">{{ client.numero }}</p>
           </div>
         </div>
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Nombre de linge :</b>
+          <div class="atribut col-6">
+            <b>Nombre de linge </b>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <p class="card-text">{{ client.nbrLinge }}</p>
           </div>
         </div>
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Code fidélité :</b>
+          <div class="atribut col-6">
+            <b>Code fidélité </b>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <p class="card-text">{{ client.codeFidelite }}</p>
           </div>
         </div>
 
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Enregistré le :</b>
+          <div class="atribut col-6">
+            <b>Enregistré le </b>
           </div>
-          <div class="col-12">
-            <p class="card-text">{{ client.createdAt | date : "shortDate" }}</p>
+          <div class="col-6">
+            <p class="card-text">{{ client.createdAt | date:  "shortDate" }}</p>
           </div>
         </div>
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Dérniere modification :</b>
+          <div class="atribut col-6">
+            <b>Dérniere modification </b>
           </div>
-          <div class="col-12">
-            <p class="card-text">{{ client.updatedAt | date : "shortDate" }}</p>
+          <div class="col-6">
+            <p class="card-text">{{ client.updatedAt | date:  "shortDate" }}</p>
           </div>
         </div>
 
         <hr />
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Client de l'employé :</b>
+          <div class="atribut col-6">
+            <b>Client de l'employé </b>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <p class="card-text">
               {{ client.Employe.prenom }} {{ client.Employe.nom }}
             </p>
@@ -132,10 +132,10 @@
         </div>
         <!--  -->
         <div class="row">
-          <div class="atribut col-12">
-            <b>Numéro de l'employé :</b>
+          <div class="atribut col-6">
+            <b>Numéro de l'employé </b>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <p class="card-text">{{ client.Employe.numero }}</p>
           </div>
         </div>

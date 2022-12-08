@@ -17,8 +17,7 @@ export class LingesUpdComponent implements OnInit {
   notification$: Observable<string | null> = new Observable();
   errorMessage$: Observable<string | null> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
-  avance = false;
-  payer = false;
+   payer = false;
   livre = false;
   montantAvance = 0;
   readonly routesNames = RoutesNames;
@@ -101,7 +100,7 @@ export class LingesUpdComponent implements OnInit {
 
   //TODO
   onTerminer() {
-    if (this.avance && this.montantAvance > 0) {
+    if ( this.montantAvance > 0) {
       this.linge.montantAvance = this.montantAvance;
       this.store.dispatch(
         this.lingesActionsService.updEntitie()({ entitie: this.linge })

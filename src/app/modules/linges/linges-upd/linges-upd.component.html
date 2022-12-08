@@ -17,9 +17,7 @@
     ></app-cmp-state-app>
   </div>
 
-  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
-
-  <h1>DETAILS LINGE</h1>
+  <!-- --------------------------------SECTION CARD LINGE----------------------------------- -->
 
   <ion-card *ngIf="linge">
     <ion-card-header *ngIf="payer && livre">
@@ -30,16 +28,32 @@
 
     <ion-card-content *ngIf="!payer || !livre">
       <ion-card-title>
-        {{ linge.createdAt | date: "shortDate" }}
+        LINGE {{ linge.createdAt | date : "shortDate" }}
       </ion-card-title>
       <hr />
-      <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom }}</p>
-      <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
-      <div *ngIf="!payer" class="row">
-        <p class="card-text">
-          <b>Montant avance:</b> {{ linge.montantAvance }} Fcfa
-        </p>
-
+      <div class="row mt-1">
+        <div class="atribut col-6">
+          <b>Type </b>
+        </div>
+        <div class="col-6">
+          <p class="card-text">{{ linge.Type_linge?.nom }}</p>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="atribut col-6">
+          <b>Montant </b>
+        </div>
+        <div class="col-6">
+          <p class="card-text">{{ linge.prixLinge }} Fcfa</p>
+        </div>
+      </div>
+      <div class="row mt-1" *ngIf="!payer">
+        <div class="atribut col-6">
+          <b>Montant avance </b>
+        </div>
+        <div class="col-6">
+          <p class="card-text">{{ linge.montantAvance }} Fcfa</p>
+        </div>
         <div class="col-12">
           <input
             type="number"
@@ -48,33 +62,34 @@
           />
         </div>
       </div>
+      <div class="row">
+        <div class="atribut col-12">
+          <ion-toggle
+            class="tog-select-piece"
+            (ionChange)="onPayer($event)"
+            [enableOnOffLabels]="linge.payer"
+          ></ion-toggle>
+          Payer
+        </div>
+      </div>
+      <div class="row mt-2" *ngIf="!livre">
+        <div class="atribut col-12">
+          <ion-toggle
+            class="tog-select-piece"
+            (ionChange)="onLivrer($event)"
+            [enableOnOffLabels]="linge.payer"
+          ></ion-toggle>
+          Livre
+        </div>
+      </div>
 
-      <p class="card-text" *ngIf="!payer">
-        <b>Payer :</b>
-        <ion-toggle
-          (ionChange)="onPayer($event)"
-          [enableOnOffLabels]="linge.payer"
-        ></ion-toggle>
-      </p>
-
-      <p class="card-text" *ngIf="!livre">
-        <b>Livre :</b>
-        <ion-toggle
-          (ionChange)="onLivrer($event)"
-          [enableOnOffLabels]="linge.livre"
-        ></ion-toggle>
-      </p>
       <hr />
 
       <div class="row">
-        <div class="col-12">
-          <button
-            type="button"
-            class="btn btn-outline-success"
-            (click)="onTerminer()"
-          >
-            Enregistrer
-          </button>
+        <div class="col-12 col-btn">
+          <ion-button fill="clear" size="small" (click)="onTerminer()"
+            ><p>Valider</p>
+          </ion-button>
         </div>
       </div>
     </ion-card-content>

@@ -1,0 +1,5 @@
+@import "../../modules/modules.scss/variables.scss";
+
+ion-card-title {
+  @include card-title-mixin;
+}

@@ -1,10 +1,24 @@
 <ion-card>
   <ion-card-content>
     <ion-card-title>
-      {{ factureCreatedAt }}
+      <b>Date :</b> {{ factureCreatedAt | date : "shortDate" }}
     </ion-card-title>
     <hr />
-    <p class="card-text"><b>Type :</b> {{ factureType }}</p>
-    <p class="card-text"><b>Montant :</b> {{ factureMontant }} Fcfa</p>
+    <div class="row mt-1">
+      <div class="col-6">
+        <b>Type </b>
+      </div>
+      <div class="col-6">
+        <p class="card-text">{{ factureType }}</p>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-6">
+        <b>Montant </b>
+      </div>
+      <div class="col-6">
+        <p class="card-text">{{ factureMontant }} Fcfa</p>
+      </div>
+    </div>
   </ion-card-content>
 </ion-card>

@@ -28,15 +28,14 @@
   <!--                                 LOADDING                                  -->
   <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
   <!--                                 LIST                                  -->
-
-  <h1>Factures</h1>
   <ion-list lines="inset" *ngIf="factures">
-    <ion-item-sliding class="mt-4" *ngFor="let facture of factures">
+    <ion-item-sliding *ngFor="let facture of factures">
       <!-- *************************************** -->
       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.facturesInfo,facture.id)"
       >
         <app-cmp-facture
+          class="card"
           [factureCreatedAt]="facture.createdAt"
           [factureType]="facture.type"
           [factureMontant]="facture.montant"
@@ -44,19 +43,14 @@
       </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
-        <button
-          (click)="onDeleteFacture(facture.id)"
-          ion-button
-          color="primary"
-        >
-          <ion-icon name="trash-outline"></ion-icon>
+        <button class="item_btn" (click)="onDeleteFacture(facture.id)">
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.updEntitie,routesNames.facturesUpd,facture.id)"
-          ion-button
-          color="secondary"
         >
-          <ion-icon name="brush-outline"></ion-icon>
+          <ion-icon class="item_icon" name="pencil-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

@@ -30,29 +30,28 @@
 
   <!--                                 LISTE                                  -->
 
-  <h1>COMPTES</h1>
+
   <ion-list lines="inset" *ngIf="cmpBloques">
-    <ion-item-sliding class="mt-4" *ngFor="let cmpBloque of cmpBloques">
+    <ion-item-sliding *ngFor="let cmpBloque of cmpBloques">
       <!-- *************************************** -->
       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie ,routesNames.cmpBloquesInfo,cmpBloque.id)"
       >
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h4>{{cmpBloque.Employe?.prenom}} {{cmpBloque.Employe?.nom}}</h4>
-        <br />
-        <p>{{cmpBloque.email}}</p>
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon
+              class="user__picture"
+              name="lock-closed-outline"
+            ></ion-icon>
+
+            <span class="user__name">{{cmpBloque.email}} </span>
+          </article>
+        </main>
       </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
-        <button
-          (click)="onDeleteCmtBloquer(cmpBloque.id)"
-          ion-button
-          color="primary"
-        >
-          <ion-icon name="text"></ion-icon>
-          Debl
+        <button class="item_btn" (click)="onDeleteCmtBloquer(cmpBloque.id)">
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

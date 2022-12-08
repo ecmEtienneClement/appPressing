@@ -1,0 +1,17 @@
+@import "../../modules.scss/card.user.scss";
+
+ion-card {
+  @include card-bg-mixin;
+}
+.col-btn-next {
+  justify-content: right;
+  ion-button {
+    font-size: 15px;
+    float: right;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+}
+.tog-select-piece {
+  margin-bottom: -15px;
+}

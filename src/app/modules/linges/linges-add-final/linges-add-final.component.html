@@ -9,7 +9,7 @@
 
 <ion-content>
   <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+  <div *ngIf="dataState$ | async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"
@@ -19,22 +19,22 @@
 
   <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
 
-  <h1>DETAILS LINGE</h1>
+  <h5>Details LINGE</h5>
 
   <ion-card *ngIf="linge">
     <ion-card-content>
       <ion-card-title>
-        {{ linge.createdAt | date: "shortDate" }}
+        {{ linge.createdAt | date : "shortDate" }}
       </ion-card-title>
       <hr />
-      <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom }}</p>
-      <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
-      <p class="card-text">
-        <b>Avance:</b>
-        <ion-toggle
+      <p class="card-text"><b>Type :</b> {{ type }}</p>
+      <p class="card-text mt-2"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
+      <p class="card-text mt-2">
+        <ion-toggle  class="tog-select-piece"
           (ionChange)="onAvance($event)"
           [enableOnOffLabels]="avance"
         ></ion-toggle>
+        <b class="text">Avance:</b>
       </p>
       <div *ngIf="avance" class="row">
         <div class="col-12">
@@ -46,32 +46,34 @@
         </div>
       </div>
 
-      <p class="card-text">
-        <b>Payer :</b>
-        <ion-toggle
+      <p class="card-text mt-2">
+        <ion-toggle  class="tog-select-piece"
           (ionChange)="onPayer($event)"
           [enableOnOffLabels]="linge.payer"
         ></ion-toggle>
+        <b class="text">Payer :</b>
       </p>
 
-      <p class="card-text">
-        <b>Livre :</b>
+      <p class="card-text mt-2">
         <ion-toggle
+          class="tog-select-piece"
           (ionChange)="onLivrer($event)"
           [enableOnOffLabels]="linge.livre"
         ></ion-toggle>
+        <b class="text">Livre :</b>
       </p>
       <hr />
 
       <div class="row">
-        <div class="col-12">
-          <button
-            type="button"
-            class="btn btn-outline-success"
+        <div class="col-btn-next col-12">
+          <ion-button
+            fill="clear"
+            class="mt-2"
+            size="small"
             (click)="onTerminer()"
           >
             Terminer
-          </button>
+          </ion-button>
         </div>
       </div>
     </ion-card-content>

@@ -144,7 +144,7 @@ export class LingesAddTypeAndClientComponent implements OnInit, OnDestroy {
       codeFidelite: 0,
       EmployeId: this.userService.getIdUser(),
     };
-    //10458090-8d5a-4730-9c4a-4805dcb5b934
+
     this.store.dispatch(
       this.clientsActionsService.addEntitie()({
         entitie: newClient,

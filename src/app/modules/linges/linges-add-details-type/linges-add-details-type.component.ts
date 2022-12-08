@@ -167,6 +167,7 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
         this.idTypeLinges = this.typeLinges.find(
           (type) => type.nom === EnumTypeLinge.kilo
         ).id;
+        this.lingesDataState.setTypeLinge('kilo');
         break;
       case 'piece':
         this.typePiece = true;
@@ -174,6 +175,7 @@ export class LingesAddDetailsTypeComponent implements OnInit, OnDestroy {
         this.idTypeLinges = this.typeLinges.find(
           (type) => type.nom === EnumTypeLinge.piece
         ).id;
+        this.lingesDataState.setTypeLinge('piece');
         break;
     }
   }

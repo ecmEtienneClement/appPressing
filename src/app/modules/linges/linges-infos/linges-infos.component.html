@@ -8,116 +8,262 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
-  </div>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+    <!-- --------------------------------SECTION CARD FACTURE-------------------------- -->
 
-  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
-
-  <h1>DETAILS LINGE</h1>
-
-  <ion-card *ngIf="linge$ | async as linge">
-    <ion-card-content>
-      <ion-card-title>
-        {{ linge.createdAt | date: "shortDate" }}
-      </ion-card-title>
-      <hr />
-      <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom }}</p>
-      <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
-      <p class="card-text">
-        <b>Montant Avance:</b> {{ linge.montantAvance }} Fcfa
-      </p>
-      <p class="card-text" *ngIf="linge.montantAvance > 0 && !linge.payer">
-        <b>Montant restant:</b> {{ linge.prixLinge - linge.montantAvance }} Fcfa
-      </p>
-      <p class="card-text">
-        <b>Payer :</b> <span *ngIf="linge.payer">Oui</span
-        ><span *ngIf="!linge.payer">Non</span>
-      </p>
-
-      <p class="card-text">
-        <b>Livre :</b> <span *ngIf="linge.livre">Oui</span
-        ><span *ngIf="!linge.livre">Non</span>
-      </p>
-      <!--                      DETAILS DU LINGE                         -->
-      <hr />
-      <div class="row">
-        <div class="col-12">
-          <h4>Détails du type de linge</h4>
+    <ion-card *ngIf="linge$ | async as linge">
+      <ion-card-header>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon class="item_icon" name="shirt-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title>
+            Linge : {{ linge.createdAt | date : "shortDate" }}
+          </ion-card-title>
+          <ion-button
+            fill="clear"
+            size="small"
+            (click)="
+              onNav(whereNav.updEntitie, routesNames.lingesUpd, linge.id)
+            "
+            ><p>modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
         </div>
-      </div>
-      <!--                      DETAILS TYPE KILO                         -->
+      </ion-card-header>
 
-      <div
-        class="container"
-        *ngIf="linge.Type_linge?.nom === enumTypeLinge.kilo"
-      >
-        <p class="card-text">
-          <b>Prix linge :</b> {{ linge.Detail_type_kilo?.prixLinge }}
-        </p>
-        <p class="card-text">
-          <b>Prix repassage :</b> {{ linge.Detail_type_kilo?.prixRepassage }}
-        </p>
-        <p class="card-text">
-          <b>Nombre de kilo :</b> {{ linge.Detail_type_kilo?.nbrKilo }}
-        </p>
-      </div>
-      <!--                      DETAILS TYPE PIECE                         -->
+      <ion-card-content>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Type </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ linge.Type_linge?.nom }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Montant </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ linge.prixLinge }} Fcfa</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Montant Avance </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ linge.montantAvance }} Fcfa</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row" *ngIf="linge.montantAvance > 0 && !linge.payer">
+          <div class="atribut col-6">
+            <b>Montant restant </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              {{ linge.prixLinge - linge.montantAvance }} Fcfa
+            </p>
+          </div>
+        </div>
 
-      <div class="container" *ngIf="linge.Detail_type_pieces">
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Payer </b>
+          </div>
+          <div class="col-6">
+            <span *ngIf="linge.payer"> Oui</span
+            ><span *ngIf="!linge.payer"> Non</span>
+          </div>
+        </div>
+
+        <!--                      DETAILS DU LINGE                         -->
+        <hr />
+        <div class="row">
+          <div class="col-title col-12">
+            <h4>Détails du type de linge</h4>
+          </div>
+        </div>
+
+        <!--                      DETAILS TYPE KILO                         -->
+
         <div
-          class="container"
-          *ngFor="let detailsPiece of linge.Detail_type_pieces"
+          class="card-type-kilo"
+          *ngIf="linge.Type_linge?.nom === enumTypeLinge.kilo"
         >
-          <p class="card-text">
-            <b>Nombre de piece :</b> {{ detailsPiece.nbrPiece }}
-          </p>
-          <p class="card-text">
-            <b>Prix :</b> {{ detailsPiece.prixLinge }} Fcfa
-          </p>
-          <p class="card-text">
-            <b>Prix repassage:</b> {{ detailsPiece.prixRepassage }} Fcfa
-          </p>
+          <!--  -->
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Prix linge</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Detail_type_kilo?.prixLinge }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Prix repassage</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">
+                {{ linge.Detail_type_kilo?.prixRepassage }}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Nombre de kilo</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Detail_type_kilo?.nbrKilo }}</p>
+            </div>
+          </div>
+        </div>
 
-          <p class="card-text">
-            <b>A repasser :</b> <span *ngIf="detailsPiece.aRepasser">Oui</span
-            ><span *ngIf="!detailsPiece.aRepasser">Non</span>
-          </p>
-        </div>
-      </div>
+        <!--  -->
+        <!--                      DETAILS TYPE PIECE                         -->
 
-      <!--                      DETAILS DU CLIENT                         -->
-      <hr />
-      <div class="row">
-        <div class="col-12">
-          <h4>Détails client</h4>
+        <div *ngIf="linge.Detail_type_pieces">
+          <div
+            class="card-type-piece"
+            *ngFor="let detailsPiece of linge.Detail_type_pieces"
+          >
+            <div class="row">
+              <div class="atribut col-6">
+                <b>Nom de piece </b>
+              </div>
+              <div class="col-6">
+                <p class="card-text">{{ detailsPiece.nom }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="atribut col-6">
+                <b>Nombre de piece </b>
+              </div>
+              <div class="col-6">
+                <p class="card-text">{{ detailsPiece.nbrPiece }} piece(s)</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="atribut col-6">
+                <b>Prix</b>
+              </div>
+              <div class="col-6">
+                <p class="card-text">{{ detailsPiece.prixLinge }} Fcfa</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="atribut col-6">
+                <b>Prix repassage </b>
+              </div>
+              <div class="col-6">
+                <p class="card-text">{{ detailsPiece.prixRepassage }} Fcfa</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="atribut col-6">
+                <b>A repasser</b>
+              </div>
+              <div class="col-6">
+                <p class="card-text">
+                  <span *ngIf="detailsPiece.aRepasser"> Oui</span
+                  ><span *ngIf="!detailsPiece.aRepasser"> Non</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-12">
-          <p class="card-text"><b>Nom :</b> {{ linge.Client.nom }}</p>
-          <p class="card-text"><b>Numero :</b> {{ linge.Client.numero }}</p>
-          <p class="card-text"><b>Address :</b> {{ linge.Client.adresse }}</p>
+
+        <!--                      DETAILS DU CLIENT                         -->
+        <hr />
+        <div class="row">
+          <div class="col-title col-12">
+            <h4>Détails client</h4>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Nom</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Client.nom }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Numero</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Client.numero }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Address</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Client.adresse }}</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <!--                      DETAILS DU EMPLOYER                         -->
-      <hr />
-      <div class="row">
-        <div class="col-12">
-          <h4>Détails Employer</h4>
+
+        <!--                      DETAILS DU EMPLOYER                         -->
+        <hr />
+        <div class="row">
+          <div class="col-title col-12">
+            <h4>Détails Employer</h4>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Nom </b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Employe.nom }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Numero</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Employe.numero }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Address</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Employe.adresse }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="atribut col-6">
+              <b>Email</b>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{ linge.Employe.email }}</p>
+            </div>
+          </div>
         </div>
-        <div class="col-12">
-          <p class="card-text"><b>Nom :</b> {{ linge.Employe.nom }}</p>
-          <p class="card-text"><b>Numero :</b> {{ linge.Employe.numero }}</p>
-          <p class="card-text"><b>Address :</b> {{ linge.Employe.adresse }}</p>
-          <p class="card-text"><b>email :</b> {{ linge.Employe.email }}</p>
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
+        <hr />
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer [translucent]="true">

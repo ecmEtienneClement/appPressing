@@ -2,11 +2,17 @@
 
 .blc-select-type,
 .list-select-piece {
+  margin-top: 10px;
   @include card-bg-mixin;
 }
 ion-card-title {
-  align-items: center;
-  justify-content: center;
+  .row {
+    .col-12 {
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 ion-button {
   @include btn-mixin;
@@ -31,4 +37,9 @@ ion-checkbox::part(container) {
     margin-bottom: 10px;
     text-transform: capitalize;
   }
+}
+.end {
+  font-size: 15px;
+  float: right;
+  text-transform: capitalize;
 }

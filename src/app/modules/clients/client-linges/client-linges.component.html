@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Linges Client</ion-title>
+    <ion-row *ngIf="client$ | async as client">
+      <ion-col>
+        <ion-title
+          >{{ client.prenom }} {{ client.nom }} etienne clement</ion-title
+        >
+      </ion-col>
+    </ion-row>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -9,7 +15,7 @@
 
 <ion-content>
   <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+  <div *ngIf="dataState$ | async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"
@@ -19,30 +25,8 @@
 
   <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
 
-  <ion-row *ngIf="client$ | async as client">
-    <ion-col>
-      <h1>LINGES CLIENT : {{ client.prenom }} {{ client.nom }}</h1>
-    </ion-col>
-  </ion-row>
-
   <div class="container" *ngIf="client$ | async as client">
-    <ion-card *ngFor="let linge of client.Linges">
-      <ion-card-content>
-        <ion-card-title>
-          {{ linge.createdAt }}
-        </ion-card-title>
-        <hr />
-        <p class="card-text"><b>Prix :</b> {{ linge.prixLinge }} Fcfa</p>
-        <p class="card-text">
-          <b>Payer :</b> <span *ngIf="linge.payer">oui</span>
-          <span *ngIf="!linge.payer">non</span>
-        </p>
-        <p class="card-text">
-          <b>Livré :</b> <span *ngIf="linge.livre">oui</span>
-          <span *ngIf="!linge.livre">non</span>
-        </p>
-      </ion-card-content>
-    </ion-card>
+    <app-cmp-linges [linges]="client.Linges"> </app-cmp-linges>
   </div>
 </ion-content>
 

@@ -8,77 +8,158 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+
+    <!-- --------------------------------SECTION CARD DEMANDE----------------------------------- -->
+
+    <ion-card *ngIf="dmdDepense$ | async as dmdDepense">
+      <ion-card-header>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon class="item_icon" name="newspaper-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title>
+            Demande : {{ dmdDepense.createdAt | date : "shortDate" }}
+          </ion-card-title>
+          <ion-button
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="onNavUpdate(dmdDepense.id)"
+            ><p>Modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
+        </div>
+        <div class="container-res">
+          <div class="row">
+            <div class="col-res col-12">
+              <ion-item>
+                <ion-select
+                  placeholder="Votre avis"
+                  (ionChange)="handleChange($event, dmdDepense)"
+                >
+                  <ion-select-option value="1">Valider</ion-select-option>
+                  <ion-select-option value="0">Rejeter</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+          </div>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Montant </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ dmdDepense.montant }} Fcfa</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Valider </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              <span *ngIf="dmdDepense.valider">Oui</span>
+              <span *ngIf="!dmdDepense.valider">Non</span>
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Rejeter </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              <span *ngIf="dmdDepense.rejeter">Oui</span>
+              <span *ngIf="!dmdDepense.rejeter">Non</span>
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Déscription </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ dmdDepense.description }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <hr />
+
+        <div class="row">
+          <div class="col-title col-12">
+            <h4>Détails Employer</h4>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="atribut col-6">
+            <b>Employer </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              {{ dmdDepense.Employe?.prenom }} {{ dmdDepense.Employe?.nom }}
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Numero employer </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              {{ dmdDepense.Employe?.numero }}
+            </p>
+          </div>
+        </div>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="col-title col-12">
+            <h4>Détails Admin</h4>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="atribut col-6">
+            <b>Admin </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              {{ dmdDepense.Admin?.prenom }} {{ dmdDepense.Admin?.nom }}
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Numero admin </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              {{ dmdDepense.Admin?.numero }}
+            </p>
+          </div>
+        </div>
+        <hr />
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION CARD DEMANDE----------------------------------- -->
-
-  <h1>DETAILS DEMANDE</h1>
-
-  <ion-card *ngIf="dmdDepense$ | async as dmdDepense">
-    <ion-avatar>
-      <ion-icon name="person-circle-outline"></ion-icon>
-    </ion-avatar>
-    <ion-card-content>
-      <ion-card-title>
-        <b>Date :</b> {{ dmdDepense.createdAt }}
-      </ion-card-title>
-      <hr />
-      <p class="card-text"><b>Montant :</b> {{ dmdDepense.montant }} Fcfa</p>
-      <p class="card-text">
-        <b>Valider :</b> <span *ngIf="dmdDepense.valider">Oui</span>
-        <span *ngIf="!dmdDepense.valider">Non</span>
-      </p>
-      <p class="card-text">
-        <b>Rejeter :</b> <span *ngIf="dmdDepense.rejeter">Oui</span>
-        <span *ngIf="!dmdDepense.rejeter">Non</span>
-      </p>
-      <p class="card-text"><b>Description :</b> {{ dmdDepense.description }}</p>
-      <hr />
-      <p class="card-text">
-        <b>Employer :</b>{{ dmdDepense.Employe?.prenom }}
-        {{ dmdDepense.Employe?.nom }}
-      </p>
-      <p class="card-text">
-        <b>Numero employer :</b>{{ dmdDepense.Employe?.numero }}
-      </p>
-      <hr />
-      <p class="card-text">
-        <b>Admin :</b>{{ dmdDepense.Admin?.prenom }} {{ dmdDepense.Admin?.nom }}
-      </p>
-      <p class="card-text">
-        <b>Numero admin :</b>{{ dmdDepense.Admin?.numero }}
-      </p>
-    </ion-card-content>
-    <hr />
-
-    <ion-row no-padding>
-      <ion-col>
-        <ion-button (click)="onNavUpdate(dmdDepense.id)" fill="outline"
-          >Modifier
-          <ion-icon slot="end" name="pencil-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-
-      <ion-col *ngIf="!dmdDepense.valider && !dmdDepense.rejeter">
-        <ion-item>
-          <ion-select
-            placeholder="Votre avis"
-            (ionChange)="handleChange($event, dmdDepense)"
-          >
-            <ion-select-option value="1">Valider</ion-select-option>
-            <ion-select-option value="0">Rejeter</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-card>
 </ion-content>
 
 <ion-footer [translucent]="true">

@@ -5,8 +5,18 @@ import { Linge } from 'src/app/models/models.interfaces';
 export class LingeDataState {
   private idClientLinge = '';
   private newLinge: Linge;
+  private typeLinge: string;
   private montantLinge: number;
 
+  //TODO
+  //GET FOR TYPE_LINGE
+  public getTypeLinge() {
+    return this.typeLinge;
+  }
+  //SET FOR TYPE_LINGE
+  public setTypeLinge(typeLinge: string) {
+    this.typeLinge = typeLinge;
+  }
   //TODO
   //GET FOR ID CLIENT
   public getIdClientLinge() {

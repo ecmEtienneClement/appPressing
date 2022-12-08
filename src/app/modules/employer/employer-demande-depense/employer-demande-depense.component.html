@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Demande Dépense Employer</ion-title>
+    <ion-row *ngIf="employer$ | async as employer">
+      <ion-col>
+        <ion-title>{{ employer.prenom }} {{ employer.nom }}</ion-title>
+      </ion-col>
+    </ion-row>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -9,7 +13,7 @@
 
 <ion-content>
   <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+  <div *ngIf="dataState$ | async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"
@@ -18,11 +22,7 @@
   </div>
 
   <!-- --------------------------------SECTION CARD LINGES EMPLOYER----------------------------------- -->
-  <ion-row *ngIf="employer$ | async as employer">
-    <ion-col>
-      <h1>EMPLOYER : {{ employer.prenom }} {{ employer.nom }}</h1>
-    </ion-col>
-  </ion-row>
+
   <div class="container" *ngIf="employer$ | async as employer">
     <app-cmp-dmd-depense
       *ngFor="let dmdDepense of employer.Demande_depenses"

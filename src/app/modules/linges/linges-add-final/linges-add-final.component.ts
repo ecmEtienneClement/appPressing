@@ -20,6 +20,7 @@ export class LingesAddFinalComponent implements OnInit {
   dataState$: Observable<AppStateEnum> = new Observable();
   avance = false;
   montantAvance = 0;
+  type = '';
   readonly routesNames = RoutesNames;
   readonly enumTypeLinge = EnumTypeLinge;
   linge: Linge = {
@@ -51,6 +52,7 @@ export class LingesAddFinalComponent implements OnInit {
       this.lingesSelectorsService.getMessageError()
     );
     this.linge = this.lingesDataState.getNewLinge();
+    this.type = this.lingesDataState.getTypeLinge();
     /**
      * TODO JSON.parse(JSON.stringify(this.linge))
      * C'est mise en place pour enlever la lecture seule des propriétes du linge.

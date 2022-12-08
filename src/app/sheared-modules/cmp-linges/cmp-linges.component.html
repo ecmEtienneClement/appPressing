@@ -1,0 +1,40 @@
+<!-- --------------------------------SECTION CARD LINGES----------------------------------- -->
+
+<ion-card *ngFor="let linge of linges">
+  <ion-card-content>
+    <ion-card-title>
+      <b>Date :</b> {{ linge.createdAt | date : "shortDate" }}
+    </ion-card-title>
+    <hr />
+    <div class="row">
+      <div class="col-6">
+        <b>Prix </b>
+      </div>
+      <div class="col-6">
+        <p class="card-text">{{ linge.prixLinge }} Fcfa</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <b>Payer </b>
+      </div>
+      <div class="col-6">
+        <p class="card-text">
+          <span *ngIf="linge.payer">oui</span>
+          <span *ngIf="!linge.payer">non</span>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <b>Livré </b>
+      </div>
+      <div class="col-6">
+        <p class="card-text">
+          <span *ngIf="linge.livre">oui</span>
+          <span *ngIf="!linge.livre">non</span>
+        </p>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

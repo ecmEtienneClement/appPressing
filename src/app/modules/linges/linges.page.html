@@ -29,42 +29,85 @@
   <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
   <!--                                 LIST                                  -->
 
-  <h1>Linges</h1>
   <ion-list lines="inset" *ngIf="linges">
-    <ion-item-sliding class="mt-4" *ngFor="let linge of linges">
+    <ion-item-sliding *ngFor="let linge of linges">
       <!-- *************************************** -->
       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.lingesInfo,linge.id)"
       >
-        <ion-card>
-          <ion-card-content>
-            <ion-card-title> {{ linge.createdAt }} </ion-card-title>
-            <hr />
-            <p class="card-text"><b>Type :</b> {{ linge.Type_linge?.nom}}</p>
-            <p class="card-text"><b>Montant :</b> {{ linge.prixLinge }} Fcfa</p>
-            <p class="card-text">
-              <b>Payer :</b> <span *ngIf="linge.payer">Oui</span
-              ><span *ngIf="!linge.payer ">Non</span>
-            </p>
+        <div class="card">
+          <ion-card>
+            <ion-card-content>
+              <ion-card-title>
+                <div class="row">
+                  <div class="col-6">
+                    <b class="txt-Enr">Enregistré le :</b>
+                  </div>
+                  <div class="col-6">
+                    <p>{{ linge.createdAt| date : "shortDate" }}</p>
+                  </div>
+                </div>
+              </ion-card-title>
+              <hr />
+              <div class="row">
+                <div class="col-6">
+                  <b>Type </b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ linge.Type_linge?.nom}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p class="card-text">
+                    <b>Montant </b>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ linge.prixLinge }} Fcfa</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p class="card-text">
+                    <b>Payer </b>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">
+                    <span *ngIf="linge.payer">Oui</span
+                    ><span *ngIf="!linge.payer ">Non</span>
+                  </p>
+                </div>
+              </div>
 
-            <p class="card-text">
-              <b>Livre :</b> <span *ngIf="linge.livre ">Oui</span
-              ><span *ngIf="!linge.livre ">Non</span>
-            </p>
-          </ion-card-content>
-        </ion-card>
+              <div class="row">
+                <div class="col-6">
+                  <p class="card-text">
+                    <b>Livre </b>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">
+                    <span *ngIf="linge.livre ">Oui</span
+                    ><span *ngIf="!linge.livre ">Non</span>
+                  </p>
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
       </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
-        <button (click)="onDeleteLinge(linge.id)" ion-button color="primary">
-          <ion-icon name="trash-outline"></ion-icon>
+        <button class="item_btn" (click)="onDeleteLinge(linge.id)">
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.updEntitie,routesNames.lingesUpd,linge.id)"
-          ion-button
-          color="primary"
         >
-          upd
+          <ion-icon class="item_icon" name="pencil-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

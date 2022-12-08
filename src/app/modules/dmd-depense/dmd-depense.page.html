@@ -18,7 +18,7 @@
 <ion-content>
   <!--                                 STATE                                  -->
 
-  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+  <div *ngIf="dataState$|async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"
@@ -29,33 +29,28 @@
   <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
   <!--                                 LIST DEMANDE                                 -->
 
-  <h1>Demande</h1>
   <ion-list lines="inset" *ngIf="dmdDepenses">
-    <ion-item-sliding class="mt-4" *ngFor="let demande of dmdDepenses">
+    <ion-item-sliding *ngFor="let demande of dmdDepenses">
       <!-- *************************************** -->
       <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.dmdDepensesInfo,demande.id)"
       >
         <app-cmp-dmd-depense
+          class="card"
           *ngIf="demande"
           [dmdDepense]="demande"
         ></app-cmp-dmd-depense>
       </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
-        <button
-          (click)="onDeleteDemandeDepense(demande.id)"
-          ion-button
-          color="primary"
-        >
-          <ion-icon name="trash-outline"></ion-icon>
+        <button class="item_btn" (click)="onDeleteDemandeDepense(demande.id)">
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
         <button
+          class="item_btn"
           (click)="onNav(whereNav.updEntitie,routesNames.dmdDepensesUpd ,demande.id)"
-          ion-button
-          color="secondary"
         >
-          <ion-icon name="brush-outline"></ion-icon>
+          <ion-icon class="item_icon" name="pencil-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

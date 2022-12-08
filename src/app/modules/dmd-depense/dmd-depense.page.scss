@@ -1,0 +1,11 @@
+@import "../modules.scss/variables.scss";
+
+.item_btn {
+  @include btn-item-option-mixin(80px, 2px, 10px, 20%);
+}
+.item_icon {
+  font-size: 25px;
+  color: $color-dark;
+  margin-left: 10px;
+  margin-right: 10px;
+}

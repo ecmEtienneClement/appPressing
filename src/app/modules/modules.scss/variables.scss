@@ -32,3 +32,32 @@ $color-light-black: #acacac;
     margin-right: 15px;
   }
 }
+@mixin btn-item-option-mixin($mgT, $mgl, $mgR, $hei: 50%) {
+  background-color: $color-light;
+  align-items: center;
+  justify-content: center;
+  margin-top: $mgT;
+  margin-left: $mgl;
+  margin-right: $mgR;
+  border-left: 2px solid $color-light-black;
+  border-radius: 15px;
+  background: linear-gradient(145deg, $color-light, $color-light);
+  box-shadow: 10px 0 20px -10px rgba(0, 0, 0, 0.8);
+  height: $hei;
+}
+@mixin card-title-mixin {
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+//
+ion-item {
+  --border-style: none;
+}
+ion-item {
+  width: 100%;
+  ion-card,
+  .card {
+    width: 100%;
+  }
+}

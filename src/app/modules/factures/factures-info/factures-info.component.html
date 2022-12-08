@@ -8,48 +8,89 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+
+    <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
+
+    <ion-card *ngIf="facture$ | async as facture">
+      <ion-card-header>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon class="item_icon" name="newspaper-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title>
+            Facture : {{ facture.createdAt | date : "shortDate" }}
+          </ion-card-title>
+          <ion-button
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="onNavUpdate(facture.id)"
+            ><p>Modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Type </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ facture.type }}</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Montant </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ facture.montant }} Fcfa</p>
+          </div>
+        </div>
+        <!--  -->
+        <hr />
+        <div class="row">
+          <div class="col-title col-12">
+            <h4>Détails Admin</h4>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="atribut col-6">
+            <b>Admin </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">
+              {{ facture.Admin?.prenom }} {{ facture.Admin?.nom }}
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Numero admin </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{ facture.Admin?.numero }}</p>
+          </div>
+        </div>
+
+        <hr />
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
-
-  <h1>DETAILS FACTURE</h1>
-
-  <ion-card *ngIf="facture$ | async as facture">
-    <ion-avatar>
-      <ion-icon name="person-circle-outline"></ion-icon>
-    </ion-avatar>
-
-    <ion-card-content>
-      <ion-card-title>
-        {{ facture.createdAt }}
-      </ion-card-title>
-      <hr />
-      <p class="card-text"><b>Type :</b> {{ facture.type }}</p>
-      <p class="card-text"><b>Montant :</b> {{ facture.montant }} Fcfa</p>
-      <hr />
-      <p class="card-text">
-        <b>Admin :</b>{{ facture.Admin?.prenom }} {{ facture.Admin?.nom }}
-      </p>
-      <p class="card-text"><b>Numero admin :</b>{{ facture.Admin?.numero }}</p>
-      <hr />
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <ion-button (click)="onNavUpdate(facture.id)" fill="outline"
-          >Modifier
-          <ion-icon slot="end" name="pencil-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
 </ion-content>
 
 <ion-footer [translucent]="true">
