@@ -37,6 +37,7 @@ export class CmpBloquesInfoComponent implements OnInit {
     );
   }
   //TODO DELETE COMPTE
+  /*
   onDeleteCmtBloquer(idCmtBloquer: string) {
     this.store.dispatch(
       this.cmpBloquesActionsService.deleteEntitie()({
@@ -44,4 +45,5 @@ export class CmpBloquesInfoComponent implements OnInit {
       })
     );
   }
+  */
 }
