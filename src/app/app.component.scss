@@ -1,0 +1,34 @@
+ion-menu {
+  --width: 80%;
+  --height: 100%;
+  .ion-padding {
+    position: relative;
+    .nav {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      background: #312450;
+
+      ion-item {
+        --border-style: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 100px;
+          height: 2px;
+          left: 0;
+          bottom: 0;
+          background-image: linear-gradient(to right, #5e42a6, #b74e91);
+        }
+      }
+    }
+  }
+}
+ion-label {
+  text-transform: capitalize;
+  letter-spacing: 0.2em;
+  font-size: 0.25em;
+}

@@ -6,77 +6,150 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-list>
-        <!-- **********MENU HOME********** -->
+      <ion-list class="nav">
+        <!-- **********MENU CONNEXION********** -->
         <ion-menu-toggle>
-          <ion-item routerLink="{{ routesNames.home }}">
-            <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-item
+            style="color: white; width: 100%"
+            routerLink="{{ routesNames.home }}"
+            ><ion-icon
+              slot="start"
+              style="color: white"
+              name="enter-outline"
+            ></ion-icon>
+            <ion-label>Connexion</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <!-- **********MENU ACCEUIL********** -->
+        <ion-menu-toggle>
+          <ion-item
+            style="color: white; width: 100%"
+            routerLink="{{ routesNames.etatFinancier }}"
+            ><ion-icon
+              slot="start"
+              style="color: white"
+              name="enter-outline"
+            ></ion-icon>
             <ion-label>Acceuil</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <!-- **********MENU ADMINS********** -->
         <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item routerLink="{{ routesNames.admins }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item style="color: white" routerLink="{{ routesNames.admins }}">
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="people-outline"
+            ></ion-icon>
             <ion-label>Admins</ion-label>
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU EMPLOYERS********** -->
         <ion-menu-toggle>
-          <ion-item routerLink="{{ routesNames.employers }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item
+            style="color: white"
+            routerLink="{{ routesNames.employers }}"
+          >
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="people-outline"
+            ></ion-icon>
             <ion-label>Employers</ion-label>
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU CLIENTS********** -->
         <ion-menu-toggle>
-          <ion-item routerLink="{{ routesNames.clients }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item style="color: white" routerLink="{{ routesNames.clients }}">
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="people-outline"
+            ></ion-icon>
             <ion-label>Clients</ion-label>
           </ion-item></ion-menu-toggle
         >
 
         <!-- **********MENU LINGES********** -->
         <ion-menu-toggle>
-          <ion-item routerLink="{{ routesNames.linges }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item style="color: white" routerLink="{{ routesNames.linges }}">
+            <ion-icon
+              slot="start"
+              style="color: white"
+              name="shirt-outline"
+            ></ion-icon>
+
             <ion-label>Linges</ion-label>
           </ion-item></ion-menu-toggle
         >
 
         <!-- **********MENU FACTURES********** -->
         <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item routerLink="{{ routesNames.factures }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item
+            style="color: white"
+            routerLink="{{ routesNames.factures }}"
+          >
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="reader-outline"
+            ></ion-icon>
             <ion-label>Factures</ion-label>
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU DEMANDES********** -->
         <ion-menu-toggle>
-          <ion-item routerLink="{{ routesNames.dmdDepenses }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item
+            style="color: white"
+            routerLink="{{ routesNames.dmdDepenses }}"
+          >
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="newspaper-outline"
+            ></ion-icon>
             <ion-label>Demandes</ion-label>
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU COMPTE BLOQUE********** -->
         <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item routerLink="{{ routesNames.cmpBloques }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item
+            style="color: white"
+            routerLink="{{ routesNames.cmpBloques }}"
+          >
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="lock-closed-outline"
+            ></ion-icon>
+
             <ion-label>Comptes Bloqués</ion-label>
           </ion-item></ion-menu-toggle
         >
         <!-- **********MENU PARAMETRE********** -->
         <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item routerLink="{{ routesNames.parametres }}">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item
+            style="color: white"
+            routerLink="{{ routesNames.parametres }}"
+          >
+            <ion-icon
+              style="color: white"
+              slot="start"
+              name="settings-outline"
+            ></ion-icon>
+
             <ion-label>Configurations</ion-label>
           </ion-item></ion-menu-toggle
         >
 
         <!-- **********MENU PARAMETRE********** -->
         <ion-menu-toggle>
-          <ion-item (click)="logOut()">
-            <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-item style="color: white" (click)="logOut()">
+            <ion-icon
+              slot="start"
+              style="color: white"
+              name="exit-outline"
+            ></ion-icon>
             <ion-label>Déconnecter</ion-label>
           </ion-item></ion-menu-toggle
         >

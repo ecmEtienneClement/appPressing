@@ -25,6 +25,7 @@
 
   <div class="container" *ngIf="employer$ | async as employer">
     <app-cmp-dmd-depense
+      class="card"
       *ngFor="let dmdDepense of employer.Demande_depenses"
       [dmdDepense]="dmdDepense"
     ></app-cmp-dmd-depense>

@@ -27,6 +27,7 @@
     <!--                          DMD DEPENSES                          -->
     <div class="container" *ngIf="demande">
       <app-cmp-dmd-depense
+        class="card"
         *ngFor="let dmdDepense of admin.Demande_depenses"
         [dmdDepense]="dmdDepense"
       ></app-cmp-dmd-depense>
@@ -35,6 +36,7 @@
 
     <div class="container" *ngIf="depense">
       <app-cmp-dmd-depense
+        class="card"
         *ngFor="let dmdDepense of depenses"
         [dmdDepense]="dmdDepense"
       ></app-cmp-dmd-depense>
@@ -43,6 +45,7 @@
     <!--                          FACTURES                           -->
     <div class="container" *ngIf="facture">
       <app-cmp-facture
+        class="card"
         *ngFor="let facture of admin.Factures"
         [factureCreatedAt]="facture.createdAt"
         [factureType]="facture.type"

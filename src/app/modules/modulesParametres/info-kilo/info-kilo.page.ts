@@ -31,7 +31,6 @@ export class InfoKiloPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(this.infoKilosActions.getAllEntities()());
-    this.subInfosKilo();
     this.dataState$ = this.store.select(this.infoKilosSelectors.getDataState());
     this.notification$ = this.store.select(
       this.infoKilosSelectors.getNotification()
@@ -39,6 +38,7 @@ export class InfoKiloPage implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.select(
       this.infoKilosSelectors.getMessageError()
     );
+    this.subInfosKilo();
   }
 
   //TODO SUBS AUX DATA INFO KILO
@@ -47,9 +47,11 @@ export class InfoKiloPage implements OnInit, OnDestroy {
       this.store.select(this.infoKilosSelectors.getEntities()).subscribe({
         next: (dataInfosKilo) => {
           if (dataInfosKilo) {
-            this.infoKilos = dataInfosKilo;
-            this.prixLingeUpd = this.infoKilos[0].prixLinge;
-            this.prixRepassageUpd = this.infoKilos[0].prixRepassage;
+            if (dataInfosKilo.length > 0) {
+              this.infoKilos = dataInfosKilo;
+              this.prixLingeUpd = this.infoKilos[0].prixLinge;
+              this.prixRepassageUpd = this.infoKilos[0].prixRepassage;
+            }
           }
         },
       })

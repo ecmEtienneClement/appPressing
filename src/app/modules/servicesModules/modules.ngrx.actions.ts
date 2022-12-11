@@ -49,7 +49,7 @@ export class EntitiesActions<T> {
   public updEntitie() {
     return createAction(
       this.entitiesNameAPI + ' updEntitie',
-      props<{ entitie: T }>()
+      props<{ entitie: T; onNavAfterUpd?: boolean }>()
     );
   }
   public updEntitieSuccess() {

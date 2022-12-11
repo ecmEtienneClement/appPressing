@@ -105,6 +105,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/linges/linges.module').then((m) => m.LingesPageModule),
   },
+
+  {
+    path: RoutesNames.etatFinancier,
+    loadChildren: () =>
+      import('./modules/acceuil/acceuil.module').then(
+        (m) => m.AcceuilPageModule
+      ),
+  },
   {
     path: '**',
     redirectTo: 'home',

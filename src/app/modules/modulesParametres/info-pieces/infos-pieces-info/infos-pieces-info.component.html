@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Details {{ infoPiece?.nom }}</ion-title>
+    <ion-title>{{ infoPiece?.nom }}</ion-title>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -8,79 +8,117 @@
 </ion-header>
 
 <ion-content>
-  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
-  </div>
-  <!--                                 LOADDING                                  -->
-  <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
-
-  <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
-
-  <h1>DETAILS {{ infoPiece?.nom }}</h1>
-
-  <ion-card *ngIf="infoPiece$ | async as infoPiece">
-    <ion-avatar>
-      <ion-icon name="person-circle-outline"></ion-icon>
-    </ion-avatar>
-
-    <ion-card-content>
-      <ion-card-title> {{ infoPiece.nom }} </ion-card-title>
-      <hr />
-      <p class="card-text">
-        <b> Prix linge :</b> {{ infoPiece.prixLinge }} Fcfa
-      </p>
-      <p class="card-text">
-        <b> Prix repassage :</b> {{ infoPiece.prixRepassage }} Fcfa
-      </p>
-      <p class="card-text">
-        <b>Enregistrer le:</b> {{ infoPiece.createdAt | date: "shortDate" }}
-      </p>
-      <p class="card-text">
-        <b>Modifier le :</b> {{ infoPiece.updatedAt | date: "shortDate" }}
-      </p>
-      <hr />
-      <div class="row" *ngIf="updated">
-        <div class="col-12">
-          Prix linge :
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="prixLingeUpd"
-          />
-        </div>
-        <div class="col-12">
-          Prix repassage :
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="prixRepassageUpd"
-          />
-        </div>
-      </div>
-    </ion-card-content>
-    <div class="row">
-      <div class="col-12" *ngIf="!updated">
-        <button type="button" class="btn btn-outline-info" (click)="onUpd()">
-          Modifier
-        </button>
-      </div>
-      <div class="col-12" *ngIf="updated">
-        <button type="button" class="btn btn-outline-info" (click)="onUpd()">
-          Fermer
-        </button>
-      </div>
-      <div class="col-12" *ngIf="updated">
-        <button type="button" class="btn btn-outline-info" (click)="onSave()">
-          Enregistrer
-        </button>
-      </div>
+  <div class="container-fluid">
+    <!--                                 STATE                                  -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
     </div>
-  </ion-card>
+    <!--                                 LISTE                                  -->
+
+    <ion-card>
+      <ion-card-header>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon name="settings-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title>
+            {{ infoPiece.createdAt | date : "shortDate" }}
+          </ion-card-title>
+
+          <ion-button
+            *ngIf="!updated"
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="onUpd()"
+            ><p>Modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
+          <ion-button
+            *ngIf="updated"
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="onUpd()"
+            ><p>Fermer</p>
+          </ion-button>
+          <ion-button
+            *ngIf="updated"
+            fill="clear"
+            size="small"
+            (click)="onSave()"
+            ><p>Enregistrer</p></ion-button
+          >
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Modifier le</b>
+          </div>
+          <div class="atribut col-6">
+            <p class="card-text">
+              {{ infoPiece.updatedAt | date : "shortDate" }}
+            </p>
+          </div>
+        </div>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b> Prix linge </b>
+          </div>
+          <div class="atribut col-6">
+            <p class="card-text">{{ infoPiece.prixLinge }} Fcfa</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Prix repassage </b>
+          </div>
+          <div class="atribut col-6">
+            <p class="card-text">{{ infoPiece.prixRepassage }} Fcfa</p>
+          </div>
+        </div>
+        <hr />
+        <!--  -->
+
+        <div class="container" *ngIf="updated">
+          <ion-card class="card-conf">
+            <div class="row">
+              <div class="col-6">Prix linge</div>
+              <div class="col-6">
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="prixLingeUpd"
+                />
+              </div>
+            </div>
+            <div  class="row">
+              <div class="col-6">Prix repassage</div>
+              <div class="col-6">
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="prixRepassageUpd"
+                />
+              </div>
+            </div>
+          </ion-card>
+        </div>
+        <hr />
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer [translucent]="true">

@@ -7,7 +7,7 @@ import { Linge } from 'src/app/models/models.interfaces';
   styleUrls: ['./cmp-linges.component.scss'],
 })
 export class CmpLingesComponent implements OnInit {
-  @Input() linges: Linge[];
+  @Input() linge: Linge;
   constructor() {}
 
   ngOnInit() {}

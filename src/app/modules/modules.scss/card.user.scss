@@ -5,7 +5,7 @@
   height: 100%;
   width: 100%;
   ion-card {
-    @include card-bg-mixin;
+  //  @include card-bg-mixin;
     ion-card-header {
       .container {
         @include flex-mixin;

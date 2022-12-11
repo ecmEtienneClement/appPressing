@@ -70,6 +70,7 @@ export interface Admin extends IG {
   Demande_depenses?: DemandeDepense[];
   Factures?: Facture[];
   Compte_bloquers?: Compte_bloquer[];
+  Employes?: Employe[];
 }
 //
 
@@ -113,10 +114,8 @@ export interface DemandeDepense extends IG {
 //
 //TODO Model ETAT_FINANCIER
 export interface EtatFinancier extends IG {
-  montantCaisse: number;
-  montantDepense: number;
-  dateUpdateCaisse: string;
-  dateUpdateDepense: string;
+  caisse: number;
+  depense: number;
 }
 //
 //TODO Model LINGE

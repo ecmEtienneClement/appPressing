@@ -1,6 +1,8 @@
 export enum RoutesNames {
   home = 'home',
   forbiden = 'forbiden',
+  //TODO ETAT FINANCIER
+  etatFinancier = 'etatFinancier',
   //TODO CLIENTS
   admins = 'admins',
   adminsInfo = 'admins_info',

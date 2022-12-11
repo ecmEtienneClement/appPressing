@@ -24,7 +24,12 @@
   <!-- --------------------------------SECTION CARD LINGES EMPLOYER----------------------------------- -->
 
   <div class="container" *ngIf="employer$ | async as employer">
-    <app-cmp-linges [linges]="employer.Linges"> </app-cmp-linges>
+    <app-cmp-linges
+      class="card"
+      *ngFor="let linge of employer.Linges"
+      [linge]="linge"
+    >
+    </app-cmp-linges>
   </div>
 </ion-content>
 

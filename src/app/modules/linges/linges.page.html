@@ -4,7 +4,6 @@
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
-
     <ion-button
       slot="end"
       (click)="onNav(whereNav.addEntitie,routesNames.lingesAddTypeAndClient)"
@@ -41,7 +40,7 @@
               <ion-card-title>
                 <div class="row">
                   <div class="col-6">
-                    <b class="txt-Enr">Enregistré le :</b>
+                    <b >Date:</b>
                   </div>
                   <div class="col-6">
                     <p>{{ linge.createdAt| date : "shortDate" }}</p>

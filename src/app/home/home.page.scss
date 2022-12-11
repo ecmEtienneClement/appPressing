@@ -1,6 +1,7 @@
-$color-primary: #3880ff;
+$color-violet: #3880ff;
 $color-light: #ffffff;
 $color-dark: #000000;
+$color-violet: #312450;
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,11 +16,11 @@ ion-content {
 }
 
 .screen {
-  background: linear-gradient(90deg, $color-primary, $color-primary);
+  background: linear-gradient(90deg, $color-violet, $color-violet);
   position: relative;
   height: 100%;
   width: 100%;
-  box-shadow: 0px 0px 24px $color-primary;
+  box-shadow: 0px 0px 24px $color-violet;
   .screen__content {
     z-index: 1;
     position: relative;
@@ -65,7 +66,7 @@ ion-content {
     display: flex;
     align-items: center;
     width: 100%;
-    color: $color-primary;
+    color: $color-violet;
     box-shadow: 3px 3px 3px $color-dark;
   }
 }

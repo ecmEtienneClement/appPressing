@@ -26,7 +26,12 @@
   <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
 
   <div class="container" *ngIf="client$ | async as client">
-    <app-cmp-linges [linges]="client.Linges"> </app-cmp-linges>
+    <app-cmp-linges
+      class="card"
+      *ngFor="let linge of client.Linges"
+      [linge]="linge"
+    >
+    </app-cmp-linges>
   </div>
 </ion-content>
 

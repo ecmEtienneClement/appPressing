@@ -18,7 +18,7 @@
 <ion-content>
   <!--                                 STATE                                  -->
 
-  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+  <div *ngIf="dataState$|async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"

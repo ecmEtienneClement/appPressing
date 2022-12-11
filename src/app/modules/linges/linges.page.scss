@@ -10,7 +10,6 @@
   margin-right: 10px;
 }
 
-.txt-Enr {
-  font-size: 14px;
-  margin-bottom: 48px;
+ion-card-title {
+  @include card-title-mixin;
 }

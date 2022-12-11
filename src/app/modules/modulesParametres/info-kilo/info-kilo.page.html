@@ -8,75 +8,115 @@
 </ion-header>
 
 <ion-content>
-  <!--                                 STATE                                  -->
-  <div *ngIf="dataState$|async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
-  </div>
-  <!--                                 LISTE                                  -->
+  <div class="container-fluid">
+    <!--                                 STATE                                  -->
+    <div *ngIf="dataState$|async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
 
-  <h1>Infos kilo</h1>
-  <ion-list lines="inset">
-    <ion-item-sliding class="mt-4" *ngIf="infoKilos">
-      <!-- *********************                         ****************** -->
-      <ion-item>
-        <div class="row">
-          <div class="col-12">
-            Prix linge /kilo :{{infoKilos[0]?.prixLinge}} Fcfa
-          </div>
-          <div class="col-12">
-            Prix repassage /kilo :{{infoKilos[0]?.prixRepassage}} Fcfa
-          </div>
-          <div class="col-12">Enregistrer le :{{infoKilos[0]?.createdAt}}</div>
-          <div class="col-12">Modifier le :{{infoKilos[0]?.updatedAt}}</div>
+    <!-- --------------------------------SECTION CARD INFO KILO----------------------------------- -->
+
+    <ion-card *ngIf="infoKilos">
+      <ion-card-header>
+        <div class="container">
+          <ion-avatar>
+            <ion-icon name="settings-outline"></ion-icon>
+          </ion-avatar>
+          <ion-card-title
+            >{{infoKilos[0]?.createdAt | date:'shortDate' }}</ion-card-title
+          >
+          <ion-button
+            *ngIf="!updated"
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="onUpd()"
+            ><p>Modifier</p>
+            <ion-icon slot="end" name="pencil-outline"></ion-icon
+          ></ion-button>
+          <ion-button
+            *ngIf="updated"
+            class="mt-2"
+            fill="clear"
+            size="small"
+            (click)="onUpd()"
+            ><p>Fermer</p>
+          </ion-button>
+          <ion-button
+            *ngIf="updated"
+            fill="clear"
+            size="small"
+            (click)="onSave()"
+            ><p>Enregistrer</p></ion-button
+          >
         </div>
-      </ion-item>
-    </ion-item-sliding>
-    <!-- *********************             FORM UPDATE            ****************** -->
+      </ion-card-header>
 
-    <ion-item-sliding class="mt-4" *ngIf="updated">
-      <ion-item>
+      <ion-card-content>
+        <hr />
         <div class="row">
-          <div class="col-12">
-            Prix linge /kilo :
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="prixLingeUpd"
-            />
+          <div class="atribut col-6">
+            <b> Modifier le</b>
           </div>
-          <div class="col-12">
-            Prix repassage /kilo :
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="prixRepassageUpd"
-            />
+          <div class="col-6">
+            <p class="card-text">
+              {{infoKilos[0]?.updatedAt | date:'shortDate'}}
+            </p>
           </div>
         </div>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
+        <hr />
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b> Prix linge /kilo </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{infoKilos[0]?.prixLinge}} Fcfa</p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="atribut col-6">
+            <b>Prix repassage /kilo </b>
+          </div>
+          <div class="col-6">
+            <p class="card-text">{{infoKilos[0]?.prixRepassage}} Fcfa</p>
+          </div>
+        </div>
+        <hr />
+        <!--  -->
+        <div class="card" *ngIf="updated">
+          <ion-card class="card-conf">
+            <div class="row">
+              <div class="col-6">Prix linge /kilo</div>
+              <div class="col-6">
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="prixLingeUpd"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">Prix repassage /kilo</div>
+              <div class="col-6">
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="prixRepassageUpd"
+                />
+              </div>
+            </div>
+          </ion-card>
+        </div>
 
-  <div class="row">
-    <div class="col-12" *ngIf="!updated">
-      <button type="button" class="btn btn-outline-info" (click)="onUpd()">
-        Modifier
-      </button>
-    </div>
-    <div class="col-12" *ngIf="updated">
-      <button type="button" class="btn btn-outline-info" (click)="onUpd()">
-        Fermer
-      </button>
-    </div>
-    <div class="col-12" *ngIf="updated">
-      <button type="button" class="btn btn-outline-info" (click)="onSave()">
-        Enregistrer
-      </button>
-    </div>
+        <hr />
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
 

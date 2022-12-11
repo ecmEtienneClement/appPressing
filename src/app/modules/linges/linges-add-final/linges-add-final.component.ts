@@ -3,8 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import { EnumTypeLinge, Linge } from 'src/app/models/models.interfaces';
+import {
+  EnumTypeLinge,
+  EtatFinancier,
+  Linge,
+} from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { AcceuilActions } from '../../acceuil/ngrx/acceuil.actions';
+import { AcceuilSelectors } from '../../acceuil/ngrx/acceuil.selectors';
 import { LingesActions } from '../ngrx/linges.actions';
 import { LingesSelectors } from '../ngrx/linges.selectors';
 import { LingeDataState } from '../services/linges.data.state';
@@ -18,6 +24,9 @@ export class LingesAddFinalComponent implements OnInit {
   notification$: Observable<string | null> = new Observable();
   errorMessage$: Observable<string | null> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
+  idEtatFinancier = '';
+  caisse = 0;
+  depense = 0;
   avance = false;
   montantAvance = 0;
   type = '';
@@ -38,10 +47,13 @@ export class LingesAddFinalComponent implements OnInit {
     private store: Store<AppState>,
     private lingesSelectorsService: LingesSelectors,
     private lingesActionsService: LingesActions,
-    private lingesDataState: LingeDataState
+    private lingesDataState: LingeDataState,
+    private etatFinancierActions: AcceuilActions,
+    private etatFinancierSelectores: AcceuilSelectors
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(this.etatFinancierActions.getAllEntities()());
     this.dataState$ = this.store.select(
       this.lingesSelectorsService.getDataState()
     );
@@ -61,8 +73,23 @@ export class LingesAddFinalComponent implements OnInit {
      */
     this.linge = JSON.parse(JSON.stringify(this.linge));
     this.onMontant();
+    this.onSubEtatFinancier();
   }
 
+  //TODO SUB ETAT
+  onSubEtatFinancier() {
+    this.store.select(this.etatFinancierSelectores.getEntities()).subscribe({
+      next: (data) => {
+        if (data) {
+          if (data.length > 0) {
+            this.caisse = data[0].caisse;
+            this.depense = data[0].depense;
+            this.idEtatFinancier = data[0].id;
+          }
+        }
+      },
+    });
+  }
   //TODO
   onMontant() {
     this.linge.prixLinge = this.lingesDataState.getMontantLinge();
@@ -102,10 +129,32 @@ export class LingesAddFinalComponent implements OnInit {
   onTerminer() {
     if (this.avance && this.montantAvance > 0) {
       this.linge.montantAvance = this.montantAvance;
+      const etat: EtatFinancier = {
+        caisse: this.caisse + this.montantAvance,
+        depense: this.depense,
+        id: this.idEtatFinancier,
+      };
+      this.store.dispatch(
+        this.etatFinancierActions.updEntitie()({
+          entitie: etat,
+          onNavAfterUpd: false,
+        })
+      );
       this.store.dispatch(
         this.lingesActionsService.updEntitie()({ entitie: this.linge })
       );
     } else {
+      const etat: EtatFinancier = {
+        caisse: this.caisse + this.linge.prixLinge,
+        depense: this.depense,
+        id: this.idEtatFinancier,
+      };
+      this.store.dispatch(
+        this.etatFinancierActions.updEntitie()({
+          entitie: etat,
+          onNavAfterUpd: false,
+        })
+      );
       this.store.dispatch(
         this.lingesActionsService.updEntitie()({ entitie: this.linge })
       );

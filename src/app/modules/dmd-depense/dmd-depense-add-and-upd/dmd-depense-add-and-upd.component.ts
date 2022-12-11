@@ -24,7 +24,6 @@ export class DmdDepenseAddAndUpdComponent implements OnInit {
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
-
   dmdDepenseUpd: DemandeDepense = {
     EmployeId: '',
     description: '',
@@ -57,6 +56,7 @@ export class DmdDepenseAddAndUpdComponent implements OnInit {
     //
     this.switchNameRoute(this.entitiesDataState.getAddOrUpdFormEntitie());
   }
+
   //TODO INIT FORM
   initForm() {
     this.formDemandeDepense = this.formBuilder.group({

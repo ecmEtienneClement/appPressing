@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Compte_bloquer } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { CmpBloquesActions } from '../ngrx/cmpBloques.actions';
 import { CmpBloquesSelectors } from '../ngrx/cmpBloques.selectors';
 
 @Component({
@@ -19,7 +20,8 @@ export class CmpBloquesInfoComponent implements OnInit {
   readonly routesNames = RoutesNames;
   constructor(
     private store: Store<AppState>,
-    private cmpBloquesSelectorsService: CmpBloquesSelectors
+    private cmpBloquesSelectorsService: CmpBloquesSelectors,
+    private cmpBloquesActionsService: CmpBloquesActions
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class CmpBloquesInfoComponent implements OnInit {
     );
   }
   //TODO DELETE COMPTE
-  /*
+
   onDeleteCmtBloquer(idCmtBloquer: string) {
     this.store.dispatch(
       this.cmpBloquesActionsService.deleteEntitie()({
@@ -45,5 +47,4 @@ export class CmpBloquesInfoComponent implements OnInit {
       })
     );
   }
-  */
 }

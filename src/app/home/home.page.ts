@@ -10,6 +10,7 @@ import { User } from 'src/app/models/models.interfaces';
 import { EntitiesEmit } from '../modules/servicesModules/modules.emit';
 import { UserService } from '../servicesApp/user.service';
 import { Toast } from '@awesome-cordova-plugins/toast/ngx';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -29,13 +30,17 @@ export class HomePage implements OnInit {
     private loginSelectors: LoginSelectors,
     private loginActions: LoginActions,
     private userService: UserService,
-    private toast: Toast
+    private toast: Toast,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    //teste de toast
+    /*
     this.toast.show(`I'm a toast`, '9000', 'center').subscribe((toast) => {
       console.log(toast);
     });
+    */
     this.dataState$ = this.store.select(this.loginSelectors.getDataState());
     this.notification$ = this.store.select(
       this.loginSelectors.getNotification()
@@ -66,6 +71,7 @@ export class HomePage implements OnInit {
         if (dataEmit.nameNotification === 'user') {
           const user: User = dataEmit.entitie;
           this.userService.setUser(user);
+          this.router.navigate([this.routesNames.linges]);
         }
       },
     });

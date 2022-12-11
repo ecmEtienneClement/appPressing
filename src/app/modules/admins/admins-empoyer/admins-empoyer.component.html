@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Employers Admin</ion-title>
+    <ion-row *ngIf="admin$ | async as admin">
+      <ion-col>
+        <ion-title> {{ admin.prenom }} {{ admin.nom }}</ion-title>
+      </ion-col>
+    </ion-row>
+
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -9,7 +14,7 @@
 
 <ion-content>
   <!-- --------------------------------SECTION STATE APP----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
+  <div *ngIf="dataState$ | async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"
@@ -17,15 +22,25 @@
     ></app-cmp-state-app>
   </div>
 
-  <!-- --------------------------------SECTION CARD DMDDEPENSE----------------------------------- -->
+  <div class="container" *ngIf="admin$ | async as admin">
+    <!--                                 LISTE                                  -->
+    <ion-list lines="inset">
+      <ion-item-sliding *ngFor="let employer of admin.Employes">
+        <!-- *************************************** -->
+        <ion-item>
+          <main class="user">
+            <article class="user__profile">
+              <ion-icon class="user__picture" name="person-outline"></ion-icon>
 
-  <ion-row *ngIf="admin$ | async as admin">
-    <ion-col>
-      <h4>... ADMIN : {{ admin.prenom }} {{ admin.nom }}</h4>
-    </ion-col>
-  </ion-row>
-
-  <div class="container" *ngIf="admin$ | async as admin"></div>
+              <span class="user__name"
+                >{{ employer.prenom }} {{ employer.nom }}</span
+              >
+            </article>
+          </main>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
 </ion-content>
 
 <ion-footer [translucent]="true" *ngIf="admin$ | async as admin">

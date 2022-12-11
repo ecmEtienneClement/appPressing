@@ -61,3 +61,11 @@ ion-searchbar {
   --color: #000000;
   height: 5px;
 }
+.scroll {
+  font-size: 22px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.scroll :hover {
+  cursor: pointer;
+}

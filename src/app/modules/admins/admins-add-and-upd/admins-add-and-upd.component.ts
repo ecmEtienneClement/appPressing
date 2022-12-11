@@ -89,10 +89,9 @@ export class AdminsAddAndUpdComponent implements OnInit {
                 mdp: dataEmploye.mdp,
               });
               this.nomAdmin = dataEmploye.nom;
-            this.prenomAdmin = dataEmploye.prenom;
-            this.isUpdate = true;
+              this.prenomAdmin = dataEmploye.prenom;
+              this.isUpdate = true;
             }
-            
           },
           error: (error) => {
             this.store.dispatch(this.adminsActions.errorEntities()({ error }));

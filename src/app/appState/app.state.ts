@@ -1,5 +1,6 @@
 import { routerReducer, RouterState } from '@ngrx/router-store';
 import { ILoginState } from '../home/ngrx/login.state';
+import { IEtatFinancierState } from '../modules/acceuil/ngrx/acceuil.state';
 import { IAdminState } from '../modules/admins/ngrx/admins.state';
 import { IClientsState } from '../modules/clients/ngrx/clients.state';
 import { ICmpBloquesState } from '../modules/cmp-bloques/ngrx/cmpBloques.state';
@@ -13,9 +14,10 @@ import { IInfosKiloState } from '../modules/modulesParametres/info-kilo/ngrx/inf
 import { IInfosPiecesState } from '../modules/modulesParametres/info-pieces/ngrx/infosPieces.state';
 import { ITypesLingesState } from '../modules/modulesParametres/typesLinges/ngrx/typesLinges.state';
 
-//TODO MON STATE GLOBAL EN 13 MODULES STATES NGRX CAR ROUTER_STATE EST UN MODULE DE NGRX DIRECT
+//TODO MON STATE GLOBAL EN 14 MODULES STATES NGRX CAR ROUTER_STATE EST UN MODULE DE NGRX DIRECT
 export interface AppState {
   login: ILoginState;
+  etatFinancierState: IEtatFinancierState;
   adminState: IAdminState;
   employerState: IEmployersState;
   clientState: IClientsState;
@@ -50,6 +52,7 @@ export const initStateApp = {
 export enum NameStateEntities {
   admin = 'adminsState',
   client = 'clientsState',
+  etatFinancier = 'etatFinancierState',
   linges = 'lingesState',
   employer = 'employersState',
   facture = 'facturesState',

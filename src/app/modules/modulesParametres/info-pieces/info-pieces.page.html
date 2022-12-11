@@ -16,7 +16,7 @@
 
 <ion-content>
   <!--                                 STATE                                  -->
-  <div *ngIf="dataState$|async as dataState" class="container-fluid">
+  <div *ngIf="dataState$|async as dataState" class="container">
     <app-cmp-state-app
       [dataState]="dataState"
       [notification]="notification$ | async"
@@ -42,27 +42,23 @@
 
   <!--                                 LISTE                                  -->
 
-  <h1>Infos pieces</h1>
   <ion-list lines="inset" *ngIf="infoPieces">
-    <ion-item-sliding
-      class="mt-4"
-      *ngFor="let infoPiece of infoPieces"
-    >
-      <!-- *********************                         ****************** -->
-      <ion-item 
-      (click)="onNav(whereNav.ressourcesEntitie ,routesNames.infosPiecesInfoAndUpd,infoPiece.id)"
+    <ion-item-sliding *ngFor="let infoPiece of infoPieces">
+      <!-- *************************************** -->
+      <ion-item
+        (click)="onNav(whereNav.ressourcesEntitie ,routesNames.infosPiecesInfoAndUpd,infoPiece.id)"
       >
-        <div class="row">
-          <div class="col-12">{{infoPiece.nom}}</div>
-        </div>
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon class="user__picture" name="settings-outline"></ion-icon>
+            <span class="user__name">{{infoPiece.nom}} </span>
+          </article>
+        </main>
       </ion-item>
+      <!-- *************************************** -->
       <ion-item-options side="end">
-        <button
-          (click)="onDeleteInfosPiece(infoPiece.id)"
-          ion-button
-          color="primary"
-        >
-          <ion-icon name="trash-outline"></ion-icon>
+        <button class="item_btn" (click)="onDeleteInfosPiece(infoPiece.id)">
+          <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

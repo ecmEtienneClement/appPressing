@@ -102,36 +102,39 @@
 
         <!--                      DETAILS TYPE KILO                         -->
 
-        <div
-          class="card-type-kilo"
-          *ngIf="linge.Type_linge?.nom === enumTypeLinge.kilo"
-        >
-          <!--  -->
-          <div class="row">
-            <div class="atribut col-6">
-              <b>Prix linge</b>
-            </div>
-            <div class="col-6">
-              <p class="card-text">{{ linge.Detail_type_kilo?.prixLinge }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="atribut col-6">
-              <b>Prix repassage</b>
-            </div>
-            <div class="col-6">
-              <p class="card-text">
-                {{ linge.Detail_type_kilo?.prixRepassage }}
-              </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="atribut col-6">
-              <b>Nombre de kilo</b>
-            </div>
-            <div class="col-6">
-              <p class="card-text">{{ linge.Detail_type_kilo?.nbrKilo }}</p>
-            </div>
+        <div class="mt-2" *ngIf="linge.Type_linge?.nom === enumTypeLinge.kilo">
+          <div class="card">
+            <ion-card>
+              <!--  -->
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Prix linge</b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">
+                    {{ linge.Detail_type_kilo?.prixLinge }}
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Prix repassage</b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">
+                    {{ linge.Detail_type_kilo?.prixRepassage }}
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Nombre de kilo</b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ linge.Detail_type_kilo?.nbrKilo }}</p>
+                </div>
+              </div>
+            </ion-card>
           </div>
         </div>
 
@@ -140,52 +143,54 @@
 
         <div *ngIf="linge.Detail_type_pieces">
           <div
-            class="card-type-piece"
+            class="card"
             *ngFor="let detailsPiece of linge.Detail_type_pieces"
           >
-            <div class="row">
-              <div class="atribut col-6">
-                <b>Nom de piece </b>
+            <ion-card>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Nom de piece </b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ detailsPiece.nom }}</p>
+                </div>
               </div>
-              <div class="col-6">
-                <p class="card-text">{{ detailsPiece.nom }}</p>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Nombre de piece </b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ detailsPiece.nbrPiece }} piece(s)</p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="atribut col-6">
-                <b>Nombre de piece </b>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Prix</b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ detailsPiece.prixLinge }} Fcfa</p>
+                </div>
               </div>
-              <div class="col-6">
-                <p class="card-text">{{ detailsPiece.nbrPiece }} piece(s)</p>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>Prix repassage </b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">{{ detailsPiece.prixRepassage }} Fcfa</p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="atribut col-6">
-                <b>Prix</b>
+              <div class="row">
+                <div class="atribut col-6">
+                  <b>A repasser</b>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">
+                    <span *ngIf="detailsPiece.aRepasser"> Oui</span
+                    ><span *ngIf="!detailsPiece.aRepasser"> Non</span>
+                  </p>
+                </div>
               </div>
-              <div class="col-6">
-                <p class="card-text">{{ detailsPiece.prixLinge }} Fcfa</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="atribut col-6">
-                <b>Prix repassage </b>
-              </div>
-              <div class="col-6">
-                <p class="card-text">{{ detailsPiece.prixRepassage }} Fcfa</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="atribut col-6">
-                <b>A repasser</b>
-              </div>
-              <div class="col-6">
-                <p class="card-text">
-                  <span *ngIf="detailsPiece.aRepasser"> Oui</span
-                  ><span *ngIf="!detailsPiece.aRepasser"> Non</span>
-                </p>
-              </div>
-            </div>
+            </ion-card>
           </div>
         </div>
 
@@ -264,6 +269,7 @@
       </ion-card-content>
     </ion-card>
   </div>
+ 
 </ion-content>
 
 <ion-footer [translucent]="true">

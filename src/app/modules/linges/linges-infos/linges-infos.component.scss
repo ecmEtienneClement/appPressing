@@ -10,9 +10,7 @@
     }
   }
 }
-.card-type-piece,.card-type-kilo {
-  @include card-bg-mixin;
-  margin-top: 10px;
-  padding-left: 5px;
-  padding-bottom: 5px;
+
+ion-card {
+  padding-left: 10px;
 }

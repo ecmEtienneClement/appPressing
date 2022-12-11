@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Acceuil</ion-title>
+    <ion-menu-toggle slot="start">
+      <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
+    </ion-menu-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+  <div *ngIf="dataState$ | async as dataState" class="container">
+    <app-cmp-state-app
+      [dataState]="dataState"
+      [notification]="notification$ | async"
+      [errorMessage]="errorMessage$ | async"
+    ></app-cmp-state-app>
+  </div>
+
+  <div class="container mt-3">
+    <div class="row-etat row">
+      <div class="col-6">
+        <div class="card">
+          <ion-card>
+            <ion-card-header> <span>Caisse</span></ion-card-header>
+            <p>{{caisse}} Fcfa</p>
+          </ion-card>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <ion-card>
+            <ion-card-header> <span>Depense</span></ion-card-header>
+            <p>{{depense}} Fcfa</p></ion-card
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Admin(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15 </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Employé(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15 </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Client(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15 </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Linge(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15 </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Demande(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15</span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Facture(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15 </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="card card-row row">
+        <div class="col-ent col-6">
+          <b>Compte(s) bloqué(s)</b>
+        </div>
+        <div class="col-nbr col-6">
+          <span>15</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      [defaultHref]="routesNames.home"
+    ></ion-back-button>
+  </ion-toolbar>
+</ion-footer>

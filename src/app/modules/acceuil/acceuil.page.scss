@@ -1,0 +1,76 @@
+.row-etat {
+  height: 150px;
+  .col-6 {
+    .card {
+      border: 1px solid #b74e91;
+
+      height: 100%;
+      ion-card {
+        text-align: center;
+        height: 100%;
+        background: #312450;
+        position: relative;
+        box-shadow: 10px 10px 10px #998c94;
+        ion-card-header {
+          span {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: white;
+          }
+        }
+
+        p {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-weight: bold;
+          color: #b74e91;
+        }
+      }
+    }
+  }
+  margin-bottom: 25px;
+}
+
+.card-row {
+  margin-top: 8px;
+  height: 50px;
+  border: 1px solid #b74e91;
+  margin-bottom: 8px;
+}
+
+.col-6 {
+  height: 100%;
+}
+.col-ent {
+  border-radius: 0 10px 10px 0;
+  height: 100%;
+  background: #312450;
+  position: relative;
+  box-shadow: 3px 2px 2px #b74e91;
+  b {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0.6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+.col-nbr {
+  height: 100%;
+  position: relative;
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: capitalize;
+  }
+}

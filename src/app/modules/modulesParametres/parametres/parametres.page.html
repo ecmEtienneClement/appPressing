@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>parametres</ion-title>
+    <ion-title>Parametres</ion-title>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -10,33 +10,40 @@
 <ion-content>
   <!--                                 LISTE                                  -->
 
-  <h1>CLIENTS</h1>
   <ion-list lines="inset">
-    <ion-item-sliding class="mt-4">
-      <!-- *********************                         ****************** -->
+    <ion-item-sliding class="mt-1">
+      <!-- *************************************** -->
       <ion-item (click)="onNav(routesNames.typesLinges)">
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h4>Types de linges</h4>
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon class="user__picture" name="settings-outline"></ion-icon>
+
+            <span class="user__name">Types de linges </span>
+          </article>
+        </main>
       </ion-item>
     </ion-item-sliding>
-    <ion-item-sliding class="mt-4">
+    <ion-item-sliding class="mt-1">
       <!-- *********************                         ****************** -->
       <ion-item (click)="onNav(routesNames.infosKilo)">
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h4>Infos kilo</h4>
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon class="user__picture" name="settings-outline"></ion-icon>
+            <span class="user__name">Infos kilo</span>
+          </article>
+        </main>
       </ion-item>
     </ion-item-sliding>
-    <ion-item-sliding class="mt-4">
+    <ion-item-sliding class="mt-1">
       <!-- *********************                         ****************** -->
       <ion-item (click)="onNav(routesNames.infosPieces)">
-        <ion-avatar item-start>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <h4>Infos Pieces</h4>
+        <main class="user">
+          <article class="user__profile">
+            <ion-icon class="user__picture" name="settings-outline"></ion-icon>
+
+            <span class="user__name">Infos Pieces</span>
+          </article>
+        </main>
       </ion-item>
     </ion-item-sliding>
   </ion-list>

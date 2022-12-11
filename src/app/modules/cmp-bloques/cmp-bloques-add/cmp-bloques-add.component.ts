@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Compte_bloquer, Employe } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { EmployersActions } from '../../employer/ngrx/employer.action';
 import { EmployersSelectors } from '../../employer/ngrx/employers.selectors';
 import { CmpBloquesActions } from '../ngrx/cmpBloques.actions';
@@ -37,7 +38,8 @@ export class CmpBloquesAddComponent implements OnInit, OnDestroy {
     private cmpBloquesSelectores: CmpBloquesSelectors,
     private formBuilder: FormBuilder,
     private employersActions: EmployersActions,
-    private employerSelectors: EmployersSelectors
+    private employerSelectors: EmployersSelectors,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -93,6 +95,7 @@ export class CmpBloquesAddComponent implements OnInit, OnDestroy {
         byAdmin: true,
         email,
         EmployeId: employer.id,
+        AdminId: this.userService.getIdUser(),
       };
       this.store.dispatch(
         this.cmpBloquesActions.addEntitie()({
