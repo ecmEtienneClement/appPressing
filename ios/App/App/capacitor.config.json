@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Prestige Pressing",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
