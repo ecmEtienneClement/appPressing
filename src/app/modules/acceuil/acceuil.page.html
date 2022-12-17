@@ -38,67 +38,174 @@
     </div>
 
     <div class="container">
+      <!-- ske -->
+      <div *ngIf="!isAdmin" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+      </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isAdmin" class="card card-row row">
         <div class="col-ent col-6">
           <b>Admin(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15 </span>
+          <span>{{nbrAdmin}} </span>
+        </div>
+      </div>
+      <!-- ske -->
+      <div *ngIf="!isEmployer" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-nbr col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
         </div>
       </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isEmployer" class="card card-row row">
         <div class="col-ent col-6">
           <b>Employé(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15 </span>
+          <span>{{nbrEmployer}} </span>
+        </div>
+      </div>
+      <!-- ske -->
+      <div *ngIf="!isClient" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-nbr col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
         </div>
       </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isClient" class="card card-row row">
         <div class="col-ent col-6">
           <b>Client(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15 </span>
+          <span>{{nbrClient}} </span>
+        </div>
+      </div>
+      <!-- ske -->
+      <div *ngIf="!isLinge" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-nbr col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
         </div>
       </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isLinge" class="card card-row row">
         <div class="col-ent col-6">
           <b>Linge(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15 </span>
+          <span>{{nbrLinge}} </span>
+        </div>
+      </div>
+      <!-- ske -->
+      <div *ngIf="!isDmd" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-nbr col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
         </div>
       </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isDmd" class="card card-row row">
         <div class="col-ent col-6">
           <b>Demande(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15</span>
+          <span>{{nbrDmd}}</span>
+        </div>
+      </div>
+      <!-- ske -->
+      <div *ngIf="!isFacture" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-nbr col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
         </div>
       </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isFacture" class="card card-row row">
         <div class="col-ent col-6">
           <b>Facture(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15 </span>
+          <span>{{nbrFacture}} </span>
+        </div>
+      </div>
+
+      <!-- ske -->
+
+      <div *ngIf="!isCmp" class="card card-row row">
+        <div class="col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </div>
+        <div class="col-nbr col-6">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
         </div>
       </div>
       <!--  -->
-      <div class="card card-row row">
+      <div *ngIf="isCmp" class="card card-row row">
         <div class="col-ent col-6">
           <b>Compte(s) bloqué(s)</b>
         </div>
         <div class="col-nbr col-6">
-          <span>15</span>
+          <span>{{nbrCmp}}</span>
         </div>
       </div>
     </div>

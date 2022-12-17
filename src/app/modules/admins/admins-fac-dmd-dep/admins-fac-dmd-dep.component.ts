@@ -24,7 +24,7 @@ export class AdminsFacDmdDepComponent implements OnInit {
   depenses: DemandeDepense[];
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
-
+  readonly appStateEnum = AppStateEnum;
   constructor(
     private store: Store<AppState>,
     private adminsSelectorsService: AdminsSelectors
@@ -50,11 +50,11 @@ export class AdminsFacDmdDepComponent implements OnInit {
   onSubAdminDmd() {
     this.store.select(this.adminsSelectorsService.getEntitieById()).subscribe({
       next: (dataAdmin) => {
-       if(dataAdmin){
+        if (dataAdmin) {
           this.depenses = dataAdmin.Demande_depenses.filter(
             (dmd) => dmd.valider === true
           );
-       }
+        }
       },
     });
   }

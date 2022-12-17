@@ -28,12 +28,20 @@
   <!--                                 LOADDING                                  -->
   <app-cmp-loading-list [dataState]="dataState$|async"></app-cmp-loading-list>
 
+  <div *ngIf="admins && dataState$|async as dataState" class="container mt-2">
+    <div
+      class="alert alert-info"
+      *ngIf="admins.length===0 && dataState===appStateEnum.loaded"
+    >
+      <strong>Pas d'administrateur ...</strong>
+    </div>
+  </div>
   <!--                                 LIST                                  -->
 
-  <ion-list lines="inset" *ngIf="admins">
+  <ion-list lines="none" *ngIf="admins">
     <ion-item-sliding *ngFor="let admin of admins">
       <!-- *************************************** -->
-       <ion-item
+      <ion-item
         (click)="onNav(whereNav.ressourcesEntitie,routesNames.adminsInfo,admin.id)"
       >
         <main class="user">
@@ -43,7 +51,7 @@
             <span class="user__name">{{admin.prenom}} {{admin.nom}} </span>
           </article>
         </main>
-      </ion-item> 
+      </ion-item>
       <!-- *************************************** -->
       <ion-item-options side="end">
         <button class="item_btn" (click)="onDeleteAdmin(admin.id)">

@@ -3,8 +3,9 @@ import { IonContent } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import { Client } from 'src/app/models/models.interfaces';
+import { Client, EnumUserRole } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { WhereNavEntities } from '../servicesModules/modules.service';
 import { ClientsActions } from './ngrx/clients.actions';
 import { ClientsSelectors } from './ngrx/clients.selectors';
@@ -17,7 +18,7 @@ import { ClientService } from './services/clients.service';
 })
 export class ClientsPage implements OnInit, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
-
+  isAdmin = false;
   clientsInit: Client[];
   clients: Client[];
   notification$: Observable<string> = new Observable();
@@ -26,12 +27,13 @@ export class ClientsPage implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly whereNavClient = WhereNavEntities;
-
+  readonly appStateEnum = AppStateEnum;
   constructor(
     public store: Store<AppState>,
     private clientsActionsService: ClientsActions,
     private clientsSelectorsService: ClientsSelectors,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -53,11 +55,18 @@ export class ClientsPage implements OnInit, OnDestroy {
     this.sub.add(
       this.store.select(this.clientsSelectorsService.getEntities()).subscribe({
         next: (clients) => {
-          this.clientsInit = clients;
-          this.clients = clients;
+          if (clients) {
+            this.clientsInit = clients;
+            this.clients = clients;
+          }
         },
       })
     );
+  }
+  //TODO
+  onIsAdmin() {
+    this.isAdmin =
+      this.userService.getRoleUser() === EnumUserRole.admin ? true : false;
   }
   //TODO SEARCH
   handleChange(event: any) {

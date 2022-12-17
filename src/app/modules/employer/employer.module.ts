@@ -14,8 +14,6 @@ import { EmployerClientComponent } from './employer-client/employer-client.compo
 import { EmployerDemandeDepenseComponent } from './employer-demande-depense/employer-demande-depense.component';
 import { EmployerService } from './services.ts/employers.service';
 import { NameStateEntities } from 'src/app/appState/app.state';
-import { EmployersActions } from './ngrx/employer.action';
-import { EmployersSelectors } from './ngrx/employers.selectors';
 import { GetEmployersReducer } from './ngrx/employers.reducer';
 import { EmployersResolver } from './services.ts/employers.resolver';
 

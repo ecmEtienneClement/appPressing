@@ -27,6 +27,7 @@ export class FacturesPage implements OnInit, OnDestroy {
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
   readonly enumTypeFacture = EnumTypeFacture;
+  readonly appStateEnum = AppStateEnum;
   customActionSheetOptions = {
     header: 'Factures',
     subHeader: 'Sélectionné le type de facture',
@@ -50,13 +51,15 @@ export class FacturesPage implements OnInit, OnDestroy {
     );
   }
 
-  //TODO SUBS AUX DATA ADMIN
+  //TODO SUBS AUX DATA FACTURE
   subFactures() {
     this.sub.add(
       this.store.select(this.facturesSelectors.getEntities()).subscribe({
         next: (factures) => {
-          this.facturesInit = factures;
-          this.factures = factures;
+          if (factures) {
+            this.facturesInit = factures;
+            this.factures = factures;
+          }
         },
       })
     );

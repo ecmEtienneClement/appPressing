@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: RoutesNames.employers,
-    canActivate: [AuthAuthorization, AdminAuthorization],
+    canActivate: [AuthAuthorization],
     loadChildren: () =>
       import('./modules/employer/employer.module').then(
         (m) => m.EmployerPageModule

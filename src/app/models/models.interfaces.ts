@@ -50,7 +50,7 @@ export interface Employe extends IG {
   adresse: string;
   salaire: number;
   email: string;
-  mdp: string;
+  mdp?: string;
   AdminId: string;
   Admin?: Admin;
   role?: EnumUserRole;
@@ -65,7 +65,7 @@ export interface Admin extends IG {
   prenom: string;
   numero?: string;
   email: string;
-  mdp: string;
+  mdp?: string;
   role?: EnumUserRole;
   Demande_depenses?: DemandeDepense[];
   Factures?: Facture[];

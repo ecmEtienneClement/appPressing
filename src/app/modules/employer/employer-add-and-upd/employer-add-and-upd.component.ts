@@ -7,6 +7,7 @@ import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import { Employe } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
 import { UserService } from 'src/app/servicesApp/user.service';
+import { AdminsActions } from '../../admins/ngrx/admins.actions';
 import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
@@ -46,7 +47,8 @@ export class EmployerAddAndUpdComponent implements OnInit {
     private employersSelectores: EmployersSelectors,
     private entitiesDataState: EntitiesDataState,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private adminsActions: AdminsActions
   ) {}
 
   ngOnInit() {
@@ -113,6 +115,9 @@ export class EmployerAddAndUpdComponent implements OnInit {
           },
         });
         break;
+      case EnumAddOrUpdFormEntitie.addEntitie:
+        this.onUpdatePwd();
+        break;
     }
   }
   //TODO
@@ -143,6 +148,7 @@ export class EmployerAddAndUpdComponent implements OnInit {
             onNavAfterAdd: true,
           })
         );
+        this.store.dispatch(this.adminsActions.getAllEntities()());
         break;
       //UPD
       case EnumAddOrUpdFormEntitie.updEntitie:

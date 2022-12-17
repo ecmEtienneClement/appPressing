@@ -1,7 +1,7 @@
 @import "../modules.scss/variables.scss";
 
 .item_btn {
-  @include btn-item-option-mixin(80px, 2px, 10px, 20%);
+  @include btn-item-option-mixin(60px, 2px, 10px, 20%);
 }
 .item_icon {
   font-size: 25px;

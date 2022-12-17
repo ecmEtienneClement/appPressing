@@ -26,7 +26,7 @@ export class CmpBloquesPage implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
-
+  readonly appStateEnum = AppStateEnum;
   constructor(
     public store: Store<AppState>,
     private cmpBloquesActionsService: CmpBloquesActions,

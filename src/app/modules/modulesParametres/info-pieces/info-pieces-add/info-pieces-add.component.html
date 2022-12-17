@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Form Piece</ion-title>
+    <ion-title>Formulaire Piece</ion-title>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -8,63 +8,91 @@
 </ion-header>
 
 <ion-content>
-  <!-- -------------------------------- SECTION STATE APP ----------------------------------- -->
-  <div *ngIf="dataState$ | async as dataState" class="container-fluid">
-    <app-cmp-state-app
-      [dataState]="dataState"
-      [notification]="notification$ | async"
-      [errorMessage]="errorMessage$ | async"
-    ></app-cmp-state-app>
+  <div class="container-fluid">
+    <!-- --------------------------------SECTION STATE APP----------------------------------- -->
+    <div *ngIf="dataState$ | async as dataState" class="container">
+      <app-cmp-state-app
+        [dataState]="dataState"
+        [notification]="notification$ | async"
+        [errorMessage]="errorMessage$ | async"
+      ></app-cmp-state-app>
+    </div>
+
+    <!-- --------------------------------SECTION FORM PIECE----------------------------------- -->
+    <ion-card>
+      <form [formGroup]="formInfoPiece" (ngSubmit)="submitForm()" novalidate>
+        <ion-card-header>
+          <div class="container">
+            <ion-avatar>
+              <ion-icon name="settings-outline"></ion-icon>
+            </ion-avatar>
+            <ion-card-title>...</ion-card-title>
+            <ion-button
+              class="mt-2"
+              fill="clear"
+              size="small"
+              [disabled]="formInfoPiece.invalid"
+              type="submit"
+              ><p>Enregistrer</p>
+            </ion-button>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <hr />
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT NOM                                            -->
+              <ion-item class="m-3" fill="solid" counter="true">
+                <ion-label position="floating">Nom piece</ion-label>
+                <ion-input
+                  maxlength="25"
+                  type="text"
+                  formControlName="nom"
+                ></ion-input>
+                <ion-note slot="helper">Nom du piece valide</ion-note>
+                <ion-note slot="error">nom du piece invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT PRIX LINGE                                            -->
+              <ion-item class="m-3" fill="solid" counter="true">
+                <ion-label position="floating">Prix linge</ion-label>
+                <ion-input
+                  maxlength="4"
+                  type="text"
+                  formControlName="prixLinge"
+                ></ion-input>
+                <ion-note slot="helper">Prix du linge valide</ion-note>
+                <ion-note slot="error">prix du linge invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-12">
+              <!--                               INPUT PRIX REPASSAGE                                            -->
+              <ion-item class="m-3" fill="solid" counter="true">
+                <ion-label position="floating">Prix repassage</ion-label>
+                <ion-input
+                  maxlength="4"
+                  type="text"
+                  formControlName="prixRepassage"
+                ></ion-input>
+                <ion-note slot="helper">Prix repassage valide</ion-note>
+                <ion-note slot="error">prix repassage invalid</ion-note>
+              </ion-item>
+            </div>
+          </div>
+          <hr />
+        </ion-card-content>
+      </form>
+    </ion-card>
   </div>
-
-  <!-- --------------------------------SECTION FORM DEMANDE----------------------------------- -->
-
-  <form [formGroup]="formInfoPiece" (ngSubmit)="submitForm()" novalidate>
-    <!--                               INPUT NOM                                            -->
-
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Nom piece</ion-label>
-      <ion-input maxlength="25" type="text" formControlName="nom"></ion-input>
-      <ion-note slot="helper">Entrez le nom du piece</ion-note>
-      <ion-note slot="error">nom du piece invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT PRIX LINGE                                            -->
-
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Prix linge</ion-label>
-      <ion-input
-        maxlength="4"
-        type="text"
-        formControlName="prixLinge"
-      ></ion-input>
-      <ion-note slot="helper">Entrez le prix du linge</ion-note>
-      <ion-note slot="error">prix du linge invalid</ion-note>
-    </ion-item>
-    <!--                               INPUT PRIX REPASSAGE                                            -->
-    <ion-item class="m-3" fill="solid" counter="true">
-      <ion-label position="floating">Prix repassage</ion-label>
-      <ion-input
-        maxlength="4"
-        type="text"
-        formControlName="prixRepassage"
-      ></ion-input>
-      <ion-note slot="helper">Entrez le prix repassage</ion-note>
-      <ion-note slot="error">prix repassage invalid</ion-note>
-    </ion-item>
-
-    <!--                                     BTN SAVE                                        -->
-
-    <ion-row>
-      <ion-col>
-        <ion-button
-          fill="outline"
-          [disabled]="formInfoPiece.invalid"
-          type="submit"
-          >Enregistrer</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </form>
 </ion-content>
 
 <ion-footer [translucent]="true">

@@ -4,7 +4,7 @@ import { DemandeDepense } from 'src/app/models/models.interfaces';
 import { EntitiesSelectors } from '../../servicesModules/modules.ngrx.selectors';
 import { IDmdDepenseState } from './dmdDepenses.state';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DmdDepensesSelectors extends EntitiesSelectors<
   DemandeDepense,
   IDmdDepenseState

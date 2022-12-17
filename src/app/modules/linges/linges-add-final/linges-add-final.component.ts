@@ -11,6 +11,7 @@ import {
 import { RoutesNames } from 'src/app/routes.config';
 import { AcceuilActions } from '../../acceuil/ngrx/acceuil.actions';
 import { AcceuilSelectors } from '../../acceuil/ngrx/acceuil.selectors';
+import { EmployersActions } from '../../employer/ngrx/employer.action';
 import { LingesActions } from '../ngrx/linges.actions';
 import { LingesSelectors } from '../ngrx/linges.selectors';
 import { LingeDataState } from '../services/linges.data.state';
@@ -49,7 +50,8 @@ export class LingesAddFinalComponent implements OnInit {
     private lingesActionsService: LingesActions,
     private lingesDataState: LingeDataState,
     private etatFinancierActions: AcceuilActions,
-    private etatFinancierSelectores: AcceuilSelectors
+    private etatFinancierSelectores: AcceuilSelectors,
+    private employersActions: EmployersActions
   ) {}
 
   ngOnInit() {
@@ -143,6 +145,7 @@ export class LingesAddFinalComponent implements OnInit {
       this.store.dispatch(
         this.lingesActionsService.updEntitie()({ entitie: this.linge })
       );
+      this.store.dispatch(this.employersActions.getAllEntities()());
     } else {
       const etat: EtatFinancier = {
         caisse: this.caisse + this.linge.prixLinge,
@@ -158,6 +161,7 @@ export class LingesAddFinalComponent implements OnInit {
       this.store.dispatch(
         this.lingesActionsService.updEntitie()({ entitie: this.linge })
       );
+      this.store.dispatch(this.employersActions.getAllEntities()());
     }
   }
 }

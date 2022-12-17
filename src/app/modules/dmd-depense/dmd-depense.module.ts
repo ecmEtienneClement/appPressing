@@ -7,10 +7,8 @@ import { DmdDepenseAddAndUpdComponent } from './dmd-depense-add-and-upd/dmd-depe
 import { DmdDepenseInfoComponent } from './dmd-depense-info/dmd-depense-info.component';
 import { DmdDepensePageRoutingModule } from './dmd-depense-routing.module';
 import { DmdDepensePage } from './dmd-depense.page';
-import { DmdDepensesActions } from './ngrx/dmdDepenses.actions';
 import { DmdDepensesEffects } from './ngrx/dmdDepenses.effects';
 import { GetDmdDepensesReducer } from './ngrx/dmdDepenses.reducer';
-import { DmdDepensesSelectors } from './ngrx/dmdDepenses.selectors';
 import { DmdDepensesDataService } from './services/dmdDepenses.data.service';
 import { DmdDepensesResolver } from './services/dmdDepenses.resolver';
 import { DmdDepensesService } from './services/dmdDepenses.service';
@@ -30,12 +28,6 @@ import { DmdDepensesService } from './services/dmdDepenses.service';
     DmdDepenseInfoComponent,
     DmdDepenseAddAndUpdComponent,
   ],
-  providers: [
-    DmdDepensesDataService,
-    DmdDepensesService,
-    DmdDepensesActions,
-    DmdDepensesSelectors,
-    DmdDepensesResolver,
-  ],
+  providers: [DmdDepensesDataService, DmdDepensesService, DmdDepensesResolver],
 })
 export class DmdDepensePageModule {}

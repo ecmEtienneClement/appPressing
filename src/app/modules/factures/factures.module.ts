@@ -7,10 +7,8 @@ import { FacturesAddAndUpdComponent } from './factures-add-and-upd/factures-add-
 import { FacturesInfoComponent } from './factures-info/factures-info.component';
 import { FacturesPageRoutingModule } from './factures-routing.module';
 import { FacturesPage } from './factures.page';
-import { FacturesActions } from './ngrx/factures.actions';
 import { FacturesEffects } from './ngrx/factures.effects';
 import { GetFacturesReducer } from './ngrx/factures.reducer';
-import { FacturesSelectors } from './ngrx/factures.selectors';
 import { FacturesDataService } from './services/factures.data.service';
 import { FacturesResolver } from './services/factures.resolver';
 import { FacturesService } from './services/factures.service';
@@ -30,12 +28,6 @@ import { FacturesService } from './services/factures.service';
     FacturesAddAndUpdComponent,
     FacturesInfoComponent,
   ],
-  providers: [
-    FacturesDataService,
-    FacturesService,
-    FacturesActions,
-    FacturesSelectors,
-    FacturesResolver,
-  ],
+  providers: [FacturesDataService, FacturesService, FacturesResolver],
 })
 export class FacturesPageModule {}

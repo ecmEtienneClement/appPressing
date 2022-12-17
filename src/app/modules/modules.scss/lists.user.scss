@@ -45,7 +45,7 @@
 }
 
 .item_btn {
-  @include btn-item-option-mixin(22px, 2px, 5px);
+  @include btn-item-option-mixin(5px, 2px, 5px);
 }
 .item_icon {
   font-size: 25px;

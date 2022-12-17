@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
-
 @Injectable({ providedIn: 'root' })
+
+//TODO ALERTE LE NATIVE_STORAGE N'EST PAS UTILISER
 export class EntititeNativeStorage {
   constructor(private nativeStorage: NativeStorage) {}
 
@@ -15,11 +16,9 @@ export class EntititeNativeStorage {
       await this.nativeStorage.setItem('teste', 'ok');
       await this.nativeStorage.setItem(nameItem, data);
       const data1 = await this.nativeStorage.getItem('teste');
-      console.log('teste est ===' + data1);
+
       return true;
     } catch (error) {
-      console.log('une erreur ===' + error);
-
       return false;
     }
   }

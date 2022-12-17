@@ -1,12 +1,21 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import { Facture, EnumTypeFacture } from 'src/app/models/models.interfaces';
+import {
+  Facture,
+  EnumTypeFacture,
+  EtatFinancier,
+  Employe,
+} from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
 import { UserService } from 'src/app/servicesApp/user.service';
+import { AcceuilActions } from '../../acceuil/ngrx/acceuil.actions';
+import { AcceuilSelectors } from '../../acceuil/ngrx/acceuil.selectors';
+import { EmployersActions } from '../../employer/ngrx/employer.action';
+import { EmployersSelectors } from '../../employer/ngrx/employers.selectors';
 import {
   EntitiesDataState,
   EnumAddOrUpdFormEntitie,
@@ -19,13 +28,18 @@ import { FacturesSelectors } from '../ngrx/factures.selectors';
   templateUrl: './factures-add-and-upd.component.html',
   styleUrls: ['./factures-add-and-upd.component.scss'],
 })
-export class FacturesAddAndUpdComponent implements OnInit {
+export class FacturesAddAndUpdComponent implements OnInit, OnDestroy {
   notification$: Observable<string> = new Observable();
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
+  sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly enumTypeFacture = EnumTypeFacture;
-
+  employes: Employe[];
+  salaire = 0;
+  idEtatFinancier = '';
+  caisse = 0;
+  depense = 0;
   factureUpd: Facture = {
     type: EnumTypeFacture.eau,
     AdminId: '',
@@ -39,10 +53,17 @@ export class FacturesAddAndUpdComponent implements OnInit {
     private facturesSelectores: FacturesSelectors,
     private entitiesDataState: EntitiesDataState,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private etatFinancierActions: AcceuilActions,
+    private etatFinancierSelectores: AcceuilSelectors,
+    private employersActions: EmployersActions,
+    private employerSelectors: EmployersSelectors
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(this.employersActions.getAllEntities()());
+    this.store.dispatch(this.etatFinancierActions.getAllEntities()());
+    this.subEmployes();
     this.dataState$ = this.store.select(this.facturesSelectores.getDataState());
     this.notification$ = this.store.select(
       this.facturesSelectores.getNotification()
@@ -53,12 +74,55 @@ export class FacturesAddAndUpdComponent implements OnInit {
     this.initForm();
     //
     this.switchNameRoute(this.entitiesDataState.getAddOrUpdFormEntitie());
+    this.onSubEtatFinancier();
   }
   //TODO INIT FORM
   initForm() {
     this.formFacture = this.formBuilder.group({
       type: [null, [Validators.required, Validators.pattern('^[a-zA-Zé]*$')]],
       montant: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+    });
+  }
+
+  //TODO SUBS AUX DATA EMPLOYER
+  subEmployes() {
+    this.sub.add(
+      this.store.select(this.employerSelectors.getEntities()).subscribe({
+        next: (employes) => {
+          if (employes) {
+            this.employes = employes;
+          }
+        },
+      })
+    );
+  }
+  //TODO FILTER
+  onSelectType($whereContainerEvent: any) {
+    switch ($whereContainerEvent.target.value) {
+      case EnumTypeFacture.salaire:
+        if (this.employes) {
+          this.employes.forEach((employer) => {
+            this.salaire += employer.salaire;
+          });
+          this.formFacture.patchValue({
+            montant: this.salaire,
+          });
+        }
+        break;
+    }
+  }
+  //TODO SUB ETAT
+  onSubEtatFinancier() {
+    this.store.select(this.etatFinancierSelectores.getEntities()).subscribe({
+      next: (data) => {
+        if (data) {
+          if (data.length > 0) {
+            this.caisse = data[0].caisse;
+            this.depense = data[0].depense;
+            this.idEtatFinancier = data[0].id;
+          }
+        }
+      },
     });
   }
 
@@ -97,6 +161,17 @@ export class FacturesAddAndUpdComponent implements OnInit {
           montant: formAddValues.montant,
           AdminId: this.userService.getIdUser(),
         };
+        const etat: EtatFinancier = {
+          caisse: this.caisse - formAddValues.montant,
+          depense: this.depense + formAddValues.montant,
+          id: this.idEtatFinancier,
+        };
+        this.store.dispatch(
+          this.etatFinancierActions.updEntitie()({
+            entitie: etat,
+            onNavAfterUpd: false,
+          })
+        );
         this.store.dispatch(
           this.facturesActions.addEntitie()({
             entitie: newFacture,
@@ -131,5 +206,8 @@ export class FacturesAddAndUpdComponent implements OnInit {
         );
         break;
     }
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

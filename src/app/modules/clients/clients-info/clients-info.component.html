@@ -18,7 +18,9 @@
       ></app-cmp-state-app>
     </div>
     <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="client$ | async as client">
       <ion-card-header>
         <div class="container">
@@ -86,7 +88,9 @@
             <b>Nombre de linge </b>
           </div>
           <div class="col-6">
-            <p class="card-text">{{ client.nbrLinge }}</p>
+            <p class="card-text">
+              {{ client.Linges ? client.Linges.length : client.nbrLinge }}
+            </p>
           </div>
         </div>
         <!--  -->
@@ -105,7 +109,7 @@
             <b>Enregistré le </b>
           </div>
           <div class="col-6">
-            <p class="card-text">{{ client.createdAt | date:  "shortDate" }}</p>
+            <p class="card-text">{{ client.createdAt | date : "shortDate" }}</p>
           </div>
         </div>
         <!--  -->
@@ -114,7 +118,7 @@
             <b>Dérniere modification </b>
           </div>
           <div class="col-6">
-            <p class="card-text">{{ client.updatedAt | date:  "shortDate" }}</p>
+            <p class="card-text">{{ client.updatedAt | date : "shortDate" }}</p>
           </div>
         </div>
 

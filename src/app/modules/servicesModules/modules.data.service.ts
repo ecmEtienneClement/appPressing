@@ -18,21 +18,21 @@ export class EntitiesDataService<T extends IG> {
   public createEntitie(entitie: T): Observable<T> {
     return this.httpClient
       .post<T>(environment.host + this.nameUrlEntities, entitie)
-      .pipe(retry(2));
+      .pipe(retry(1));
   }
   //
   //TODO
   public getAllEntities(): Observable<T[]> {
     return this.httpClient
       .get<T[]>(environment.host + this.nameUrlEntities)
-      .pipe(retry(2));
+      .pipe(retry(1));
   }
   //
   //TODO
   public getEntitieById(idEntitie: string): Observable<T> {
     return this.httpClient
       .get<T>(environment.host + this.nameUrlEntities + idEntitie)
-      .pipe(retry(2));
+      .pipe(retry(1));
   }
   //
   //TODO
@@ -41,20 +41,20 @@ export class EntitiesDataService<T extends IG> {
       .put<T>(environment.host + this.nameUrlEntities + entitie.id, {
         ...entitie,
       })
-      .pipe(retry(2));
+      .pipe(retry(1));
   }
   //
   //TODO
   public deleteEntitiesById(idEntitie: string): Observable<boolean> {
     return this.httpClient
       .delete<boolean>(environment.host + this.nameUrlEntities + idEntitie)
-      .pipe(retry(2));
+      .pipe(retry(1));
   }
   //
   //TODO
   public deleteAllEntities(): Observable<boolean> {
     return this.httpClient
       .delete<boolean>(environment.host + this.nameUrlEntities + 'all')
-      .pipe(retry(2));
+      .pipe(retry(1));
   }
 }

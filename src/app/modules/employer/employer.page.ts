@@ -26,7 +26,7 @@ export class EmployerPage implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
-
+  readonly appStateEnum = AppStateEnum;
   constructor(
     public store: Store<AppState>,
     private employersActions: EmployersActions,
@@ -46,13 +46,15 @@ export class EmployerPage implements OnInit, OnDestroy {
     );
   }
 
-  //TODO SUBS AUX DATA CLIENTS
+  //TODO SUBS AUX DATA EMPLOYER
   subEmployes() {
     this.sub.add(
       this.store.select(this.employerSelectors.getEntities()).subscribe({
         next: (employes) => {
-          this.employesInit = employes;
-          this.employes = employes;
+          if (employes) {
+            this.employesInit = employes;
+            this.employes = employes;
+          }
         },
       })
     );

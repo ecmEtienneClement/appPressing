@@ -3,8 +3,6 @@ import { CmpBloquesPageRoutingModule } from './cmp-bloques-routing.module';
 import { CmpBloquesPage } from './cmp-bloques.page';
 import { CmpBloquesDataService } from './services/cmpBloques.data.service';
 import { CmpBloquesService } from './services/cmpBloques.service';
-import { CmpBloquesActions } from './ngrx/cmpBloques.actions';
-import { CmpBloquesSelectors } from './ngrx/cmpBloques.selectors';
 import { ShearedModulesModule } from 'src/app/sheared-modules/sheared-modules.module';
 import { EffectsModule } from '@ngrx/effects';
 import { CmpBloquesEffects } from './ngrx/cmpBloques.effects';
@@ -30,12 +28,6 @@ import { CmpBloquesResolver } from './services/cmpBloques.resolver';
     CmpBloquesInfoComponent,
     CmpBloquesAddComponent,
   ],
-  providers: [
-    CmpBloquesDataService,
-    CmpBloquesService,
-    CmpBloquesActions,
-    CmpBloquesSelectors,
-    CmpBloquesResolver,
-  ],
+  providers: [CmpBloquesDataService, CmpBloquesService, CmpBloquesResolver],
 })
 export class CmpBloquesPageModule {}

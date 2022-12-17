@@ -29,8 +29,18 @@
   <app-cmp-loading-list [dataState]="dataState$|async"></app-cmp-loading-list>
 
   <!--                                 LIST                                  -->
-
-  <ion-list lines="inset" *ngIf="employes">
+  <div
+    *ngIf="employes && dataState$ | async as dataState"
+    class="container mt-2"
+  >
+    <div
+      class="alert alert-info"
+      *ngIf="employes.length === 0 && dataState === appStateEnum.loaded"
+    >
+      <strong>Pas d'employé ...</strong>
+    </div>
+  </div>
+  <ion-list lines="none" *ngIf="employes">
     <ion-item-sliding *ngFor="let employer of employes">
       <!-- *************************************** -->
       <ion-item

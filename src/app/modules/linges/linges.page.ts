@@ -3,8 +3,13 @@ import { IonContent } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import { EnumTypeLinge, Linge } from 'src/app/models/models.interfaces';
+import {
+  EnumTypeLinge,
+  EnumUserRole,
+  Linge,
+} from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { EntitiesDb } from '../servicesModules/modules.db';
 import { WhereNavEntities } from '../servicesModules/modules.service';
 import { LingesActions } from './ngrx/linges.actions';
@@ -18,7 +23,7 @@ import { LingesService } from './services/linges.service';
 })
 export class LingesPage implements OnInit, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
-
+  isAdmin = false;
   lingesInit: Linge[] = [];
   linges: Linge[] = [];
   notification$: Observable<string> = new Observable();
@@ -27,6 +32,7 @@ export class LingesPage implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
+  readonly appStateEnum = AppStateEnum;
   customActionSheetOptions = {
     header: 'Linges',
     subHeader: 'Sélectionnés critères de linges',
@@ -37,7 +43,8 @@ export class LingesPage implements OnInit, OnDestroy {
     private lingesActions: LingesActions,
     private lingesSelectors: LingesSelectors,
     private lingesService: LingesService,
-    private db: EntitiesDb
+    private db: EntitiesDb,
+    private userService: UserService
   ) {}
   //AIzaSyDuMAmilxAQTBuFKztDzshg1xVfFL9twdg
   ngOnInit() {
@@ -51,8 +58,13 @@ export class LingesPage implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.select(
       this.lingesSelectors.getMessageError()
     );
+    this.onIsAdmin();
   }
-
+  //TODO
+  onIsAdmin() {
+    this.isAdmin =
+      this.userService.getRoleUser() === EnumUserRole.admin ? true : false;
+  }
   //TODO SUBS AUX DATA LINGE
   subLinges() {
     this.sub.add(

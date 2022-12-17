@@ -4,9 +4,13 @@ import { environment } from 'src/environments/environment';
 import { EntitiesSql } from './modules.sql';
 
 @Injectable({ providedIn: 'root' })
+//TODO ALERTE LA BD LOCAL N'EST PAS UTILISER ..heuuu pour des raisons coherence car si je creer
+//une base de donnee local pour le user et que ce dernier na pas de connexion il peut travailer 
+//avec des données obsolete en cas de modifications par les admins exp: le prix de linge du chemise
+//modifier....  
 export class EntitiesDb {
   constructor(private sqlite: SQLite) {
-  //  this.createTables();
+    //  this.createTables();
   }
 
   //TODO

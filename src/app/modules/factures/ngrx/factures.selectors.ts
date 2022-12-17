@@ -4,7 +4,7 @@ import { Facture } from 'src/app/models/models.interfaces';
 import { EntitiesSelectors } from '../../servicesModules/modules.ngrx.selectors';
 import { IFactureState } from './factures.state';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FacturesSelectors extends EntitiesSelectors<
   Facture,
   IFactureState

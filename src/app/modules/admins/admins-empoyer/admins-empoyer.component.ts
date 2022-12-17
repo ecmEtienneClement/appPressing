@@ -13,14 +13,13 @@ import { AdminsSelectors } from '../ngrx/admins.selectors';
   styleUrls: ['./admins-empoyer.component.scss'],
 })
 export class AdminsEmpoyerComponent implements OnInit {
-
   notification$: Observable<string> = new Observable();
   errorMessage$: Observable<string> = new Observable();
   admin$: Observable<Admin> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
+  readonly appStateEnum = AppStateEnum;
   readonly whereNav = WhereNavEntities;
-
   constructor(
     private store: Store<AppState>,
     private adminsSelectorsService: AdminsSelectors
@@ -40,7 +39,4 @@ export class AdminsEmpoyerComponent implements OnInit {
       this.adminsSelectorsService.getEntitieById()
     );
   }
-
-
 }
-

@@ -153,7 +153,8 @@ export class EntitiesEffects<T extends IG> {
           catchError((error) =>
             of(
               this.entitiesActionsService.errorEntities()({
-                error: error.error ? error.error.message : error.message,
+               
+                 error: error.error ? error.error.message : error.message,
               })
             )
           )

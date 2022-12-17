@@ -3,10 +3,8 @@ import { AdminsPageRoutingModule } from './admins-routing.module';
 import { AdminsPage } from './admins.page';
 import { AdminsDataService } from './services/admins.data.service';
 import { AdminsService } from './services/admins.service';
-import { AdminsActions } from './ngrx/admins.actions';
 import { EffectsModule } from '@ngrx/effects';
 import { AdminsEffects } from './ngrx/admins.effects';
-import { AdminsSelectors } from './ngrx/admins.selectors';
 import { StoreModule } from '@ngrx/store';
 import { NameStateEntities } from 'src/app/appState/app.state';
 import { GetAdminsReducer } from './ngrx/admins.reducer';
@@ -36,12 +34,6 @@ import { AdminsResolver } from './services/admins.resolver';
     AdminsCmpBloquerComponent,
     AdminsFacDmdDepComponent,
   ],
-  providers: [
-    AdminsSelectors,
-    AdminsDataService,
-    AdminsService,
-    AdminsActions,
-    AdminsResolver,
-  ],
+  providers: [AdminsDataService, AdminsService, AdminsResolver],
 })
 export class AdminsPageModule {}

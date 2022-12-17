@@ -23,8 +23,16 @@
   </div>
 
   <div class="container" *ngIf="admin$ | async as admin">
+    <div *ngIf="dataState$ | async as dataState" class="container mt-2">
+      <div
+        class="alert alert-info"
+        *ngIf="admin.Employes.length === 0 && dataState === appStateEnum.loaded"
+      >
+        <strong>Cet administrateur n'a enregistré aucun employé ...</strong>
+      </div>
+    </div>
     <!--                                 LISTE                                  -->
-    <ion-list lines="inset">
+    <ion-list lines="none">
       <ion-item-sliding *ngFor="let employer of admin.Employes">
         <!-- *************************************** -->
         <ion-item>

@@ -23,7 +23,18 @@
 
   <!--                                 LISTE                                  -->
 
-  <ion-list lines="inset" *ngIf="admin$ | async as admin">
+  <ion-list lines="none" *ngIf="admin$ | async as admin">
+    <div *ngIf="dataState$ | async as dataState" class="container mt-2">
+      <div
+        class="alert alert-info"
+        *ngIf="
+          admin.Compte_bloquers.length === 0 &&
+          dataState === appStateEnum.loaded
+        "
+      >
+        <strong>Cet administrateur n'a bloqué aucun compte ...</strong>
+      </div>
+    </div>
     <ion-item-sliding *ngFor="let cmpBloque of admin.Compte_bloquers">
       <!-- *************************************** -->
       <ion-item>

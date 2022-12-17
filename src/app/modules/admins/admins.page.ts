@@ -24,6 +24,7 @@ export class AdminsPage implements OnInit, OnDestroy {
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   sub: Subscription = new Subscription();
+  readonly appStateEnum = AppStateEnum;
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
 
@@ -51,8 +52,10 @@ export class AdminsPage implements OnInit, OnDestroy {
     this.sub.add(
       this.store.select(this.adminsSelectors.getEntities()).subscribe({
         next: (admins) => {
-          this.adminInit = admins;
-          this.admins = admins;
+          if (admins) {
+            this.adminInit = admins;
+            this.admins = admins;
+          }
         },
       })
     );

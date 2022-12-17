@@ -17,6 +17,7 @@ export class ClientLingesComponent implements OnInit {
   client$: Observable<Client> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
+  readonly appStateEnum = AppStateEnum;
   constructor(
     private store: Store<AppState>,
     private clientsSelectorsService: ClientsSelectors

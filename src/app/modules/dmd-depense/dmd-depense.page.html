@@ -6,6 +6,7 @@
     </ion-menu-toggle>
 
     <ion-button
+      *ngIf="!isAdmin"
       slot="end"
       (click)="onNav(whereNav.addEntitie,routesNames.dmdDepensesAdd)"
       fill="outline"
@@ -28,8 +29,18 @@
   <!--                                 LOADDING                                  -->
   <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
   <!--                                 LIST DEMANDE                                 -->
-
-  <ion-list lines="inset" *ngIf="dmdDepenses">
+  <div
+    *ngIf="dmdDepenses && dataState$ | async as dataState"
+    class="container mt-2"
+  >
+    <div
+      class="alert alert-info"
+      *ngIf="dmdDepenses.length === 0 && dataState === appStateEnum.loaded"
+    >
+      <strong>Pas de demande dépense ...</strong>
+    </div>
+  </div>
+  <ion-list lines="none" *ngIf="dmdDepenses">
     <ion-item-sliding *ngFor="let demande of dmdDepenses">
       <!-- *************************************** -->
       <ion-item
@@ -42,7 +53,7 @@
         ></app-cmp-dmd-depense>
       </ion-item>
       <!-- *************************************** -->
-      <ion-item-options side="end">
+      <ion-item-options *ngIf="!isAdmin" side="end">
         <button class="item_btn" (click)="onDeleteDemandeDepense(demande.id)">
           <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>

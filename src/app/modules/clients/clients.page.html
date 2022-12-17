@@ -30,7 +30,18 @@
 
   <!--                                 LISTE                                  -->
 
-  <ion-list lines="inset" *ngIf="clients">
+  <div
+    *ngIf="clients && dataState$ | async as dataState"
+    class="container mt-2"
+  >
+    <div
+      class="alert alert-info"
+      *ngIf="clients.length === 0 && dataState === appStateEnum.loaded"
+    >
+      <strong>Pas de clients ...</strong>
+    </div>
+  </div>
+  <ion-list lines="none" *ngIf="clients">
     <ion-item-sliding *ngFor="let client of clients">
       <!-- *************************************** -->
       <ion-item
@@ -46,7 +57,7 @@
         </main>
       </ion-item>
       <!-- *************************************** -->
-      <ion-item-options side="end">
+      <ion-item-options *ngIf="!isAdmin" side="end">
         <button class="item_btn" (click)="onDeleteClient(client.id)">
           <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>

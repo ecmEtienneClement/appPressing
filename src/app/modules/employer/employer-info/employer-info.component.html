@@ -18,7 +18,9 @@
       ></app-cmp-state-app>
     </div>
     <!-- --------------------------------SECTION CARD EMPLOYER----------------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="employe$ | async as employe">
       <ion-card-header>
         <div class="container">

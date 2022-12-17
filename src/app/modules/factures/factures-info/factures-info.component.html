@@ -19,7 +19,9 @@
     </div>
 
     <!-- --------------------------------SECTION CARD FACTURE----------------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="facture$ | async as facture">
       <ion-card-header>
         <div class="container">

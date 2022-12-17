@@ -29,8 +29,18 @@
   <app-cmp-loading-list [dataState]="dataState$|async"></app-cmp-loading-list>
 
   <!--                                 LISTE                                  -->
-
-  <ion-list lines="inset" *ngIf="cmpBloques">
+  <div
+    *ngIf="cmpBloques && dataState$ | async as dataState"
+    class="container mt-2"
+  >
+    <div
+      class="alert alert-info"
+      *ngIf="cmpBloques.length === 0 && dataState === appStateEnum.loaded"
+    >
+      <strong>Pas de compte bloqué ...</strong>
+    </div>
+  </div>
+  <ion-list lines="none" *ngIf="cmpBloques">
     <ion-item-sliding *ngFor="let cmpBloque of cmpBloques">
       <!-- *************************************** -->
       <ion-item

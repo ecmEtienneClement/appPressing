@@ -26,6 +26,17 @@
   <div class="container" *ngIf="admin$ | async as admin">
     <!--                          DMD DEPENSES                          -->
     <div class="container" *ngIf="demande">
+      <div *ngIf="dataState$ | async as dataState" class="container mt-2">
+        <div
+          class="alert alert-info"
+          *ngIf="
+            admin.Demande_depenses.length === 0 &&
+            dataState === appStateEnum.loaded
+          "
+        >
+          <strong>Cet administrateur n'a validé aucune demande ...</strong>
+        </div>
+      </div>
       <app-cmp-dmd-depense
         class="card"
         *ngFor="let dmdDepense of admin.Demande_depenses"
@@ -35,6 +46,17 @@
     <!--                           DEPENSES                           -->
 
     <div class="container" *ngIf="depense">
+      <div *ngIf="dataState$ | async as dataState" class="container mt-2">
+        <div
+          class="alert alert-info"
+          *ngIf="
+            admin.Demande_depenses.length === 0 &&
+            dataState === appStateEnum.loaded
+          "
+        >
+          <strong>Cet administrateur n'a validé aucune demande ...</strong>
+        </div>
+      </div>
       <app-cmp-dmd-depense
         class="card"
         *ngFor="let dmdDepense of depenses"
@@ -44,6 +66,16 @@
 
     <!--                          FACTURES                           -->
     <div class="container" *ngIf="facture">
+      <div *ngIf="dataState$ | async as dataState" class="container mt-2">
+        <div
+          class="alert alert-info"
+          *ngIf="
+            admin.Factures.length === 0 && dataState === appStateEnum.loaded
+          "
+        >
+          <strong>Cet administrateur n'a enregistré aucune facture ...</strong>
+        </div>
+      </div>
       <app-cmp-facture
         class="card"
         *ngFor="let facture of admin.Factures"

@@ -3,8 +3,9 @@ import { IonContent } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
-import { DemandeDepense } from 'src/app/models/models.interfaces';
+import { DemandeDepense, EnumUserRole } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { WhereNavEntities } from '../servicesModules/modules.service';
 import { DmdDepensesActions } from './ngrx/dmdDepenses.actions';
 import { DmdDepensesSelectors } from './ngrx/dmdDepenses.selectors';
@@ -17,7 +18,7 @@ import { DmdDepensesService } from './services/dmdDepenses.service';
 })
 export class DmdDepensePage implements OnInit, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
-
+  isAdmin = false;
   dmdDepensesInit: DemandeDepense[];
   dmdDepenses: DemandeDepense[];
   notification$: Observable<string> = new Observable();
@@ -26,6 +27,7 @@ export class DmdDepensePage implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   readonly whereNav = WhereNavEntities;
+  readonly appStateEnum = AppStateEnum;
   customActionSheetOptions = {
     header: 'Demande',
     subHeader: 'Sélectionné état demande',
@@ -34,7 +36,8 @@ export class DmdDepensePage implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private dmdDepensesActions: DmdDepensesActions,
     private dmdDepensesSelectors: DmdDepensesSelectors,
-    private dmdDepensesService: DmdDepensesService
+    private dmdDepensesService: DmdDepensesService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -49,15 +52,22 @@ export class DmdDepensePage implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.select(
       this.dmdDepensesSelectors.getMessageError()
     );
+    this.onIsAdmin();
   }
-
+  //TODO
+  onIsAdmin() {
+    this.isAdmin =
+      this.userService.getRoleUser() === EnumUserRole.admin ? true : false;
+  }
   //TODO SUBS AUX DATA DMD_DEPENSE
   subDmdDepenses() {
     this.sub.add(
       this.store.select(this.dmdDepensesSelectors.getEntities()).subscribe({
         next: (dmdDepenses) => {
-          this.dmdDepensesInit = dmdDepenses;
-          this.dmdDepenses = dmdDepenses;
+          if (dmdDepenses) {
+            this.dmdDepensesInit = dmdDepenses;
+            this.dmdDepenses = dmdDepenses;
+          }
         },
       })
     );

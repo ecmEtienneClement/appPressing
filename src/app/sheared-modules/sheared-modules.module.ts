@@ -8,7 +8,7 @@ import { CmpDmdDepenseComponent } from './cmp-dmd-depense/cmp-dmd-depense.compon
 import { CmpFactureComponent } from './cmp-facture/cmp-facture.component';
 import { CmpLoadingCardComponent } from './cmp-loading-card/cmp-loading-card.component';
 import { CmpLingesComponent } from './cmp-linges/cmp-linges.component';
-
+import { CmpLoadingInfoUserComponent } from './cmp-loading-info-user/cmp-loading-info-user.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { CmpLingesComponent } from './cmp-linges/cmp-linges.component';
     CmpFactureComponent,
     CmpLoadingCardComponent,
     CmpLingesComponent,
+    CmpLoadingInfoUserComponent,
   ],
   imports: [CommonModule, IonicModule],
   exports: [
@@ -27,6 +28,7 @@ import { CmpLingesComponent } from './cmp-linges/cmp-linges.component';
     CmpFactureComponent,
     CmpLoadingCardComponent,
     CmpLingesComponent,
+    CmpLoadingInfoUserComponent,
     IonicModule,
     CommonModule,
     ReactiveFormsModule,

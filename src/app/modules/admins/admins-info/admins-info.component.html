@@ -19,7 +19,9 @@
     </div>
 
     <!-- --------------------------------SECTION CARD ADMIN----------------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="admin$ | async as admin">
       <ion-card-header>
         <div class="container">

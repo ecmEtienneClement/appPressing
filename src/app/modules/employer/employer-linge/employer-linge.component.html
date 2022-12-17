@@ -24,6 +24,19 @@
   <!-- --------------------------------SECTION CARD LINGES EMPLOYER----------------------------------- -->
 
   <div class="container" *ngIf="employer$ | async as employer">
+    <div
+      *ngIf="employer && dataState$ | async as dataState"
+      class="container mt-2"
+    >
+      <div
+        class="alert alert-info"
+        *ngIf="
+          employer.Linges.length === 0 && dataState === appStateEnum.loaded
+        "
+      >
+        <strong>Ce employé n'a enregistré aucun linge...</strong>
+      </div>
+    </div>
     <app-cmp-linges
       class="card"
       *ngFor="let linge of employer.Linges"

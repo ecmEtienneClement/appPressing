@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RoutesNames } from 'src/app/routes.config';
+import { AdminAuthorization } from 'src/app/servicesApp/admin.authorization';
 import { EmployerAddAndUpdComponent } from './employer-add-and-upd/employer-add-and-upd.component';
 import { EmployerClientComponent } from './employer-client/employer-client.component';
 import { EmployerDemandeDepenseComponent } from './employer-demande-depense/employer-demande-depense.component';
@@ -21,11 +22,13 @@ const routes: Routes = [
   },
   {
     path: `${RoutesNames.employersAdd}`,
+    canActivate: [AdminAuthorization],
     resolve: { employersResolver: EmployersResolver },
     component: EmployerAddAndUpdComponent,
   },
   {
     path: `${RoutesNames.employersUpd}/:id`,
+    canActivate: [AdminAuthorization],
     resolve: { employersResolver: EmployersResolver },
     component: EmployerAddAndUpdComponent,
   },

@@ -19,7 +19,9 @@
     </div>
 
     <!-- --------------------------------SECTION CARD COMPTE----------------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="cmpBloques$ | async as cmpBloque">
       <ion-card-header>
         <div class="container">

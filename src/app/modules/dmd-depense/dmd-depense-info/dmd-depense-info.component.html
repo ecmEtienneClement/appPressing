@@ -19,7 +19,9 @@
     </div>
 
     <!-- --------------------------------SECTION CARD DEMANDE----------------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="dmdDepense$ | async as dmdDepense">
       <ion-card-header>
         <div class="container">
@@ -30,6 +32,7 @@
             Demande : {{ dmdDepense.createdAt | date : "shortDate" }}
           </ion-card-title>
           <ion-button
+            *ngIf="!isAdmin"
             class="mt-2"
             fill="clear"
             size="small"
@@ -40,7 +43,11 @@
         </div>
         <div
           class="container-res"
-          *ngIf="dmdDepense.valider === false && dmdDepense.rejeter === false"
+          *ngIf="
+            isAdmin &&
+            dmdDepense.valider === false &&
+            dmdDepense.rejeter === false
+          "
         >
           <div class="row">
             <div class="col-res col-12">

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Form Client</ion-title>
+    <ion-title>Formulaire Client</ion-title>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -43,7 +43,7 @@
 
     <ion-list lines="inset" *ngIf="clients && selectClient">
       <h5 class="mt-2">Séléctionné un client</h5>
-      <ion-item-sliding  *ngFor="let client of clients">
+      <ion-item-sliding *ngFor="let client of clients">
         <ion-item (click)="onSelectClient(client.id)">
           <main class="user">
             <article class="user__profile">

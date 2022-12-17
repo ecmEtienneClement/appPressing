@@ -18,7 +18,9 @@
       ></app-cmp-state-app>
     </div>
     <!-- --------------------------------SECTION CARD FACTURE-------------------------- -->
-
+    <app-cmp-loading-info-user
+      [dataState]="dataState$ | async"
+    ></app-cmp-loading-info-user>
     <ion-card *ngIf="linge$ | async as linge">
       <ion-card-header>
         <div class="container">
@@ -269,7 +271,6 @@
       </ion-card-content>
     </ion-card>
   </div>
- 
 </ion-content>
 
 <ion-footer [translucent]="true">

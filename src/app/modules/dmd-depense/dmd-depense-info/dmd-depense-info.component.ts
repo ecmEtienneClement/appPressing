@@ -4,9 +4,11 @@ import { Observable } from 'rxjs';
 import { AppState, AppStateEnum } from 'src/app/appState/app.state';
 import {
   DemandeDepense,
+  EnumUserRole,
   EtatFinancier,
 } from 'src/app/models/models.interfaces';
 import { RoutesNames } from 'src/app/routes.config';
+import { UserService } from 'src/app/servicesApp/user.service';
 import { AcceuilActions } from '../../acceuil/ngrx/acceuil.actions';
 import { AcceuilSelectors } from '../../acceuil/ngrx/acceuil.selectors';
 import { WhereNavEntities } from '../../servicesModules/modules.service';
@@ -24,6 +26,7 @@ export class DmdDepenseInfoComponent implements OnInit {
   errorMessage$: Observable<string> = new Observable();
   dmdDepense$: Observable<DemandeDepense> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
+  isAdmin = false;
   readonly routesNames = RoutesNames;
   idEtatFinancier = '';
   caisse = 0;
@@ -34,7 +37,8 @@ export class DmdDepenseInfoComponent implements OnInit {
     private dmdDepensesSelectorsService: DmdDepensesSelectors,
     private dmdDepensesActionsService: DmdDepensesActions,
     private etatFinancierActions: AcceuilActions,
-    private etatFinancierSelectores: AcceuilSelectors
+    private etatFinancierSelectores: AcceuilSelectors,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -52,6 +56,12 @@ export class DmdDepenseInfoComponent implements OnInit {
       this.dmdDepensesSelectorsService.getEntitieById()
     );
     this.onSubEtatFinancier();
+    this.onIsAdmin();
+  }
+  //TODO
+  onIsAdmin() {
+    this.isAdmin =
+      this.userService.getRoleUser() === EnumUserRole.admin ? true : false;
   }
   //TODO SUB ETAT
   onSubEtatFinancier() {

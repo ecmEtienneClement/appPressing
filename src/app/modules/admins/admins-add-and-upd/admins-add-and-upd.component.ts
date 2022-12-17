@@ -98,6 +98,9 @@ export class AdminsAddAndUpdComponent implements OnInit {
           },
         });
         break;
+      case EnumAddOrUpdFormEntitie.addEntitie:
+        this.onUpdatePwd();
+        break;
     }
   }
   //TODO
@@ -135,7 +138,7 @@ export class AdminsAddAndUpdComponent implements OnInit {
           prenom: formUpdValues.prenom,
           numero: formUpdValues.numero,
           email: formUpdValues.email,
-          mdp: formUpdValues.mdp,
+         // mdp: formUpdValues.mdp,
           role: this.AdminUpd.role,
           Compte_bloquers: this.AdminUpd.Compte_bloquers,
           Demande_depenses: this.AdminUpd.Demande_depenses,

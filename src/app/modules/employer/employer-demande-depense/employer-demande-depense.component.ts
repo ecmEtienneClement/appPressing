@@ -17,6 +17,8 @@ export class EmployerDemandeDepenseComponent implements OnInit {
   employer$: Observable<Employe> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
+  readonly appStateEnum = AppStateEnum;
+
   constructor(
     private store: Store<AppState>,
     private employersSelectores: EmployersSelectors

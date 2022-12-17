@@ -1,158 +1,206 @@
 <ion-app>
-  <ion-menu contentId="main-content">
+  <ion-menu type="reveal" contentId="main-content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu Content</ion-title>
+        <ion-title>P7-Pressing-App</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-list class="nav">
+      <ion-list lines="none" class="nav">
         <!-- **********MENU CONNEXION********** -->
-        <ion-menu-toggle>
-          <ion-item
-            style="color: white; width: 100%"
-            routerLink="{{ routesNames.home }}"
-            ><ion-icon
-              slot="start"
-              style="color: white"
-              name="enter-outline"
-            ></ion-icon>
+        <ion-item
+          style="color: white; width: 100%"
+          routerLink="{{ routesNames.home }}"
+        >
+          <ion-icon
+            slot="start"
+            style="color: white"
+            name="enter-outline"
+          ></ion-icon>
+
+          <ion-menu-toggle>
             <ion-label>Connexion</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+          </ion-menu-toggle>
+        </ion-item>
         <!-- **********MENU ACCEUIL********** -->
-        <ion-menu-toggle>
-          <ion-item
-            style="color: white; width: 100%"
-            routerLink="{{ routesNames.etatFinancier }}"
-            ><ion-icon
-              slot="start"
-              style="color: white"
-              name="enter-outline"
-            ></ion-icon>
+        <ion-item
+          *ngIf="isAdmin"
+          style="color: white; width: 100%"
+          routerLink="{{ routesNames.etatFinancier }}"
+        >
+          <ion-icon
+            slot="start"
+            style="color: white"
+            name="home-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
             <ion-label>Acceuil</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+          </ion-menu-toggle>
+        </ion-item>
+        <!-- **********MENU PROFIL ADM********** -->
+        <ion-item
+          *ngIf="isAdmin"
+          routerLink="{{
+            routesNames.admins + '/' + routesNames.adminsInfo + '/' + idUser
+          }}"
+          style="color: white; width: 100%"
+        >
+          <ion-icon
+            slot="start"
+            style="color: white"
+            name="person-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
+            <ion-label>Profil</ion-label>
+          </ion-menu-toggle>
+        </ion-item>
+        <!-- **********MENU PROFIL EMP********** -->
+        <ion-item
+          *ngIf="!isAdmin"
+          routerLink="{{
+            routesNames.employers +
+              '/' +
+              routesNames.employersInfo +
+              '/' +
+              idUser
+          }}"
+          style="color: white; width: 100%"
+        >
+          <ion-icon
+            slot="start"
+            style="color: white"
+            name="person-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
+            <ion-label>Profil</ion-label>
+          </ion-menu-toggle>
+        </ion-item>
+
         <!-- **********MENU ADMINS********** -->
-        <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item style="color: white" routerLink="{{ routesNames.admins }}">
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="people-outline"
-            ></ion-icon>
+        <ion-item
+          *ngIf="isAdmin"
+          style="color: white"
+          routerLink="{{ routesNames.admins }}"
+        >
+          <ion-icon
+            style="color: white"
+            slot="start"
+            name="people-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
             <ion-label>Admins</ion-label>
-          </ion-item></ion-menu-toggle
+          </ion-menu-toggle></ion-item
         >
         <!-- **********MENU EMPLOYERS********** -->
-        <ion-menu-toggle>
-          <ion-item
+        <ion-item
+          *ngIf="isAdmin"
+          style="color: white"
+          routerLink="{{ routesNames.employers }}"
+        >
+          <ion-icon
             style="color: white"
-            routerLink="{{ routesNames.employers }}"
-          >
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="people-outline"
-            ></ion-icon>
-            <ion-label>Employers</ion-label>
-          </ion-item></ion-menu-toggle
-        >
-        <!-- **********MENU CLIENTS********** -->
-        <ion-menu-toggle>
-          <ion-item style="color: white" routerLink="{{ routesNames.clients }}">
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="people-outline"
-            ></ion-icon>
-            <ion-label>Clients</ion-label>
-          </ion-item></ion-menu-toggle
-        >
-
+            slot="start"
+            name="people-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
+            <ion-label>Employes</ion-label>
+          </ion-menu-toggle>
+        </ion-item>
         <!-- **********MENU LINGES********** -->
-        <ion-menu-toggle>
-          <ion-item style="color: white" routerLink="{{ routesNames.linges }}">
-            <ion-icon
-              slot="start"
-              style="color: white"
-              name="shirt-outline"
-            ></ion-icon>
-
+        <ion-item style="color: white" routerLink="{{ routesNames.linges }}">
+          <ion-icon
+            slot="start"
+            style="color: white"
+            name="shirt-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
             <ion-label>Linges</ion-label>
-          </ion-item></ion-menu-toggle
+          </ion-menu-toggle>
+        </ion-item>
+        <!-- **********MENU CLIENTS********** -->
+        <ion-item style="color: white" routerLink="{{ routesNames.clients }}">
+          <ion-icon
+            style="color: white"
+            slot="start"
+            name="people-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
+            <ion-label>Clients</ion-label>
+          </ion-menu-toggle></ion-item
         >
 
         <!-- **********MENU FACTURES********** -->
-        <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item
+        <ion-item
+          *ngIf="isAdmin"
+          style="color: white"
+          routerLink="{{ routesNames.factures }}"
+        >
+          <ion-icon
             style="color: white"
-            routerLink="{{ routesNames.factures }}"
-          >
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="reader-outline"
-            ></ion-icon>
+            slot="start"
+            name="reader-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
             <ion-label>Factures</ion-label>
-          </ion-item></ion-menu-toggle
-        >
+          </ion-menu-toggle>
+        </ion-item>
         <!-- **********MENU DEMANDES********** -->
-        <ion-menu-toggle>
-          <ion-item
+        <ion-item
+          style="color: white"
+          routerLink="{{ routesNames.dmdDepenses }}"
+        >
+          <ion-icon
             style="color: white"
-            routerLink="{{ routesNames.dmdDepenses }}"
-          >
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="newspaper-outline"
-            ></ion-icon>
+            slot="start"
+            name="newspaper-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
             <ion-label>Demandes</ion-label>
-          </ion-item></ion-menu-toggle
-        >
+          </ion-menu-toggle>
+        </ion-item>
         <!-- **********MENU COMPTE BLOQUE********** -->
-        <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item
+        <ion-item
+          *ngIf="isAdmin"
+          style="color: white"
+          routerLink="{{ routesNames.cmpBloques }}"
+        >
+          <ion-icon
             style="color: white"
-            routerLink="{{ routesNames.cmpBloques }}"
-          >
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="lock-closed-outline"
-            ></ion-icon>
-
+            slot="start"
+            name="lock-closed-outline"
+          ></ion-icon>
+          <ion-menu-toggle>
             <ion-label>Comptes Bloqués</ion-label>
-          </ion-item></ion-menu-toggle
-        >
+          </ion-menu-toggle>
+        </ion-item>
         <!-- **********MENU PARAMETRE********** -->
-        <ion-menu-toggle *ngIf="isAdmin">
-          <ion-item
+        <ion-item
+          *ngIf="isAdmin"
+          style="color: white"
+          routerLink="{{ routesNames.parametres }}"
+        >
+          <ion-icon
             style="color: white"
-            routerLink="{{ routesNames.parametres }}"
-          >
-            <ion-icon
-              style="color: white"
-              slot="start"
-              name="settings-outline"
-            ></ion-icon>
+            slot="start"
+            name="settings-outline"
+          ></ion-icon>
 
+          <ion-menu-toggle>
             <ion-label>Configurations</ion-label>
-          </ion-item></ion-menu-toggle
-        >
+          </ion-menu-toggle>
+        </ion-item>
 
-        <!-- **********MENU PARAMETRE********** -->
-        <ion-menu-toggle>
-          <ion-item style="color: white" (click)="logOut()">
-            <ion-icon
-              slot="start"
-              style="color: white"
-              name="exit-outline"
-            ></ion-icon>
+        <!-- **********MENU DECONNECTER********** -->
+        <ion-item style="color: white" (click)="logOut()">
+          <ion-icon
+            slot="start"
+            style="color: white"
+            name="exit-outline"
+          ></ion-icon>
+          <ion-menu-toggle class="mt-4">
             <ion-label>Déconnecter</ion-label>
-          </ion-item></ion-menu-toggle
-        >
+          </ion-menu-toggle>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Form Employer</ion-title>
+    <ion-title>Formulaire Employe</ion-title>
     <ion-menu-toggle slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
@@ -40,7 +40,7 @@
             ></ion-button>
           </div>
           <!--  -->
-          <div class="container-res">
+          <div *ngIf="isUpdate" class="container-res">
             <div class="row">
               <div class="col-res col-12">
                 <ion-button (click)="onUpdatePwd()" fill="clear" size="small">

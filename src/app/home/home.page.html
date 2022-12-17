@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Connexion</ion-title>
-    <ion-menu-toggle slot="start">
+    <ion-menu-toggle *ngIf="!islogOut" slot="start">
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
   </ion-toolbar>
@@ -55,7 +55,7 @@
           class="button login__submit"
           type="submit"
         >
-          <span class="button__text">Se Connecter</span>
+          <span (click)="showLoading()" class="button__text">Se Connecter</span>
         </button>
       </form>
     </div>

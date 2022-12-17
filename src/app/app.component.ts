@@ -14,19 +14,24 @@ export class AppComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   readonly routesNames = RoutesNames;
   isAdmin = false;
-
+  idUser = '';
+  islogOut = false;
   constructor(private router: Router, private userService: UserService) {
     this.onIsAdmin();
   }
 
   ngOnInit() {
     this.onSubUser();
+    if (this.userService.getTokenUser() === '') {
+      this.islogOut = true;
+    }
   }
 
   //TODO
   onIsAdmin() {
     this.isAdmin =
       this.userService.getRoleUser() === EnumUserRole.admin ? true : false;
+    this.idUser = this.userService.getIdUser();
   }
   //TODO
   logOut() {
@@ -40,11 +45,28 @@ export class AppComponent implements OnInit, OnDestroy {
         next: (dataState) => {
           this.onIsAdmin();
           if (dataState === EnumUserState.logOut) {
+            this.islogOut = true;
             this.router.navigate([this.routesNames.home]);
           }
         },
       })
     );
+  }
+  //TODO
+  onNavProfil() {
+    if (this.userService.getRoleUser() === EnumUserRole.admin) {
+      this.router.navigate([
+        this.routesNames.admins +
+          this.routesNames.adminsInfo +
+          this.userService.getIdUser(),
+      ]);
+    } else {
+      this.router.navigate([
+        this.routesNames.employers +
+          this.routesNames.employersInfo +
+          this.userService.getIdUser(),
+      ]);
+    }
   }
   //TODO
   ngOnDestroy() {

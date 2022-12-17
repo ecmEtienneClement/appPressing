@@ -5,6 +5,7 @@
       <ion-button><ion-icon name="grid-outline"></ion-icon></ion-button>
     </ion-menu-toggle>
     <ion-button
+      *ngIf="!isAdmin"
       slot="end"
       (click)="onNav(whereNav.addEntitie,routesNames.lingesAddTypeAndClient)"
       fill="outline"
@@ -28,7 +29,17 @@
   <app-cmp-loading-card [dataState]="dataState$|async"></app-cmp-loading-card>
   <!--                                 LIST                                  -->
 
-  <ion-list lines="inset" *ngIf="linges">
+  <div *ngIf="linges && dataState$ | async as dataState" class="container mt-2">
+    <div
+      class="alert alert-info"
+      *ngIf=" 
+          linges.length === 0 && dataState === appStateEnum.loaded
+        "
+    >
+      <strong>Pas de linge ...</strong>
+    </div>
+  </div>
+  <ion-list lines="none" *ngIf="linges">
     <ion-item-sliding *ngFor="let linge of linges">
       <!-- *************************************** -->
       <ion-item
@@ -40,7 +51,7 @@
               <ion-card-title>
                 <div class="row">
                   <div class="col-6">
-                    <b >Date:</b>
+                    <b>Date:</b>
                   </div>
                   <div class="col-6">
                     <p>{{ linge.createdAt| date : "shortDate" }}</p>
@@ -98,7 +109,7 @@
         </div>
       </ion-item>
       <!-- *************************************** -->
-      <ion-item-options side="end">
+      <ion-item-options *ngIf="!isAdmin" side="end">
         <button class="item_btn" (click)="onDeleteLinge(linge.id)">
           <ion-icon class="item_icon" name="trash-outline"></ion-icon>
         </button>

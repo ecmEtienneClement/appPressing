@@ -2,9 +2,7 @@
   <ion-toolbar>
     <ion-row *ngIf="client$ | async as client">
       <ion-col>
-        <ion-title
-          >{{ client.prenom }} {{ client.nom }} etienne clement</ion-title
-        >
+        <ion-title>{{ client.prenom }} {{ client.nom }} </ion-title>
       </ion-col>
     </ion-row>
     <ion-menu-toggle slot="start">
@@ -25,7 +23,15 @@
 
   <!-- --------------------------------SECTION CARD CLIENT----------------------------------- -->
 
-  <div class="container" *ngIf="client$ | async as client">
+  <div *ngIf="client$ | async as client">
+    <div *ngIf="dataState$ | async as dataState" class="container mt-2">
+      <div
+        class="alert alert-info"
+        *ngIf="client.Linges.length === 0 && dataState === appStateEnum.loaded"
+      >
+        <strong>Cet client n'a pas de linge ...</strong>
+      </div>
+    </div>
     <app-cmp-linges
       class="card"
       *ngFor="let linge of client.Linges"

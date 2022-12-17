@@ -1,27 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AppState, AppStateEnum } from '../appState/app.state';
 import { RoutesNames } from '../routes.config';
 import { LoginActions } from './ngrx/login.actions';
 import { LoginSelectors } from './ngrx/login.selectors';
-import { User } from 'src/app/models/models.interfaces';
+import { EnumUserState, User } from 'src/app/models/models.interfaces';
 import { EntitiesEmit } from '../modules/servicesModules/modules.emit';
 import { UserService } from '../servicesApp/user.service';
 import { Toast } from '@awesome-cordova-plugins/toast/ngx';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   notification$: Observable<string> = new Observable();
   errorMessage$: Observable<string> = new Observable();
   dataState$: Observable<AppStateEnum> = new Observable();
   readonly routesNames = RoutesNames;
-
+  sub: Subscription = new Subscription();
+  islogOut = false;
+  loading: any;
   //
   formLogin: FormGroup;
   constructor(
@@ -30,7 +33,7 @@ export class HomePage implements OnInit {
     private loginSelectors: LoginSelectors,
     private loginActions: LoginActions,
     private userService: UserService,
-    private toast: Toast,
+    private loadingCtl: LoadingController,
     private router: Router
   ) {}
 
@@ -50,6 +53,10 @@ export class HomePage implements OnInit {
     );
     this.initForm();
     this.onSubEmit();
+    this.onSubUser();
+    if (this.userService.getTokenUser() === '') {
+      this.islogOut = true;
+    }
   }
   //TODO INIT FORM
   initForm() {
@@ -71,6 +78,8 @@ export class HomePage implements OnInit {
         if (dataEmit.nameNotification === 'user') {
           const user: User = dataEmit.entitie;
           this.userService.setUser(user);
+          this.loading.dismiss();
+
           this.router.navigate([this.routesNames.linges]);
         }
       },
@@ -93,33 +102,28 @@ export class HomePage implements OnInit {
     );
   }
 
+  //TODO SUB USER
+  onSubUser() {
+    this.sub.add(
+      this.userService.userSub.subscribe({
+        next: (dataState) => {
+          if (dataState === EnumUserState.logOut) {
+            this.islogOut = true;
+          }
+        },
+      })
+    );
+  }
+  async showLoading() {
+    this.loading = await this.loadingCtl.create({
+      message: 'Connexion en cour...',
+      cssClass: 'custom-loading',
+      duration: 15000,
+    });
+    this.loading.present();
+  }
   //TODO
-  /*
-  mdpIsValid = (pwd: string): boolean => {
-    const regIncludeLettreMini = new RegExp('[a-z]+', 'g');
-    const regIncludeLettreMaju = new RegExp('[A-Z]+', 'g');
-    const regIncludeChiffre = new RegExp('[0-9]+', 'g');
-
-    const message = 'Votre mot de passe doit avoir au moins';
-    const errorPwd = new Error();
-    errorPwd.name = 'InvalidePwd';
-
-    //VRF
-    if (pwd.length < 6) {
-      errorPwd.message = message + ' six(6) caractères';
-      throw errorPwd;
-    } else if (!regIncludeLettreMini.test(pwd)) {
-      errorPwd.message = message + ' une lettre minuscule';
-      throw errorPwd;
-    } else if (!regIncludeLettreMaju.test(pwd)) {
-      errorPwd.message = message + ' une lettre majuscule';
-      throw errorPwd;
-    } else if (!regIncludeChiffre.test(pwd)) {
-      errorPwd.message = message + ' un chiffre';
-      throw errorPwd;
-    } else {
-      return true;
-    }
-  };
-  */
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }
